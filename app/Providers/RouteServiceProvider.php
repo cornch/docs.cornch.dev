@@ -37,6 +37,13 @@ class RouteServiceProvider extends ServiceProvider
     {
         $this->configureRateLimiting();
 
+        $docs = collect(config('docs'))
+            ->keys()
+            ->each(fn ($docName) => preg_quote($docName, '#'))
+            ->join('|');
+
+        Route::pattern('{docs}', "($docs)");
+
         $this->routes(function () {
             Route::prefix('api')
                 ->middleware('api')
