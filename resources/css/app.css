@@ -4,6 +4,7 @@
 @import 'tailwindcss/components';
 
 @import './content.css';
+@import './sidebar.css';
 
 @import 'tailwindcss/utilities';
 

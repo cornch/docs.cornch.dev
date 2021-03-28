@@ -1,0 +1,53 @@
+.sidebar {
+    ul {
+        @apply list-none m-0 p-0;
+
+        li {
+            @apply block py-[.65em] px-0 whitespace-nowrap;
+
+            h2 {
+                @apply block mb-0 text-[.875em] font-medium text-gray-900 no-underline cursor-pointer transition-all duration-[.3s] ease-in-out;
+
+                &:hover {
+                    transform: translate3d(5px, 0, 0);
+                }
+            }
+
+            a {
+                @apply block text-[.875em] font-medium text-gray-900 no-underline transition-transform duration-[.3s] ease-in-out;
+
+                &:hover {
+                    transform: translate3d(5px, 0, 0);
+                }
+            }
+        }
+
+        ul {
+            transition: max-height .45s ease;
+            @apply overflow-hidden max-h-0;
+
+            li {
+                a {
+                    line-height: 1.25;
+                    @apply relative pl-[1em] font-normal;
+                }
+
+                &.active a::before {
+                    content: "";
+                    background-image: url("data:image/svg+xml;utf8,<svg width="8" height="8" viewBox="0 0 8 8" xmlns="http://www.w3.org/2000/svg"><title>active_marker</title><path d="M4 0l3.464 2v4L4 8 .536 6V2z" fill="#FF2D20" fill-rule="nonzero"/></svg>");
+                    @apply absolute top-[.25em] left-0 w-2 h-2 bg-no-repeat bg-center;
+                }
+            }
+        }
+
+        .sub--on {
+            &> h2 {
+                @apply mb-[1em];
+            }
+
+            ul {
+                max-height: none;
+            }
+        }
+    }
+}

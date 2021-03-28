@@ -5,7 +5,7 @@ return [
         'laravel' => [
             'folder' => 'laravel/build/zh_TW',
             'version' => true,
-            'navigation' => 'navigation.md'
+            'navigation' => 'documentation.md'
         ],
     ],
 ];
