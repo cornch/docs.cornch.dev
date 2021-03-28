@@ -1,4 +1,4 @@
-const mix = require('laravel-mix');
+const mix = require('laravel-mix')
 
 /*
  |--------------------------------------------------------------------------
@@ -12,6 +12,9 @@ const mix = require('laravel-mix');
  */
 
 mix.js('resources/js/app.js', 'public/dist/js')
-    .postCss('resources/css/app.css', 'public/dist/css', [
-        //
-    ]);
+mix.postCss('resources/css/app.css', 'public/dist/css', [
+  require('postcss-import'),
+  require('@tailwindcss/jit'),
+  require('postcss-nested'),
+  require('postcss-preset-env')({ stage: 0 })
+])

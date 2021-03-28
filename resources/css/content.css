@@ -1,0 +1,243 @@
+/*
+ * laravel/laravel.com-next, MIT License.
+ * https://github.com/laravel/laravel.com-next/blob/a59bb1087a6410eb13dc434f0c79b5c45532c7a9/resources/css/_docs.css
+ * https://github.com/laravel/laravel.com-next/blob/a59bb1087a6410eb13dc434f0c79b5c45532c7a9/resources/css/_typography.css
+ */
+
+.content {
+    h1, h2, h3, h4, h5, h6 {
+        @apply font-medium mb-[1em];
+    }
+
+    h1 {
+        @apply mb-[.65em] text-[2em] tracking-[-1px] leading-[1.125em];
+        @aply md:text-[2.5em] lg:text-[3em] xl:text-[3.5em] 2xl:text-[4em];
+    }
+
+    h2 {
+        @apply text-[1.75em] font-normal tracking-[-.5px] leading-[1.125em];
+        @aply md:text-[2.25em] lg:text-[3em];
+    }
+
+    h3 {
+        @apply text-[1.25em] font-medium tracking-[-.33px] leading-[1.25em];
+        @apply sm:text-[1.75em] md:text-[2em];
+    }
+
+    h4 {
+        @apply text-[1em] font-normal tracking-[-.25px];
+        @apply sm:text-[1.5em];
+    }
+
+    h5 {
+        @apply text-[.95em] text-gray-700 font-bold leading-[1.666em];
+        @apply sm:text-[1.125em];
+    }
+
+    h6 {
+        @apply text-[.875em] text-gray-600 font-medium;
+    }
+
+    a {
+        @apply relative no-underline transition-all duration-[.3s] ease-in-out;
+
+        &.learn_more {
+            @apply text-red-600 font-medium;
+
+            span {
+                @apply inline-block transition-transform duration-[.3s] ease-in-out;
+            }
+
+            &:hover span {
+                @apply transform translate-x-[.5em];
+            }
+        }
+    }
+
+    p {
+        @apply text-[1em] md:text-[1.125em] text-gray-700 leading-[1.666em];
+
+        strong {
+            @apply font-medium;
+        }
+
+        &.small {
+            @apply text-[.75em] md:text-[.875em] leading-[1.714em];
+        }
+    }
+
+    p, ul, ol {
+        @apply mb-[2em];
+
+        a {
+            @apply text-red-600 break-words no-underline;
+
+            &:hover {
+                color: darken(theme('colors.red.600'), 10%);
+            }
+        }
+    }
+
+    /* @TODO quotes for other languages */
+    q, blockquote p {
+        quotes: "“" "”" "‘" "’";
+    }
+
+    blockquote {
+        @apply ml-0 mr-0;
+    }
+
+    span.small_text {
+        @apply block text-[.625em] text-gray-700 leading-[1.4em];
+    }
+
+    span.label, label {
+        @apply block mb-[.875em] text-[.625em] leading-[1.4em] uppercase tracking-[2.5px] opacity-40;
+    }
+
+    code {
+        @apply text-[.775em] text-gray-900 font-mono leading-[1.714em];
+    }
+
+    :not(pre) > code {
+        @apply py-0 px-[.25em] bg-gray-50 text-red-800;
+    }
+
+    .list-custom li {
+        @apply relative pl-4;
+
+        &:before {
+            content: "";
+            background-image: url("data:image/svg+xml;utf8,<svg width="10" height="11" viewBox="0 0 10 11" xmlns="http://www.w3.org/2000/svg"><title>Polygon</title><path d="M5.036 1.965l-3.492 1.94v3.88l3.492 1.94 3.492-1.94v-3.88l-3.492-1.94zm0-1.12l4.5 2.5v5l-4.5 2.5-4.5-2.5v-5l4.5-2.5z" fill="#FF2D20" fill-rule="nonzero"/></svg>");
+            background-position: 50%;
+            @apply absolute top-[.15em] left-0 w-[9px] h-[10px] bg-no-repeat;
+        }
+    }
+
+    a[name] {
+        @apply relative block invisible top-[-45px];
+    }
+
+    table {
+        border-collapse: collapse;
+        @apply w-full text-base mb-8;
+
+        th, td {
+            @apply p-3 border border-gray-300 text-left;
+        }
+
+        th {
+            @apply text-lg;
+        }
+    }
+
+    @screen sm {
+        a[name] {
+            @apply top-[-30px];
+        }
+    }
+
+    .page_title {
+        @apply hidden;
+    }
+
+    h1 {
+        @apply text-[2.5em] tracking-normal;
+    }
+
+    h2 {
+        @apply text-[1.75em] tracking-normal;
+    }
+
+    h3 {
+        @apply text-[1.25em] font-medium tracking-normal;
+    }
+
+    h4 {
+        @apply text-base font-medium tracking-normal;
+    }
+
+    h4 a, h3 a, h2 a {
+        @apply text-gray-900;
+    }
+
+    h4 a:before,
+    h3 a:before,
+    h2 a:before {
+        content: "#";
+        @apply absolute font-normal text-red-600 opacity-60;
+    }
+
+    h3 a:before,
+    h2 a:before {
+        @apply ml-[-25px] text-[28px];
+    }
+
+    h4 a:before {
+        @apply ml-[-18px] text-[17px];
+    }
+
+    code {
+        line-height: 1.9;
+        @apply text-[.8rem] font-medium text-gray-900;
+    }
+
+    p {
+        @apply text-base leading-[1.8em];
+        code {
+            @apply text-[.8rem];
+        }
+    }
+
+    ul:not(:first-of-type),
+    .content-list ul {
+        @apply list-none m-0 mb-[2.5em] p-0;
+
+        li {
+            @apply relative block pl-5 mb-4 text-[.89em] text-gray-700 leading-[1.714em];
+
+            a {
+                @apply no-underline;
+            }
+
+            code {
+                @apply text-[.875em];
+            }
+
+            &::before {
+                content: "";
+                background-image: url("data:image/svg+xml;utf8,<svg width="10" height="11" viewBox="0 0 10 11" xmlns="http://www.w3.org/2000/svg"><title>Polygon</title><path d="M5.036 1.965l-3.492 1.94v3.88l3.492 1.94 3.492-1.94v-3.88l-3.492-1.94zm0-1.12l4.5 2.5v5l-4.5 2.5-4.5-2.5v-5l4.5-2.5z" fill="#FF2D20" fill-rule="nonzero"/></svg>");
+                @apply absolute top-[.40em] left-0 w-[9px] h-[10px] bg-no-repeat bg-center bg-contain;
+            }
+        }
+    }
+
+    h1 + ul {
+        @apply mb-[4em] list-none m-0 p-0;
+
+        li {
+            @apply block mb-[.5em];
+
+            a {
+                @apply relative text-[.89em] font-medium text-gray-900 no-underline;
+
+                &::before {
+                    content: "# ";
+                    @apply text-red-600;
+                }
+            }
+        }
+
+        ul {
+            @apply mt-[.5em] p-0 mb-0;
+
+            li {
+                @apply pl-[1.5em];
+
+                a {
+                    @apply font-normal;
+                }
+            }
+        }
+    }
+}

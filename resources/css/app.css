@@ -1,0 +1,12 @@
+@import './fonts/iosevka-cornch-web/iosevka-cornch-web.css';
+
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+
+@import './content.css';
+
+@import 'tailwindcss/utilities';
+
+body {
+    @apply text-gray-800;
+}
