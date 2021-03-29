@@ -3,9 +3,9 @@
 return [
     'docsets' => [
         'laravel' => [
-            'folder' => 'laravel/build/zh_TW',
+            'path' => 'laravel/build/{{locale}}/{{version}}/{{page}}.md',
             'version' => true,
-            'navigation' => 'documentation.md'
+            'navigation' => 'laravel/build/{{locale}}/{{version}}/documentation.md'
         ],
     ],
 ];

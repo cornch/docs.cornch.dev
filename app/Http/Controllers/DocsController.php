@@ -6,37 +6,34 @@ namespace App\Http\Controllers;
 
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 
 final class DocsController
 {
-    public function show(string $doc, ?string $version, string $page): View
+    public function show(string $locale, string $doc, ?string $version, string $page): View
     {
-        $markdown = $this->getPage($doc, $version, $page);
+        $markdown = $this->getPage($doc, $locale, $version, $page);
 
         return view('docs.show', [
             'doc' => $doc,
+            'locale' => $locale,
             'version' => $version,
             'markdown' => $markdown
         ]);
     }
 
-    private function getPage(string $doc, ?string $version, string $page): string
+    private function getPage(string $doc, string $locale, ?string $version, string $page): string
     {
-        $docFolder = $this->getDocFolder($doc);
+        $path = config("docs.docsets.{$doc}.path");
 
         $pageFolder = dirname($page);
-        $pageFolder = $pageFolder === '.' ? '' : $pageFolder;
-        $pageFolder = trim($version . '/' . $pageFolder, '/');
-        $pageName = basename($page);
+        $pageName = trim(($pageFolder === '.' ? '' : $pageFolder) . '/' . basename($page), '/');
 
-        $fileName = "{$docFolder}/{$pageFolder}/{$pageName}.md";
+        $fileName = str_replace(
+            ['{{locale}}', '{{version}}', '{{page}}'],
+            [$locale, $version, $pageName],
+            $path,
+        );
 
         return Storage::disk('docs')->get($fileName);
-    }
-
-    private function getDocFolder(string $doc): ?string
-    {
-        return config("docs.docsets.{$doc}.folder");
     }
 }

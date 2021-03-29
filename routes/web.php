@@ -18,4 +18,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('{doc}/{version}/{page}', [DocsController::class, 'show'])->where('page', '([\w\-_]+/?)*');
+Route::get('{locale}/{doc}/{version}/{page}', [DocsController::class, 'show'])->where('page', '([\w\-_]+/?)*');

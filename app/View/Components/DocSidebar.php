@@ -14,6 +14,7 @@ class DocSidebar extends Component
      * @param string $version
      */
     public function __construct(
+        public string $locale,
         public string $doc,
         public string $version
     ) {
@@ -33,7 +34,11 @@ class DocSidebar extends Component
             return '';
         }
 
-        $navFile = config("docs.docsets.{$this->doc}.folder") . '/' . $this->version . '/' . $navFile;
+        $navFile = str_replace(
+            ['{{locale}}', '{{version}}'],
+            [$this->locale, $this->version],
+            $navFile
+        );
 
         $markdown = Storage::disk('docs')->get($navFile);
 
