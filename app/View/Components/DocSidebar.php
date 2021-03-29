@@ -32,10 +32,10 @@ class DocSidebar extends Component
      */
     public function render()
     {
-        $markdown = $this->docLoader->getNavigation($this->doc, $this->version);
+        $html = $this->docLoader->getNavigation($this->doc, $this->version);
 
         return view('components.doc-sidebar', [
-            'markdown' => $markdown,
+            'html' => $html,
         ]);
     }
 }

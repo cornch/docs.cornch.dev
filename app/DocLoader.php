@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace App;
 
+use App\CommonMark\DocumentationConverter;
+use App\CommonMark\NavigationConverter;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 use JetBrains\PhpStorm\ArrayShape;
 
 final class DocLoader
@@ -36,9 +37,11 @@ final class DocLoader
         }
 
         $path = $this->replaceStubStrings($path, ['doc' => $doc, 'page' => $page, 'version' => $version]);
-
         $markdown = $this->getFile($path);
-        return $this->replaceStubStrings($markdown, ['doc' => $doc, 'page' => $page, 'version' => $version]);
+        $markdown = $this->replaceStubStrings($markdown, ['doc' => $doc, 'page' => $page, 'version' => $version]);
+        $html = (new DocumentationConverter(config("docs.docsets.{$docName}.link-fixer")))->convertToHtml($markdown);
+
+        return $this->replaceStubStrings($html, ['doc' => $doc, 'page' => $page, 'version' => $version]);
     }
 
     public function getNavigation($doc = null, $version = null): string
@@ -51,10 +54,11 @@ final class DocLoader
             throw new \RuntimeException("Unkown doc: {$docName}");
         }
 
-        $nav = $this->replaceStubStrings($nav, ['doc' => $doc, 'version' => $version]);
-        $markdown = $this->getFile($nav);
+        $markdown = $this->getFile($this->replaceStubStrings($nav, ['doc' => $doc, 'version' => $version]));
+        $markdown = $this->replaceStubStrings($markdown, ['doc' => $doc, 'version' => $version]);
+        $html = (new NavigationConverter(config("docs.docsets.{$docName}.link-fixer")))->convertToHtml($markdown);
 
-        return $this->replaceStubStrings($markdown, ['doc' => $doc, 'version' => $version]);
+        return $this->replaceStubStrings($html, ['doc' => $doc, 'version' => $version]);
     }
 
     public function replaceStubStrings(

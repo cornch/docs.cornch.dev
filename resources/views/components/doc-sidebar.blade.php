@@ -1,3 +1,3 @@
-<div>
-    {!! Str::markdown($markdown) !!}
+<div x-data="{  }">
+    {!! $html !!}
 </div>
