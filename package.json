@@ -10,6 +10,7 @@
     "devDependencies": {
         "@tailwindcss/jit": "^0.1.17",
         "axios": "^0.21",
+        "babel-plugin-prismjs": "^2.0.1",
         "laravel-mix": "^6.0.6",
         "lodash": "^4.17.19",
         "postcss": "^8.1.14",
@@ -19,6 +20,7 @@
     },
     "dependencies": {
         "alpinejs": "^2.8.2",
+        "prismjs": "^1.23.0",
         "tailwindcss": "^2.0.4"
     }
 }

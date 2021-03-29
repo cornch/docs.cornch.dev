@@ -8,6 +8,8 @@
 
 @import 'tailwindcss/utilities';
 
+@import './prism.css';
+
 body {
     @apply text-gray-800;
 }

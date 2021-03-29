@@ -7,7 +7,7 @@
                 <x-doc-sidebar />
             </div>
 
-            <div class="w-3/4 content mx-2">
+            <div class="w-3/4 content mx-2 language-php">
                 {!! $markdown !!}
             </div>
         </div>
