@@ -2,6 +2,7 @@
 
 namespace App\View\Components;
 
+use App\DocLoader;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\Component;
 
@@ -10,13 +11,16 @@ class DocSidebar extends Component
     /**
      * Create a new component instance.
      *
-     * @param string $doc
-     * @param string $version
+     * @param \App\DocLoader $docLoader
+     * @param string|null $locale
+     * @param string|null $doc
+     * @param string|null $version
      */
     public function __construct(
-        public string $locale,
-        public string $doc,
-        public string $version
+        private DocLoader $docLoader,
+        public ?string $locale = null,
+        public ?string $doc = null,
+        public ?string $version = null
     ) {
 
     }
@@ -28,19 +32,7 @@ class DocSidebar extends Component
      */
     public function render()
     {
-        $navFile = config("docs.docsets.{$this->doc}.navigation");
-
-        if ($navFile === null) {
-            return '';
-        }
-
-        $navFile = str_replace(
-            ['{{locale}}', '{{version}}'],
-            [$this->locale, $this->version],
-            $navFile
-        );
-
-        $markdown = Storage::disk('docs')->get($navFile);
+        $markdown = $this->docLoader->getNavigation($this->doc, $this->version);
 
         return view('components.doc-sidebar', [
             'markdown' => $markdown,

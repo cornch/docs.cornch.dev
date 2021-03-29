@@ -4,20 +4,24 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\DocLoader;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Storage;
 
 final class DocsController
 {
+    public function __construct(
+        private DocLoader $docLoader
+    ) {
+    }
+
     public function show(string $locale, string $doc, ?string $version, string $page): View
     {
-        $markdown = $this->getPage($doc, $locale, $version, $page);
-
         return view('docs.show', [
             'doc' => $doc,
             'locale' => $locale,
             'version' => $version,
-            'markdown' => $markdown
+            'markdown' => $this->docLoader->getPage($doc, $page, $version),
         ]);
     }
 
