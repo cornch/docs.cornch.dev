@@ -1,5 +1,6 @@
 module.exports = {
   purge: [
+    'app/CommonMark/Block/Renderer/**/*.php',
     'resources/views/**/*.blade.php',
   ],
   darkMode: false, // or 'media' or 'class'
