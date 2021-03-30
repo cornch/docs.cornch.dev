@@ -17,11 +17,15 @@ final class DocsController
 
     public function show(string $locale, string $doc, ?string $version, string $page): View
     {
+        $title = $this->docLoader->getPageTitle($doc, $page, $version);
+        $content = $this->docLoader->getPage($doc, $page, $version);
+
         return view('docs.show', [
+            'title' => $title,
             'doc' => $doc,
             'locale' => $locale,
             'version' => $version,
-            'markdown' => $this->docLoader->getPage($doc, $page, $version),
+            'content' => $content,
         ]);
     }
 

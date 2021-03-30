@@ -3,6 +3,7 @@
 return [
     'docsets' => [
         'laravel' => [
+            'name' => 'Laravel',
             'path' => 'laravel/build/{{locale}}/{{version}}/{{page}}.md',
             'version' => true,
             'navigation' => 'laravel/build/{{locale}}/{{version}}/documentation.md',

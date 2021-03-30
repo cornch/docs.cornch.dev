@@ -27,7 +27,35 @@ final class DocLoader
         $this->page = $currentRoute->parameter('page');
     }
 
+    public function getDocName(string $doc = null): string
+    {
+        $docName = $doc ?? $this->doc;
+
+        return config("docs.docsets.{$docName}.name");
+    }
+
+    public function getPageTitle($doc = null, $page = null, $version = null): string
+    {
+        $markdown = $this->getFile($this->resolveDocPath($doc, $page, $version));
+
+        $matches = [];
+        preg_match('@^#([^#]+)\n@', $markdown, $matches);
+
+        return trim($matches[1] ?? '') . ' - ' . $this->getDocName();
+    }
+
     public function getPage($doc = null, $page = null, $version = null): string
+    {
+        $path = $this->resolveDocPath($doc, $page, $version);
+
+        $markdown = $this->getFile($path);
+        $markdown = $this->replaceStubStrings($markdown, ['doc' => $doc, 'page' => $page, 'version' => $version]);
+        $html = (new DocumentationConverter(config('docs.docsets.' . ($doc ?? $this->doc) . '.link-fixer')))->convertToHtml($markdown);
+
+        return $this->replaceStubStrings($html, ['doc' => $doc, 'page' => $page, 'version' => $version]);
+    }
+
+    private function resolveDocPath(?string $doc = null, ?string $page = null, ?string $version = null): string
     {
         $docName = $doc ?? $this->doc;
 
@@ -36,12 +64,7 @@ final class DocLoader
             throw new \RuntimeException("Unknown doc: {$docName}");
         }
 
-        $path = $this->replaceStubStrings($path, ['doc' => $doc, 'page' => $page, 'version' => $version]);
-        $markdown = $this->getFile($path);
-        $markdown = $this->replaceStubStrings($markdown, ['doc' => $doc, 'page' => $page, 'version' => $version]);
-        $html = (new DocumentationConverter(config("docs.docsets.{$docName}.link-fixer")))->convertToHtml($markdown);
-
-        return $this->replaceStubStrings($html, ['doc' => $doc, 'page' => $page, 'version' => $version]);
+        return $this->replaceStubStrings($path, ['doc' => $docName, 'page' => $page, 'version' => $version]);
     }
 
     public function getNavigation($doc = null, $version = null): string

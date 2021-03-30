@@ -1,5 +1,7 @@
 @extends('layouts.main')
 
+@section('title', $title)
+
 @section('content')
     <div class="container mx-auto px-6">
         <div class="flex -mx-2">
@@ -8,7 +10,7 @@
             </div>
 
             <div class="w-3/4 content mx-2 language-php">
-                {!! $markdown !!}
+                {!! $content !!}
             </div>
         </div>
     </div>
