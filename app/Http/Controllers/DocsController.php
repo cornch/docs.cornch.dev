@@ -17,8 +17,8 @@ final class DocsController
 
     public function show(string $locale, string $doc, ?string $version, string $page): View
     {
-        $title = $this->docLoader->getPageTitle($doc, $page, $version);
-        $content = $this->docLoader->getPage($doc, $page, $version);
+        $title = $this->docLoader->getPageTitle();
+        $content = $this->docLoader->getPage();
 
         return view('docs.show', [
             'title' => $title,

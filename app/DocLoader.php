@@ -6,6 +6,7 @@ namespace App;
 
 use App\CommonMark\DocumentationConverter;
 use App\CommonMark\NavigationConverter;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use JetBrains\PhpStorm\ArrayShape;
 
@@ -18,70 +19,27 @@ final class DocLoader
     private string $version;
     private string $locale;
 
-    public function __construct(\Illuminate\Routing\Router $route)
+    #[ArrayShape([
+        'name' => 'string',
+        'path' => 'string',
+        'navigation' => 'string',
+        'link-fixer' => \Closure::class
+    ])]
+    private array $config;
+
+    /**
+     * @noinspection PhpFieldAssignmentTypeMismatchInspection
+     * @noinspection NullPointerExceptionInspection
+     */
+    public function __construct(?string $doc = null, ?string $locale = null, ?string $version = null, ?string $page = null)
     {
-        $currentRoute = $route->current();
-        $this->doc = $currentRoute->parameter('doc');
-        $this->locale = $currentRoute->parameter('locale');
-        $this->version = $currentRoute->parameter('version');
-        $this->page = $currentRoute->parameter('page');
-    }
+        $currentRoute = Route::current();
+        $this->doc = $doc ?? $currentRoute->parameter('doc');
+        $this->locale = $locale ?? $currentRoute->parameter('locale');
+        $this->version = $version ?? $currentRoute->parameter('version');
+        $this->page = $page ?? $currentRoute->parameter('page');
 
-    public function getDocName(string $doc = null): string
-    {
-        $docName = $doc ?? $this->doc;
-
-        return config("docs.docsets.{$docName}.name");
-    }
-
-    public function getPageTitle($doc = null, $page = null, $version = null): string
-    {
-        $markdown = $this->getFile($this->resolveDocPath($doc, $page, $version));
-
-        $matches = [];
-        preg_match('@^#([^#]+)\n@', $markdown, $matches);
-
-        return trim($matches[1] ?? '') . ' - ' . $this->getDocName();
-    }
-
-    public function getPage($doc = null, $page = null, $version = null): string
-    {
-        $path = $this->resolveDocPath($doc, $page, $version);
-
-        $markdown = $this->getFile($path);
-        $markdown = $this->replaceStubStrings($markdown, ['doc' => $doc, 'page' => $page, 'version' => $version]);
-        $html = (new DocumentationConverter(config('docs.docsets.' . ($doc ?? $this->doc) . '.link-fixer')))->convertToHtml($markdown);
-
-        return $this->replaceStubStrings($html, ['doc' => $doc, 'page' => $page, 'version' => $version]);
-    }
-
-    private function resolveDocPath(?string $doc = null, ?string $page = null, ?string $version = null): string
-    {
-        $docName = $doc ?? $this->doc;
-
-        $path = config("docs.docsets.{$docName}.path");
-        if ($path === null) {
-            throw new \RuntimeException("Unknown doc: {$docName}");
-        }
-
-        return $this->replaceStubStrings($path, ['doc' => $docName, 'page' => $page, 'version' => $version]);
-    }
-
-    public function getNavigation($doc = null, $version = null): string
-    {
-        $docName = $doc ?? $this->doc;
-
-        $nav = config("docs.docsets.{$docName}.navigation");
-
-        if ($nav === null) {
-            throw new \RuntimeException("Unkown doc: {$docName}");
-        }
-
-        $markdown = $this->getFile($this->replaceStubStrings($nav, ['doc' => $doc, 'version' => $version]));
-        $markdown = $this->replaceStubStrings($markdown, ['doc' => $doc, 'version' => $version]);
-        $html = (new NavigationConverter(config("docs.docsets.{$docName}.link-fixer")))->convertToHtml($markdown);
-
-        return $this->replaceStubStrings($html, ['doc' => $doc, 'version' => $version]);
+        $this->config = config("docs.docsets.{$this->doc}");
     }
 
     public function replaceStubStrings(
@@ -102,9 +60,49 @@ final class DocLoader
         );
     }
 
-    private function getFile($path)
+    public function getDocName(): string
+    {
+        return $this->config['name'];
+    }
+
+    public function getPage(): string
+    {
+        $path = $this->resolveDocPath();
+
+        $markdown = $this->getFile($path);
+        $markdown = $this->replaceStubStrings($markdown);
+        $html = (new DocumentationConverter($this->config['link-fixer']))->convertToHtml($markdown);
+
+        return $this->replaceStubStrings($html);
+    }
+
+    public function getPageTitle(): string
+    {
+        $markdown = $this->getFile($this->resolveDocPath());
+
+        $matches = [];
+        preg_match('@^#([^#]+)\n@', $markdown, $matches);
+
+        return trim($matches[1] ?? '') . ' - ' . $this->getDocName();
+    }
+
+    public function getNavigation(): string
+    {
+        $markdown = $this->getFile($this->replaceStubStrings($this->config['navigation']));
+        $markdown = $this->replaceStubStrings($markdown);
+        $html = (new NavigationConverter($this->config['link-fixer']))->convertToHtml($markdown);
+
+        return $this->replaceStubStrings($html);
+    }
+
+    private function getFile(string $path): string
     {
         return Storage::disk(self::DISK)->get($path);
+    }
+
+    private function resolveDocPath(): string
+    {
+        return $this->replaceStubStrings($this->config['path']);
     }
 
     /**
