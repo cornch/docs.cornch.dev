@@ -6,18 +6,11 @@ namespace App;
 
 use App\CommonMark\DocumentationConverter;
 use App\CommonMark\NavigationConverter;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Storage;
 use JetBrains\PhpStorm\ArrayShape;
 
 final class DocLoader
 {
     private const DISK = 'docs';
-
-    private string $doc;
-    private string $page;
-    private string $version;
-    private string $locale;
 
     #[ArrayShape([
         'name' => 'string',
@@ -30,15 +23,17 @@ final class DocLoader
     /**
      * @noinspection PhpFieldAssignmentTypeMismatchInspection
      * @noinspection NullPointerExceptionInspection
+     * @param string $doc
+     * @param string $locale
+     * @param string $version
+     * @param string $page
      */
-    public function __construct(?string $doc = null, ?string $locale = null, ?string $version = null, ?string $page = null)
-    {
-        $currentRoute = Route::current();
-        $this->doc = $doc ?? $currentRoute->parameter('doc');
-        $this->locale = $locale ?? $currentRoute->parameter('locale');
-        $this->version = $version ?? $currentRoute->parameter('version');
-        $this->page = $page ?? $currentRoute->parameter('page');
-
+    public function __construct(
+        private string $doc,
+        private string $locale,
+        private string $version,
+        private string $page
+    ) {
         $this->config = config("docs.docsets.{$this->doc}");
     }
 
@@ -97,7 +92,7 @@ final class DocLoader
 
     private function getFile(string $path): string
     {
-        return Storage::disk(self::DISK)->get($path);
+        return app('filesystem')->disk(self::DISK)->get($path);
     }
 
     private function resolveDocPath(): string
