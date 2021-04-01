@@ -6,6 +6,7 @@ namespace App;
 
 use App\CommonMark\DocumentationConverter;
 use App\CommonMark\NavigationConverter;
+use Illuminate\Contracts\View\View;
 use JetBrains\PhpStorm\ArrayShape;
 
 final class DocLoader
@@ -16,13 +17,13 @@ final class DocLoader
         'name' => 'string',
         'path' => 'string',
         'navigation' => 'string',
+        'header' => 'string',
+        'versions' => 'array',
         'link-fixer' => \Closure::class
     ])]
     private array $config;
 
     /**
-     * @noinspection PhpFieldAssignmentTypeMismatchInspection
-     * @noinspection NullPointerExceptionInspection
      * @param string $doc
      * @param string $locale
      * @param string $version
@@ -93,6 +94,19 @@ final class DocLoader
     private function getFile(string $path): string
     {
         return app('filesystem')->disk(self::DISK)->get($path);
+    }
+
+    public function getHeader(): View
+    {
+        $view = $this->config['header'];
+
+        return view($view, [
+            'versions' => $this->config['versions'],
+            'version' => $this->version,
+            'locale' => $this->locale,
+            'page' => $this->page,
+            'versionUrl' => route('docs.show', ['version' => '__version__', 'locale' => $this->locale, 'doc' => $this->doc, 'page' => $this->page])
+        ]);
     }
 
     private function resolveDocPath(): string

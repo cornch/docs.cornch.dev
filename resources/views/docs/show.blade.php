@@ -4,12 +4,14 @@
 
 @section('content')
     <div class="container mx-auto px-6">
+        <x-doc-header class="mb-16" :locale="$locale" :doc="$doc" :version="$version" :page="$page" />
+
         <div class="flex -mx-2">
-            <div class="w-1/4 sidebar">
+            <div class="sidebar w-1/4 mx-2">
                 <x-doc-sidebar :locale="$locale" :doc="$doc" :version="$version" :page="$page" />
             </div>
 
-            <div class="w-3/4 content mx-2 language-php">
+            <div class="content w-3/4 mx-2 language-php">
                 {!! $content !!}
             </div>
         </div>

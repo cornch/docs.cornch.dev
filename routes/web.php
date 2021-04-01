@@ -17,7 +17,7 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
-$router->get('{locale:[\w\-_]+}/{doc:\w+}/{version}/{page:[\w\-_/]+}', function (string $locale, string $doc, string $version, string $page) {
+$router->get('{locale:[\w\-_]+}/{doc:\w+}/{version}/{page:[\w\-_/]+}', ['as' => 'docs.show', function (string $locale, string $doc, string $version, string $page) {
     $docLoader = app(\App\DocLoader::class, [
         'locale' => $locale,
         'doc' => $doc,
@@ -33,4 +33,4 @@ $router->get('{locale:[\w\-_]+}/{doc:\w+}/{version}/{page:[\w\-_/]+}', function 
         'version' => $version,
         'page' => $page,
     ]);
-});
+}]);
