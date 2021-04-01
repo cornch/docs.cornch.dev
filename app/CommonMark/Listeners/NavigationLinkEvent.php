@@ -6,6 +6,8 @@ namespace App\CommonMark\Listeners;
 
 use League\CommonMark\Block\Element\Heading;
 use League\CommonMark\Event\DocumentParsedEvent;
+use League\CommonMark\Inline\Element\Link;
+use Ramsey\Uuid\Uuid;
 
 final class NavigationLinkEvent
 {
@@ -20,7 +22,14 @@ final class NavigationLinkEvent
                 $current->isEntering() &&
                 $node->getLevel() === 2
             ) {
-                $node->data['attributes']['x-on:click.self'] = '$event.target.parentNode.classList.toggle(\'sub--on\')';
+                $uuid = base64_encode(Uuid::uuid4()->getBytes());
+
+                /** @var \League\CommonMark\Block\Element\ListItem $parent */
+                $parent = $node->parent();
+                $parent->data['attributes']['x-bind:class'] = /** @lang JavaScript */ "{ 'sub--on': opening === '{$uuid}' }";
+                $parent->data['attributes']['data-uuid'] = $uuid;
+
+                $node->data['attributes']['x-on:click.self'] = /** @lang JavaScript */ "opening = '{$uuid}'";
             }
         }
     }

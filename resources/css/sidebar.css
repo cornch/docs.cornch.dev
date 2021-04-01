@@ -34,7 +34,7 @@
 
                 &.active a::before {
                     content: "";
-                    background-image: url("data:image/svg+xml;utf8,<svg width="8" height="8" viewBox="0 0 8 8" xmlns="http://www.w3.org/2000/svg"><title>active_marker</title><path d="M4 0l3.464 2v4L4 8 .536 6V2z" fill="#FF2D20" fill-rule="nonzero"/></svg>");
+                    background-image: url("data:image/svg+xml;utf8,%3Csvg%20width%3D%228%22%20height%3D%228%22%20viewBox%3D%220%200%208%208%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Ctitle%3Eactive_marker%3C/title%3E%3Cpath%20d%3D%22M4%200l3.464%202v4L4%208%20.536%206V2z%22%20fill%3D%22%23FF2D20%22%20fill-rule%3D%22nonzero%22/%3E%3C/svg%3E");
                     @apply absolute top-[.25em] left-0 w-2 h-2 bg-no-repeat bg-center;
                 }
             }
