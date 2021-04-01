@@ -14,7 +14,11 @@ return [
                 'Master' => 'master',
             ],
             'link-fixer' => function (string $url): string {
-                return preg_replace('#^/docs/#', '/{{locale}}/laravel/', $url);
+                return preg_replace(
+                    ['#^/docs/#', '#^/api/#'],
+                    ['/{{locale}}/laravel/', 'https://laravel.com/api/'],
+                    $url
+                );
             },
         ],
     ],
