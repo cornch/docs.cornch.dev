@@ -1,3 +1,5 @@
+const colors = require('tailwindcss/colors')
+
 module.exports = {
   purge: [
     'app/CommonMark/Block/Renderer/**/*.php',
@@ -5,6 +7,7 @@ module.exports = {
   ],
   darkMode: false, // or 'media' or 'class'
   theme: {
+    colors,
     fontFamily: {
       sans: [
         'ui-sans-serif',
