@@ -11,12 +11,12 @@
 
     h1 {
         @apply mb-[.65em] text-[2em] tracking-[-1px] leading-[1.125em];
-        @aply md:text-[2.5em] lg:text-[3em] xl:text-[3.5em] 2xl:text-[4em];
+        @apply md:text-[2.5em] lg:text-[3em] xl:text-[3.5em] 2xl:text-[4em];
     }
 
     h2 {
         @apply text-[1.75em] font-normal tracking-[-.5px] leading-[1.125em];
-        @aply md:text-[2.25em] lg:text-[3em];
+        @apply md:text-[2.25em] lg:text-[3em];
     }
 
     h3 {
