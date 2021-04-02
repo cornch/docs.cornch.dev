@@ -1,15 +1,17 @@
-@import './fonts/iosevka-cornch-web/iosevka-cornch-web.css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
+@layer base {
+    @import './fonts/iosevka-cornch-web/iosevka-cornch-web.css';
 
-@import './content.css';
-@import './sidebar.css';
+    body {
+        @apply text-gray-800;
+    }
+}
 
-@import 'tailwindcss/utilities';
-
-@import './prism.css';
-
-body {
-    @apply text-gray-800;
+@layer components {
+    @import './content.css';
+    @import './sidebar.css';
+    @import './prism.css';
 }

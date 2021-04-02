@@ -5,7 +5,7 @@
 	font-weight: 100;
 	font-stretch: normal;
 	font-style: normal;
-	src: url('fonts/iosevka-cornch-web/woff2/iosevka-cornch-web-thin.woff2') format('woff2'), url('fonts/iosevka-cornch-web/ttf/iosevka-cornch-web-thin.ttf') format('truetype');
+	src: url('./woff2/iosevka-cornch-web-thin.woff2') format('woff2'), url('./ttf/iosevka-cornch-web-thin.ttf') format('truetype');
 }
 
 @font-face {
@@ -14,7 +14,7 @@
 	font-weight: 100;
 	font-stretch: expanded;
 	font-style: normal;
-	src: url('fonts/iosevka-cornch-web/woff2/iosevka-cornch-web-extendedthin.woff2') format('woff2'), url('fonts/iosevka-cornch-web/ttf/iosevka-cornch-web-extendedthin.ttf') format('truetype');
+	src: url('./woff2/iosevka-cornch-web-extendedthin.woff2') format('woff2'), url('./ttf/iosevka-cornch-web-extendedthin.ttf') format('truetype');
 }
 
 @font-face {
@@ -23,7 +23,7 @@
 	font-weight: 100;
 	font-stretch: normal;
 	font-style: italic;
-	src: url('fonts/iosevka-cornch-web/woff2/iosevka-cornch-web-thinitalic.woff2') format('woff2'), url('fonts/iosevka-cornch-web/ttf/iosevka-cornch-web-thinitalic.ttf') format('truetype');
+	src: url('./woff2/iosevka-cornch-web-thinitalic.woff2') format('woff2'), url('./ttf/iosevka-cornch-web-thinitalic.ttf') format('truetype');
 }
 
 @font-face {
@@ -32,7 +32,7 @@
 	font-weight: 100;
 	font-stretch: expanded;
 	font-style: italic;
-	src: url('fonts/iosevka-cornch-web/woff2/iosevka-cornch-web-extendedthinitalic.woff2') format('woff2'), url('fonts/iosevka-cornch-web/ttf/iosevka-cornch-web-extendedthinitalic.ttf') format('truetype');
+	src: url('./woff2/iosevka-cornch-web-extendedthinitalic.woff2') format('woff2'), url('./ttf/iosevka-cornch-web-extendedthinitalic.ttf') format('truetype');
 }
 
 @font-face {
@@ -41,7 +41,7 @@
 	font-weight: 400;
 	font-stretch: normal;
 	font-style: normal;
-	src: url('fonts/iosevka-cornch-web/woff2/iosevka-cornch-web-regular.woff2') format('woff2'), url('fonts/iosevka-cornch-web/ttf/iosevka-cornch-web-regular.ttf') format('truetype');
+	src: url('./woff2/iosevka-cornch-web-regular.woff2') format('woff2'), url('./ttf/iosevka-cornch-web-regular.ttf') format('truetype');
 }
 
 @font-face {
@@ -50,7 +50,7 @@
 	font-weight: 400;
 	font-stretch: expanded;
 	font-style: normal;
-	src: url('fonts/iosevka-cornch-web/woff2/iosevka-cornch-web-extended.woff2') format('woff2'), url('fonts/iosevka-cornch-web/ttf/iosevka-cornch-web-extended.ttf') format('truetype');
+	src: url('./woff2/iosevka-cornch-web-extended.woff2') format('woff2'), url('./ttf/iosevka-cornch-web-extended.ttf') format('truetype');
 }
 
 @font-face {
@@ -59,7 +59,7 @@
 	font-weight: 400;
 	font-stretch: normal;
 	font-style: italic;
-	src: url('fonts/iosevka-cornch-web/woff2/iosevka-cornch-web-italic.woff2') format('woff2'), url('fonts/iosevka-cornch-web/ttf/iosevka-cornch-web-italic.ttf') format('truetype');
+	src: url('./woff2/iosevka-cornch-web-italic.woff2') format('woff2'), url('./ttf/iosevka-cornch-web-italic.ttf') format('truetype');
 }
 
 @font-face {
@@ -68,7 +68,7 @@
 	font-weight: 400;
 	font-stretch: expanded;
 	font-style: italic;
-	src: url('fonts/iosevka-cornch-web/woff2/iosevka-cornch-web-extendeditalic.woff2') format('woff2'), url('fonts/iosevka-cornch-web/ttf/iosevka-cornch-web-extendeditalic.ttf') format('truetype');
+	src: url('./woff2/iosevka-cornch-web-extendeditalic.woff2') format('woff2'), url('./ttf/iosevka-cornch-web-extendeditalic.ttf') format('truetype');
 }
 
 @font-face {
@@ -77,7 +77,7 @@
 	font-weight: 700;
 	font-stretch: normal;
 	font-style: normal;
-	src: url('fonts/iosevka-cornch-web/woff2/iosevka-cornch-web-bold.woff2') format('woff2'), url('fonts/iosevka-cornch-web/ttf/iosevka-cornch-web-bold.ttf') format('truetype');
+	src: url('./woff2/iosevka-cornch-web-bold.woff2') format('woff2'), url('./ttf/iosevka-cornch-web-bold.ttf') format('truetype');
 }
 
 @font-face {
@@ -86,7 +86,7 @@
 	font-weight: 700;
 	font-stretch: expanded;
 	font-style: normal;
-	src: url('fonts/iosevka-cornch-web/woff2/iosevka-cornch-web-extendedbold.woff2') format('woff2'), url('fonts/iosevka-cornch-web/ttf/iosevka-cornch-web-extendedbold.ttf') format('truetype');
+	src: url('./woff2/iosevka-cornch-web-extendedbold.woff2') format('woff2'), url('./ttf/iosevka-cornch-web-extendedbold.ttf') format('truetype');
 }
 
 @font-face {
@@ -95,7 +95,7 @@
 	font-weight: 700;
 	font-stretch: normal;
 	font-style: italic;
-	src: url('fonts/iosevka-cornch-web/woff2/iosevka-cornch-web-bolditalic.woff2') format('woff2'), url('fonts/iosevka-cornch-web/ttf/iosevka-cornch-web-bolditalic.ttf') format('truetype');
+	src: url('./woff2/iosevka-cornch-web-bolditalic.woff2') format('woff2'), url('./ttf/iosevka-cornch-web-bolditalic.ttf') format('truetype');
 }
 
 @font-face {
@@ -104,5 +104,5 @@
 	font-weight: 700;
 	font-stretch: expanded;
 	font-style: italic;
-	src: url('fonts/iosevka-cornch-web/woff2/iosevka-cornch-web-extendedbolditalic.woff2') format('woff2'), url('fonts/iosevka-cornch-web/ttf/iosevka-cornch-web-extendedbolditalic.ttf') format('truetype');
+	src: url('./woff2/iosevka-cornch-web-extendedbolditalic.woff2') format('woff2'), url('./ttf/iosevka-cornch-web-extendedbolditalic.ttf') format('truetype');
 }
