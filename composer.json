@@ -1,8 +1,8 @@
 {
-    "name": "laravel/lumen",
-    "description": "The Laravel Lumen Framework.",
-    "keywords": ["framework", "laravel", "lumen"],
-    "license": "MIT",
+    "name": "cornch/cornch-docs",
+    "description": "A documentation site provide translations of various laravel projects.",
+    "keywords": ["laravel", "documentation", "translation"],
+    "license": "AGPL-3.0-or-later",
     "type": "project",
     "require": {
         "php": "^8.0",
