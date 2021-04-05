@@ -1,3 +1,0 @@
-[submodule "resources/docs/laravel"]
-	path = resources/docs/laravel
-	url = https://github.com/cornch/laravel-docs-l10n.git
