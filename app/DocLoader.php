@@ -6,6 +6,7 @@ namespace App;
 
 use App\CommonMark\DocumentationConverter;
 use App\CommonMark\NavigationConverter;
+use App\Exceptions\LocaleNotFoundException;
 use Illuminate\Contracts\View\View;
 use JetBrains\PhpStorm\ArrayShape;
 
@@ -15,8 +16,7 @@ final class DocLoader
 
     #[ArrayShape([
         'name' => 'string',
-        'path' => 'string',
-        'navigation' => 'string',
+        'locales' => 'array',
         'header' => 'string',
         'versions' => 'array',
         'link-fixer' => \Closure::class
@@ -36,6 +36,10 @@ final class DocLoader
         private string $page
     ) {
         $this->config = config("docs.docsets.{$this->doc}");
+
+        if (!array_key_exists($this->locale, $this->config['locales'])) {
+            throw new LocaleNotFoundException();
+        }
     }
 
     public function replaceStubStrings(
@@ -48,7 +52,7 @@ final class DocLoader
             ['{{doc}}', '{{locale}}', '{{version}}', '{{page}}'],
             [
                 $replace['doc'] ?? $this->doc,
-                $this->resolveLocale($replace['locale'] ?? $this->locale),
+                $replace['locale'] ?? $this->locale,
                 $replace['version'] ?? $this->version,
                 $replace['page'] ?? $this->page
             ],
@@ -58,7 +62,12 @@ final class DocLoader
 
     public function getDocName(): string
     {
-        return $this->config['name'];
+        return $this->config['locales'][$this->locale]['title'];
+    }
+
+    public function getLocales(): array
+    {
+        return $this->config['locales'];
     }
 
     public function getPage(): string
@@ -84,24 +93,28 @@ final class DocLoader
 
     public function getNavigation(): string
     {
-        $markdown = $this->getFile($this->replaceStubStrings($this->config['navigation']));
+        $markdown = $this->getFile($this->replaceStubStrings($this->config['locales'][$this->locale]['navigation']));
         $markdown = $this->replaceStubStrings($markdown);
         $html = (new NavigationConverter($this->config['link-fixer']))->convertToHtml($markdown);
 
         return $this->replaceStubStrings($html);
     }
 
-    private function getFile(string $path): string
-    {
-        return app('filesystem')->disk(self::DISK)->get($path);
-    }
-
     public function getHeader(): View
     {
         $view = $this->config['header'];
+        $locales = collect($this->config['locales'])
+            ->map(function (array $config, $code): array {
+                return [
+                    'name' => $config['name'],
+                    'url' => route('docs.show', ['version' => $this->version, 'locale' => $code, 'doc' => $this->doc, 'page' => $this->page]),
+                ];
+            })
+            ->toArray();
 
         return view($view, [
             'versions' => $this->config['versions'],
+            'locales' => $locales,
             'version' => $this->version,
             'locale' => $this->locale,
             'page' => $this->page,
@@ -109,22 +122,13 @@ final class DocLoader
         ]);
     }
 
-    private function resolveDocPath(): string
+    private function getFile(string $path): string
     {
-        return $this->replaceStubStrings($this->config['path']);
+        return app('filesystem')->disk(self::DISK)->get($path);
     }
 
-    /**
-     * Take care of locale format.
-     * Replace something like zh-tw to zh_TW.
-     *
-     * @param string $locale
-     * @return string
-     */
-    private function resolveLocale(string $locale): string
+    private function resolveDocPath(): string
     {
-        [$first, $second] = explode('_', str_replace('-', '_', $locale));
-
-        return strtolower($first) . '_' . strtoupper($second);
+        return $this->replaceStubStrings($this->config['locales'][$this->locale]['path']);
     }
 }

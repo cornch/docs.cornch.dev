@@ -3,12 +3,23 @@
 return [
     'docsets' => [
         'laravel' => [
-            'name' => 'Laravel Documentation',
-            'path' => 'laravel/build/{{locale}}/{{version}}/{{page}}.md',
-            'navigation' => 'laravel/build/{{locale}}/{{version}}/documentation.md',
             'header' => 'docs.headers.laravel',
             'version' => true,
             'default_version' => '8.x',
+            'locales' => [
+                'zh-tw' => [
+                    'name' => '繁體中文（臺灣）',
+                    'title' => 'Laravel 繁體中文（臺灣）說明文件',
+                    'path' => 'laravel/build/zh_TW/{{version}}/{{page}}.md',
+                    'navigation' => 'laravel/build/zh_TW/{{version}}/documentation.md',
+                ],
+                'en' => [
+                    'name' => 'English',
+                    'title' => 'Laravel Documentation',
+                    'path' => 'laravel/docs/{{version}}/{{page}}.md',
+                    'navigation' => 'laravel/docs/{{version}}/documentation.md',
+                ],
+            ],
             'versions' => [
                 '8.x' => '8.x',
                 'Master' => 'master',
