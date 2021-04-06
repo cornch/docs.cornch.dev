@@ -8,6 +8,10 @@
     body {
         @apply text-gray-800;
     }
+
+    [x-cloak] {
+        display: none !important;
+    }
 }
 
 @layer components {

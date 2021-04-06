@@ -29,6 +29,9 @@ final class NavigationLinkEvent
                 $parent->data['attributes']['x-bind:class'] = /** @lang JavaScript */ "{ 'sub--on': opening === '{$uuid}' }";
                 $parent->data['attributes']['data-uuid'] = $uuid;
 
+                // open by default for noscript users
+                $parent->data['attributes']['class'] = 'sub--on';
+
                 $node->data['attributes']['x-on:click.self'] = /** @lang JavaScript */ "opening = '{$uuid}'";
             }
         }
