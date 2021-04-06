@@ -77,7 +77,15 @@ final class DocLoader
 
         $markdown = $this->getFile($path);
         $markdown = $this->replaceStubStrings($markdown);
-        $html = (new DocumentationConverter($this->config['link-fixer']))->convertToHtml($markdown);
+
+        $hash = 'page-' . sha1($markdown);
+        $html = app('cache')->get($hash, function () use ($hash, $markdown) {
+            $html = (new DocumentationConverter($this->config['link-fixer']))->convertToHtml($markdown);
+            app('cache')->put($hash, $html);
+
+            return $html;
+        });
+
 
         return $this->replaceStubStrings($html);
     }
@@ -96,7 +104,14 @@ final class DocLoader
     {
         $markdown = $this->getFile($this->replaceStubStrings($this->config['locales'][$this->locale]['navigation']));
         $markdown = $this->replaceStubStrings($markdown);
-        $html = (new NavigationConverter($this->config['link-fixer']))->convertToHtml($markdown);
+
+        $hash = 'page-' . sha1($markdown);
+        $html = app('cache')->get($hash, function () use ($hash, $markdown) {
+            $html = (new NavigationConverter($this->config['link-fixer']))->convertToHtml($markdown);
+            app('cache')->put($hash, $html);
+
+            return $html;
+        });
 
         return $this->replaceStubStrings($html);
     }
