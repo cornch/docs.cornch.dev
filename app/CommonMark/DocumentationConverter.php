@@ -24,6 +24,6 @@ final class DocumentationConverter extends CommonMarkConverter
         $environment->addBlockParser(new CalloutParser());
         $environment->addBlockRenderer(Callout::class, new CalloutRenderer());
 
-        parent::__construct(['html_input' => 'escape', 'allow_unsafe_links' => false], $environment);
+        parent::__construct(['allow_unsafe_links' => false], $environment);
     }
 }
