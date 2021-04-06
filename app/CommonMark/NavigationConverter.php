@@ -18,7 +18,7 @@ final class NavigationConverter extends CommonMarkConverter
         $environment->addEventListener(DocumentParsedEvent::class, new NavigationLinkEvent());
         $environment->addEventListener(DocumentParsedEvent::class, new LinkFixer($linkFixer));
 
-        parent::__construct([], $environment);
+        parent::__construct(['html_input' => 'escape', 'allow_unsafe_links' => false], $environment);
     }
 
 }

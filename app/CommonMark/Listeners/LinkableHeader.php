@@ -9,7 +9,6 @@ use League\CommonMark\Block\Element\Paragraph;
 use League\CommonMark\Event\DocumentParsedEvent;
 use League\CommonMark\Inline\Element\HtmlInline;
 use League\CommonMark\Inline\Element\Link;
-use Ramsey\Uuid\Uuid;
 
 final class LinkableHeader
 {
@@ -35,21 +34,29 @@ final class LinkableHeader
                     continue;
                 }
 
-                $link = new Link("#{$matches['name']}", $node->getStringContent());
+                $id = $matches['name'];
+
+                $link = new Link("#{$id}", $node->getStringContent());
 
                 $replaces[] = [
                     'heading' => $node,
+                    'id' => $id,
                     'link' => $link,
+                    'remove' => $previousNode,
                 ];
             }
         }
 
         /**
          * @var Heading $heading
+         * @var string $id
          * @var Link $link
+         * @var Paragraph $remove
          */
-        foreach ($replaces as ['heading' => $heading, 'link' => $link]) {
+        foreach ($replaces as ['heading' => $heading, 'id' => $id, 'link' => $link, 'remove' => $remove]) {
+            $remove->detach();
             $heading->replaceChildren([$link]);
+            $heading->data['attributes']['id'] = $id;
         }
     }
 }
