@@ -18,6 +18,7 @@ final class DocLoader
         'name' => 'string',
         'locales' => 'array',
         'header' => 'string',
+        'footer' => 'string',
         'versions' => 'array',
         'link-fixer' => \Closure::class
     ])]
@@ -119,6 +120,17 @@ final class DocLoader
             'locale' => $this->locale,
             'page' => $this->page,
             'versionUrl' => route('docs.show', ['version' => '__version__', 'locale' => $this->locale, 'doc' => $this->doc, 'page' => $this->page])
+        ]);
+    }
+
+    public function getFooter(): View
+    {
+        $view = $this->config['footer'];
+
+        return view($view, [
+            'version' => $this->version,
+            'locale' => $this->locale,
+            'page' => $this->page,
         ]);
     }
 

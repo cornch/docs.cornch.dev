@@ -4,6 +4,7 @@ return [
     'docsets' => [
         'laravel' => [
             'header' => 'docs.headers.laravel',
+            'footer' => 'docs.footers.laravel',
             'version' => true,
             'default_version' => '8.x',
             'locales' => [
