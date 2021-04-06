@@ -2,6 +2,8 @@
 
 @section('title', $title)
 
+@section('lang', $locale)
+
 @section('content')
     <x-doc-header class="mb-16" :locale="$locale" :doc="$doc" :version="$version" :page="$page" />
 

@@ -20,6 +20,7 @@ return [
                     'navigation' => 'laravel/docs/{{version}}/documentation.md',
                 ],
             ],
+            'index' => 'installation',
             'versions' => [
                 '8.x' => '8.x',
                 'Master' => 'master',
