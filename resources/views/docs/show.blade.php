@@ -7,13 +7,13 @@
 @section('content')
     <x-doc-header class="mb-16" :locale="$locale" :doc="$doc" :version="$version" :page="$page" />
 
-    <div class="container mx-auto px-6 mb-6">
-        <div class="flex -mx-2">
-            <div class="sidebar w-1/4 mx-2">
+    <div class="container mx-auto px-6 mb-6 overflow-x-hidden">
+        <div class="flex flex-col md:flex-row justify-between items-stretch md:-mx-2">
+            <div class="sidebar md:w-1/4 mx-6 mb-16 md:mb-0 md:mx-2">
                 <x-doc-sidebar :locale="$locale" :doc="$doc" :version="$version" :page="$page" />
             </div>
 
-            <div class="content w-3/4 mx-2 language-php">
+            <div class="content md:w-3/4 mx-6 md:mx-2 language-php">
                 {!! $content !!}
             </div>
         </div>

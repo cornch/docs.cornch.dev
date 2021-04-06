@@ -9,7 +9,7 @@
 </head>
 
 <body>
-<header class="px-6 py-36 antialiased">
+<header class="px-6 py-16 md:py-36 antialiased">
     <div class="flex flex-col justify-center items-center">
         <x-logo class="w-48 mx-2" />
         <a
@@ -22,9 +22,9 @@
 </header>
 
 <div class="container mx-auto px-6 mb-36">
-    <x-docs-list-item doc="laravel" class="flex justify-center items-stretch -mx-2">
+    <x-docs-list-item doc="laravel" class="flex flex-col md:flex-row justify-center items-center md:items-stretch md:-mx-2">
         <x-slot name="logo">
-            <x-logo.laravel class="w-full py-2" />
+            <x-logo.laravel class="w-64 md:w-full py-2" />
         </x-slot>
     </x-docs-list-item>
 </div>
