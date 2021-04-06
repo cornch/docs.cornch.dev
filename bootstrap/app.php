@@ -62,6 +62,7 @@ $app->singleton(
 $app->configure('app');
 $app->configure('filesystems');
 $app->configure('docs');
+$app->configure('htmlmin');
 
 /*
 |--------------------------------------------------------------------------
@@ -96,6 +97,7 @@ $app->configure('docs');
 // $app->register(App\Providers\AppServiceProvider::class);
 // $app->register(App\Providers\AuthServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
+$app->register(HTMLMin\HTMLMin\HTMLMinServiceProvider::class);
 
 /*
 |--------------------------------------------------------------------------
