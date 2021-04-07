@@ -63,6 +63,14 @@ final class DocLoader
         );
     }
 
+    public function getDocHash(string $prefix): string
+    {
+        return $prefix . '-' . once(function (): string {
+            $path = $this->resolveDocPath();
+            return md5($path);
+        });
+    }
+
     public function getDocName(): string
     {
         return $this->config['locales'][$this->locale]['title'];
@@ -77,45 +85,50 @@ final class DocLoader
     {
         $path = $this->resolveDocPath();
 
-        $markdown = $this->getFile($path);
-        $markdown = $this->replaceStubStrings($markdown);
+        return app('cache')->get($this->getDocHash('page'), function () use ($path) {
+            $markdown = $this->getFile($path);
+            $markdown = $this->replaceStubStrings($markdown);
 
-        $hash = 'page-' . sha1($markdown);
-        $html = app('cache')->get($hash, function () use ($hash, $markdown) {
             $html = (new DocumentationConverter($this->config['link-fixer']))->convertToHtml($markdown);
-            app('cache')->put($hash, $html);
+            $html = app('htmlmin')->html($html);
+            $html = $this->replaceStubStrings($html);
+
+            app('cache')->put($this->getDocHash('page'), $html);
 
             return $html;
         });
-
-
-        return $this->replaceStubStrings($html);
     }
 
     public function getPageTitle(): string
     {
-        $markdown = $this->getFile($this->resolveDocPath());
+        return app('cache')->get($this->getDocHash('title'), function () {
+            $markdown = $this->getFile($this->resolveDocPath());
 
-        $matches = [];
-        preg_match('@^#([^#]+)\n@', $markdown, $matches);
+            $matches = [];
+            preg_match('@^#([^#]+)\n@', $markdown, $matches);
 
-        return trim($matches[1] ?? '') . ' - ' . $this->getDocName();
+            $title = trim($matches[1] ?? '') . ' - ' . $this->getDocName();
+
+            app('cache')->put($this->getDocHash('title'), $title);
+
+            return $title;
+        });
     }
 
     public function getNavigation(): string
     {
-        $markdown = $this->getFile($this->replaceStubStrings($this->config['locales'][$this->locale]['navigation']));
-        $markdown = $this->replaceStubStrings($markdown);
+        return app('cache')->get($this->getDocHash('nav'), function () {
+            $markdown = $this->getFile($this->replaceStubStrings($this->config['locales'][$this->locale]['navigation']));
+            $markdown = $this->replaceStubStrings($markdown);
 
-        $hash = 'page-' . sha1($markdown);
-        $html = app('cache')->get($hash, function () use ($hash, $markdown) {
             $html = (new NavigationConverter($this->config['link-fixer']))->convertToHtml($markdown);
-            app('cache')->put($hash, $html);
+            $html = app('htmlmin')->html($html);
+            $html = $this->replaceStubStrings($html);
+
+            app('cache')->put($this->getDocHash('nav'), $html);
 
             return $html;
         });
-
-        return $this->replaceStubStrings($html);
     }
 
     public function getHeader(): View
