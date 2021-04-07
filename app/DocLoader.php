@@ -7,8 +7,10 @@ namespace App;
 use App\CommonMark\DocumentationConverter;
 use App\CommonMark\NavigationConverter;
 use App\Exceptions\LocaleNotFoundException;
+use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Contracts\View\View;
 use JetBrains\PhpStorm\ArrayShape;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 final class DocLoader
 {
@@ -151,7 +153,11 @@ final class DocLoader
 
     private function getFile(string $path): string
     {
-        return app('filesystem')->disk(self::DISK)->get($path);
+        try {
+            return app('filesystem')->disk(self::DISK)->get($path);
+        } catch (FileNotFoundException $fileNotFoundException) {
+            throw new NotFoundHttpException('Page not found', $fileNotFoundException);
+        }
     }
 
     private function resolveDocPath(): string
