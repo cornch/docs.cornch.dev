@@ -12,12 +12,15 @@ use App\CommonMark\Parsers\CalloutParser;
 use League\CommonMark\CommonMarkConverter;
 use League\CommonMark\Environment;
 use League\CommonMark\Event\DocumentParsedEvent;
+use League\CommonMark\Extension\Attributes\AttributesExtension;
 
 final class DocumentationConverter extends CommonMarkConverter
 {
     public function __construct(?\Closure $linkFixer = null)
     {
         $environment = Environment::createGFMEnvironment();
+
+        $environment->addExtension(new AttributesExtension());
 
         $environment->addEventListener(DocumentParsedEvent::class, new LinkFixer($linkFixer));
         $environment->addEventListener(DocumentParsedEvent::class, new LinkableHeader());
