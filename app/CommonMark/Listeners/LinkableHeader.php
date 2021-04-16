@@ -36,7 +36,7 @@ final class LinkableHeader
 
                 $id = $matches['name'];
 
-                $link = new Link("#{$id}", $node->getStringContent());
+                $link = new Link("#{$id}");
 
                 $replaces[] = [
                     'heading' => $node,
@@ -55,6 +55,7 @@ final class LinkableHeader
          */
         foreach ($replaces as ['heading' => $heading, 'id' => $id, 'link' => $link, 'remove' => $remove]) {
             $remove->detach();
+            $link->replaceChildren($heading->children());
             $heading->replaceChildren([$link]);
             $heading->data['attributes']['id'] = $id;
         }
