@@ -26,6 +26,7 @@ $router->get('{locale:[\w\-_]+}/{doc:\w+}/{version}/{page:[\w\-_/]+}', ['as' => 
     return view('docs.show', [
         'title' => $docLoader->getPageTitle(),
         'content' => $docLoader->getPage(),
+        'style' => $docLoader->getStyle(),
         'locale' => $locale,
         'doc' => $doc,
         'version' => $version,

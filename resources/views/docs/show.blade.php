@@ -4,6 +4,12 @@
 
 @section('lang', $locale)
 
+@unless(empty($style))
+    @push('header-styles')
+        <style>{!! $style !!}</style>
+    @endpush
+@endunless
+
 @section('content')
     <x-doc-header class="mb-16" :locale="$locale" :doc="$doc" :version="$version" :page="$page" />
 

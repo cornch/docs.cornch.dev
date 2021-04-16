@@ -15,6 +15,8 @@
         <title>{{ config('app.name') }}</title>
     @endif
     <link rel="stylesheet" href="{{ url('dist/css/app.css') }}">
+
+    @stack('header-styles')
 </head>
 
 <body>

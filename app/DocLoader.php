@@ -89,6 +89,9 @@ final class DocLoader
             $markdown = $this->getFile($path);
             $markdown = $this->replaceStubStrings($markdown);
 
+            // remove style
+            $markdown = preg_replace('#<style>[\w\W]+?</style>#', '', $markdown);
+
             $html = (new DocumentationConverter($this->config['link-fixer']))->convertToHtml($markdown);
             $html = app('htmlmin')->html($html);
             $html = $this->replaceStubStrings($html);
@@ -96,6 +99,18 @@ final class DocLoader
             app('cache')->put($this->getDocHash('page'), $html);
 
             return $html;
+        });
+    }
+
+    public function getStyle(): string
+    {
+        $path = $this->resolveDocPath();
+
+        return app('cache')->get($this->getDocHash('style'), function () use ($path) {
+            $matches = [];
+            preg_match_all('#<style>([\w\W]+?)</style>#', $this->getFile($path), $matches);
+
+            return implode('', $matches[1] ?: []);
         });
     }
 
