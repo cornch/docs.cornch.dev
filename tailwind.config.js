@@ -5,6 +5,7 @@ module.exports = {
     'app/CommonMark/Block/Renderer/**/*.php',
     'resources/views/**/*.blade.php',
   ],
+  mode: 'jit',
   darkMode: false, // or 'media' or 'class'
   theme: {
     colors,

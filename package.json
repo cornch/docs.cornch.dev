@@ -8,7 +8,6 @@
         "prod": "mix --production"
     },
     "devDependencies": {
-        "@tailwindcss/jit": "^0.1.18",
         "axios": "^0.21",
         "babel-plugin-prismjs": "^2.0.1",
         "laravel-mix": "^6.0.16",
