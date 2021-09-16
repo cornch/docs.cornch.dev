@@ -19,7 +19,7 @@
     },
     "dependencies": {
         "alpinejs": "^2.8.2",
-        "prismjs": "^1.23.0",
+        "prismjs": "^1.25.0",
         "tailwindcss": "^2.0.4"
     }
 }
