@@ -12,7 +12,7 @@
         "babel-plugin-prismjs": "^2.0.1",
         "laravel-mix": "^6.0.16",
         "lodash": "^4.17.19",
-        "postcss": "^8.2.9",
+        "postcss": "^8.3.8",
         "postcss-import": "^14.0.1",
         "postcss-nested": "^5.0.5",
         "postcss-preset-env": "^6.7.0"
