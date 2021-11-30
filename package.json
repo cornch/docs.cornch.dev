@@ -18,7 +18,7 @@
         "postcss-preset-env": "^6.7.0"
     },
     "dependencies": {
-        "alpinejs": "^2.8.2",
+        "alpinejs": "^3.6.1",
         "prismjs": "^1.23.0",
         "tailwindcss": "^2.0.4"
     }
