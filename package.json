@@ -9,7 +9,7 @@
     },
     "devDependencies": {
         "autoprefixer": "^10.4.2",
-        "axios": "^0.21",
+        "axios": "^0.25",
         "babel-plugin-prismjs": "^2.0.1",
         "laravel-mix": "^6.0.41",
         "lodash": "^4.17.19",
