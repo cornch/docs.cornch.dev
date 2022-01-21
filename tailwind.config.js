@@ -1,14 +1,9 @@
-const colors = require('tailwindcss/colors')
-
 module.exports = {
-  purge: [
+  content: [
     'app/CommonMark/Block/Renderer/**/*.php',
     'resources/views/**/*.blade.php',
   ],
-  mode: 'jit',
-  darkMode: false, // or 'media' or 'class'
   theme: {
-    colors,
     fontFamily: {
       sans: [
         'ui-sans-serif',
@@ -44,9 +39,6 @@ module.exports = {
         'monospace',
       ],
     },
-    extend: {},
-  },
-  variants: {
     extend: {},
   },
   plugins: [],
