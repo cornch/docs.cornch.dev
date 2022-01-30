@@ -14,7 +14,7 @@ const mix = require('laravel-mix')
 mix.js('resources/js/app.js', 'public/dist/js')
 mix.css('resources/css/app.css', 'public/dist/css', [
   require('postcss-import'),
+  require('tailwindcss/nesting'),
   require('tailwindcss'),
-  require('postcss-nested'),
   require('postcss-preset-env')({ stage: 0 })
 ])

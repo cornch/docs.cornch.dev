@@ -15,7 +15,6 @@
         "lodash": "^4.17.19",
         "postcss": "^8.4.5",
         "postcss-import": "^14.0.2",
-        "postcss-nested": "^5.0.6",
         "postcss-preset-env": "^7.2.3"
     },
     "dependencies": {
