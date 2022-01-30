@@ -1,4 +1,4 @@
-<div {{ $attributes->merge(['class' => 'bg-warmGray-200']) }}">
+<div {{ $attributes->merge(['class' => 'bg-zinc-200']) }}">
     <div class="container mx-auto px-6 py-12">
         <div class="flex flex-col md:flex-row items-center justify-between -m-2">
             <div class="w-1/3 m-2">
@@ -51,11 +51,11 @@
 
             <noscript>
                 <div class="flex justify-end -mx-2">
-                    <div class="mx-2 px-2 py-1 border border-warmGray-700 rounded">
+                    <div class="mx-2 px-2 py-1 border border-zinc-700 rounded">
                         <details class="relative">
                             <summary>Language - {{ $locales[$locale]['name'] }}</summary>
 
-                            <ul class="absolute top-full mt-1 px-2 py-1 border border-warmGray-700 border-t-0 rounded-b">
+                            <ul class="absolute top-full mt-1 px-2 py-1 border border-zinc-700 border-t-0 rounded-b">
                                 @foreach($locales as $code => ['url' => $url, 'name' => $name])
                                     <li class="text-sm">
                                         @if ($locale === $code)
@@ -73,11 +73,11 @@
                         </details>
                     </div>
 
-                    <div class="mx-2 px-2 py-1 border border-warmGray-700 rounded">
+                    <div class="mx-2 px-2 py-1 border border-zinc-700 rounded">
                         <details class="relative">
                             <summary>Version - {{ $version }}</summary>
 
-                            <ul class="absolute top-full mt-1 px-2 py-1 border border-warmGray-700 border-t-0 rounded-b">
+                            <ul class="absolute top-full mt-1 px-2 py-1 border border-zinc-700 border-t-0 rounded-b">
                                 @foreach($versions as $name => $code)
                                     <li class="text-sm">
                                         @if ($version === $code)

@@ -38,7 +38,7 @@
 </div>
 
 <footer class="container mx-auto px-6 mb-16">
-    <div class="w-full rounded bg-warmGray-200 py-4">
+    <div class="w-full rounded bg-zinc-200 py-4">
         <div class="text-center text-sm text-gray-600">
             <p>This software is licensed under AGPL-3.0-or-later. You can get a copy of it's source code from <a href="https://github.com/cornch/docs.cornch.dev" class="hover:text-gray-500 underline hover:no-underline" target="_blank" rel="nofollow noopener">its GitHub repository</a>.</p>
             <p>cornch.dev &copy; {{ date('Y') }} All Rights Reserved.</p>

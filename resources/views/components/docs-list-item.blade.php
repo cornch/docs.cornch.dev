@@ -15,7 +15,7 @@
                             <li class="m-2">
                                 <a
                                     href="{{ route('docs.show', ['locale' => $locale, 'doc' => 'laravel', 'version' => $version, 'page' => config("docs.docsets.{$doc}.index")]) }}"
-                                    class="px-2 py-1 rounded bg-warmGray-200 text-red-500 hover:text-red-400 hover:underline"
+                                    class="px-2 py-1 rounded bg-zinc-200 text-red-500 hover:text-red-400 hover:underline"
                                 >{{ $name }}</a>
                             </li>
                         @endforeach
