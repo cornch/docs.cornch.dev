@@ -1,47 +1,53 @@
-.sidebar ul {
-    @apply list-none m-0 p-0;
-}
+.sidebar {
+    ul {
+        @apply list-none m-0 p-0;
 
-.sidebar ul li {
-    @apply block py-[.65em] px-0 whitespace-nowrap;
-}
+        li {
+            @apply block py-[.65em] px-0 whitespace-nowrap;
 
-.sidebar ul li h2 {
-    @apply block mb-0 text-[.875em] font-medium text-gray-900 no-underline cursor-pointer transition-all duration-[.3s] ease-in-out;
-}
+            h2 {
+                @apply block mb-0 text-[.875em] font-medium text-gray-900 no-underline cursor-pointer transition-all duration-[.3s] ease-in-out;
 
-.sidebar ul li h2:hover {
-    transform: translate3d(5px, 0, 0);
-}
+                &:hover {
+                    transform: translate3d(5px, 0, 0);
+                }
+            }
 
-.sidebar ul li a {
-    @apply block text-[.875em] font-medium text-gray-900 no-underline transition-transform duration-[.3s] ease-in-out;
-}
+            a {
+                @apply block text-[.875em] font-medium text-gray-900 no-underline transition-transform duration-[.3s] ease-in-out;
 
-.sidebar ul li a:hover {
-    transform: translate3d(5px, 0, 0);
-}
+                &:hover {
+                    transform: translate3d(5px, 0, 0);
+                }
+            }
+        }
 
-.sidebar ul ul {
-    transition: max-height .45s ease;
-    @apply overflow-hidden max-h-0;
-}
+        ul {
+            transition: max-height .45s ease;
+            @apply overflow-hidden max-h-0;
 
-.sidebar ul ul li a {
-    line-height: 1.25;
-    @apply relative pl-[1em] font-normal;
-}
+            li {
+                a {
+                    line-height: 1.25;
+                    @apply relative pl-[1em] font-normal;
+                }
 
-.sidebar ul ul li.active a::before {
-    content: "";
-    background-image: url("data:image/svg+xml;utf8,%3Csvg%20width%3D%228%22%20height%3D%228%22%20viewBox%3D%220%200%208%208%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Ctitle%3Eactive_marker%3C/title%3E%3Cpath%20d%3D%22M4%200l3.464%202v4L4%208%20.536%206V2z%22%20fill%3D%22%23FF2D20%22%20fill-rule%3D%22nonzero%22/%3E%3C/svg%3E");
-    @apply absolute top-[.25em] left-0 w-2 h-2 bg-no-repeat bg-center;
-}
+                &.active a::before {
+                    content: "";
+                    background-image: url("data:image/svg+xml;utf8,%3Csvg%20width%3D%228%22%20height%3D%228%22%20viewBox%3D%220%200%208%208%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Ctitle%3Eactive_marker%3C/title%3E%3Cpath%20d%3D%22M4%200l3.464%202v4L4%208%20.536%206V2z%22%20fill%3D%22%23FF2D20%22%20fill-rule%3D%22nonzero%22/%3E%3C/svg%3E");
+                    @apply absolute top-[.25em] left-0 w-2 h-2 bg-no-repeat bg-center;
+                }
+            }
+        }
 
-.sidebar ul .sub--on > h2 {
-    @apply mb-[1em];
-}
+        .sub--on {
+            &> h2 {
+                @apply mb-[1em];
+            }
 
-.sidebar ul .sub--on ul {
-    max-height: none;
+            ul {
+                max-height: none;
+            }
+        }
+    }
 }
