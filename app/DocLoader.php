@@ -14,6 +14,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 final class DocLoader
 {
+    private const CACHE_TTL = 60 * 60 * 24;
     private const DISK = 'docs';
 
     #[ArrayShape([
@@ -85,65 +86,74 @@ final class DocLoader
     {
         $path = $this->resolveDocPath();
 
-        return app('cache')->get($this->getDocHash('page'), function () use ($path) {
-            $markdown = $this->getFile($path);
-            $markdown = $this->replaceStubStrings($markdown);
+        return app('cache')
+            ->remember(
+                $this->getDocHash('page'),
+                self::CACHE_TTL,
+                function () use ($path) {
+                    $markdown = $this->getFile($path);
+                    $markdown = $this->replaceStubStrings($markdown);
 
-            // remove style
-            $markdown = preg_replace('#<style>[\w\W]+?</style>#', '', $markdown);
+                    // remove style
+                    $markdown = preg_replace('#<style>[\w\W]+?</style>#', '', $markdown);
 
-            $html = (new DocumentationConverter($this->config['link-fixer']))->convertToHtml($markdown);
-            $html = app('htmlmin')->html($html);
-            $html = $this->replaceStubStrings($html);
+                    $html = (new DocumentationConverter($this->config['link-fixer']))->convertToHtml($markdown);
+                    $html = app('htmlmin')->html($html);
+                    $html = $this->replaceStubStrings($html);
 
-            app('cache')->put($this->getDocHash('page'), $html);
-
-            return $html;
-        });
+                    return $html;
+                },
+            );
     }
 
     public function getStyle(): string
     {
         $path = $this->resolveDocPath();
 
-        return app('cache')->get($this->getDocHash('style'), function () use ($path) {
-            $matches = [];
-            preg_match_all('#<style>([\w\W]+?)</style>#', $this->getFile($path), $matches);
+        return app('cache')
+            ->remember(
+                $this->getDocHash('style'),
+                self::CACHE_TTL,
+                function () use ($path) {
+                    $matches = [];
+                    preg_match_all('#<style>([\w\W]+?)</style>#', $this->getFile($path), $matches);
 
-            return implode('', $matches[1] ?: []);
-        });
+                    return implode('', $matches[1] ?: []);
+                },
+            );
     }
 
     public function getPageTitle(): string
     {
-        return app('cache')->get($this->getDocHash('title'), function () {
-            $markdown = $this->getFile($this->resolveDocPath());
+        return app('cache')->remember(
+            $this->getDocHash('title'),
+            self::CACHE_TTL,
+            function () {
+                $markdown = $this->getFile($this->resolveDocPath());
 
-            $matches = [];
-            preg_match('@^#([^#]+)\n@', $markdown, $matches);
+                $matches = [];
+                preg_match('@^#([^#]+)\n@', $markdown, $matches);
 
-            $title = trim($matches[1] ?? '') . ' - ' . $this->getDocName();
-
-            app('cache')->put($this->getDocHash('title'), $title);
-
-            return $title;
-        });
+                return trim($matches[1] ?? '') . ' - ' . $this->getDocName();
+            },
+        );
     }
 
     public function getNavigation(): string
     {
-        return app('cache')->get($this->getDocHash('nav'), function () {
-            $markdown = $this->getFile($this->replaceStubStrings($this->config['locales'][$this->locale]['navigation']));
-            $markdown = $this->replaceStubStrings($markdown);
+        return app('cache')->remember(
+            $this->getDocHash('nav'),
+            self::CACHE_TTL,
+            function () {
+                $markdown = $this->getFile($this->replaceStubStrings($this->config['locales'][$this->locale]['navigation']));
+                $markdown = $this->replaceStubStrings($markdown);
 
-            $html = (new NavigationConverter($this->config['link-fixer']))->convertToHtml($markdown);
-            $html = app('htmlmin')->html($html);
-            $html = $this->replaceStubStrings($html);
+                $html = (new NavigationConverter($this->config['link-fixer']))->convertToHtml($markdown);
+                $html = app('htmlmin')->html($html);
 
-            app('cache')->put($this->getDocHash('nav'), $html);
-
-            return $html;
-        });
+                return $this->replaceStubStrings($html);
+            },
+        );
     }
 
     public function getHeader(): View
