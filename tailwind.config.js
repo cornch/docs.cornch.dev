@@ -2,6 +2,7 @@ module.exports = {
   content: [
     'app/CommonMark/Block/Renderer/**/*.php',
     'resources/views/**/*.blade.php',
+    'resources/docs/laravel/build/**/*.md',
   ],
   theme: {
     fontFamily: {

@@ -6,19 +6,23 @@ namespace App\CommonMark;
 
 use App\CommonMark\Listeners\LinkFixer;
 use App\CommonMark\Listeners\NavigationLinkEvent;
-use League\CommonMark\CommonMarkConverter;
-use League\CommonMark\Environment;
+use League\CommonMark\Environment\Environment;
 use League\CommonMark\Event\DocumentParsedEvent;
+use League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension;
+use League\CommonMark\Extension\GithubFlavoredMarkdownExtension;
+use League\CommonMark\MarkdownConverter;
 
-final class NavigationConverter extends CommonMarkConverter
+final class NavigationConverter extends MarkdownConverter
 {
     public function __construct(?\Closure $linkFixer = null)
     {
-        $environment = Environment::createGFMEnvironment();
+        $environment = new Environment(['allow_unsafe_links' => true]);
+        $environment->addExtension(new CommonMarkCoreExtension());
+        $environment->addExtension(new GithubFlavoredMarkdownExtension());
+
         $environment->addEventListener(DocumentParsedEvent::class, new NavigationLinkEvent());
         $environment->addEventListener(DocumentParsedEvent::class, new LinkFixer($linkFixer));
 
-        parent::__construct(['allow_unsafe_links' => false], $environment);
+        parent::__construct($environment);
     }
-
 }

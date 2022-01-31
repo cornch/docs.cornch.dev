@@ -97,7 +97,7 @@ final class DocLoader
                     // remove style
                     $markdown = preg_replace('#<style>[\w\W]+?</style>#', '', $markdown);
 
-                    $html = (new DocumentationConverter($this->config['link-fixer']))->convertToHtml($markdown);
+                    $html = (new DocumentationConverter($this->config['link-fixer']))->convert($markdown);
                     $html = app('htmlmin')->html($html);
                     $html = $this->replaceStubStrings($html);
 
@@ -148,7 +148,7 @@ final class DocLoader
                 $markdown = $this->getFile($this->replaceStubStrings($this->config['locales'][$this->locale]['navigation']));
                 $markdown = $this->replaceStubStrings($markdown);
 
-                $html = (new NavigationConverter($this->config['link-fixer']))->convertToHtml($markdown);
+                $html = (new NavigationConverter($this->config['link-fixer']))->convert($markdown);
                 $html = app('htmlmin')->html($html);
 
                 return $this->replaceStubStrings($html);

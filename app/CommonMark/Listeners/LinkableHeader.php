@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\CommonMark\Listeners;
 
-use League\CommonMark\Block\Element\Heading;
-use League\CommonMark\Block\Element\Paragraph;
 use League\CommonMark\Event\DocumentParsedEvent;
-use League\CommonMark\Inline\Element\HtmlInline;
-use League\CommonMark\Inline\Element\Link;
+use League\CommonMark\Extension\CommonMark\Node\Block\Heading;
+use League\CommonMark\Extension\CommonMark\Node\Inline\HtmlInline;
+use League\CommonMark\Extension\CommonMark\Node\Inline\Link;
+use League\CommonMark\Node\Block\Paragraph;
 
 final class LinkableHeader
 {
@@ -29,7 +29,7 @@ final class LinkableHeader
                 $current->isEntering()
             ) {
                 $matches = [];
-                preg_match('#name="(?P<name>.+)"#', $previousNodeChild->getContent(), $matches);
+                preg_match('#name="(?P<name>.+)"#', $previousNodeChild->getLiteral(), $matches);
                 if (empty($matches['name'])) {
                     continue;
                 }
@@ -57,7 +57,7 @@ final class LinkableHeader
             $remove->detach();
             $link->replaceChildren($heading->children());
             $heading->replaceChildren([$link]);
-            $heading->data['attributes']['id'] = $id;
+            $heading->data->set('attributes.id', $id);
         }
     }
 }

@@ -6,11 +6,16 @@ namespace App\CommonMark\Block\Element;
 
 use League\CommonMark\Node\Block\AbstractBlock;
 
-final class Callout extends AbstractBlock
+final class MarkdownDiv extends AbstractBlock
 {
     public function __construct(
-        public string $type
+        private string $class = '',
     ) {
         parent::__construct();
+    }
+
+    public function getClass(): string
+    {
+        return $this->class;
     }
 }

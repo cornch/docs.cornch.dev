@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\CommonMark\Listeners;
 
-use League\CommonMark\Block\Element\Heading;
 use League\CommonMark\Event\DocumentParsedEvent;
-use League\CommonMark\Inline\Element\Link;
+use League\CommonMark\Extension\CommonMark\Node\Block\Heading;
+use League\CommonMark\Extension\CommonMark\Node\Block\ListItem;
 use Ramsey\Uuid\Uuid;
 
 final class NavigationLinkEvent
@@ -24,15 +24,15 @@ final class NavigationLinkEvent
             ) {
                 $uuid = base64_encode(Uuid::uuid4()->getBytes());
 
-                /** @var \League\CommonMark\Block\Element\ListItem $parent */
+                /** @var ListItem $parent */
                 $parent = $node->parent();
-                $parent->data['attributes']['x-bind:class'] = /** @lang JavaScript */ "{ 'sub--on': opening === '{$uuid}' }";
-                $parent->data['attributes']['data-uuid'] = $uuid;
+                $parent->data->set('attributes.x-bind:class', /** @lang JavaScript */ "{ 'sub--on': opening === '{$uuid}' }");
+                $parent->data->set('attributes.data-uuid', $uuid);
 
                 // open by default for noscript users
-                $parent->data['attributes']['class'] = 'sub--on';
+                $parent->data->set('attributes.class', 'sub--on');
 
-                $node->data['attributes']['x-on:click.self'] = /** @lang JavaScript */ "opening = '{$uuid}'";
+                $node->data->set('attributes.x-on:click.self', /** @lang JavaScript */ "opening = '{$uuid}'");
             }
         }
     }

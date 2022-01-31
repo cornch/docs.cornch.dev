@@ -5,23 +5,19 @@ declare(strict_types=1);
 namespace App\CommonMark\Block\Renderer;
 
 use App\CommonMark\Block\Element\Callout;
-use League\CommonMark\Block\Element\AbstractBlock;
-use League\CommonMark\Block\Element\Paragraph;
-use League\CommonMark\Block\Renderer\BlockRendererInterface;
-use League\CommonMark\ElementRendererInterface;
-use League\CommonMark\HtmlElement;
+use League\CommonMark\Node\Block\Paragraph;
+use League\CommonMark\Node\Node;
+use League\CommonMark\Renderer\ChildNodeRendererInterface;
+use League\CommonMark\Renderer\NodeRendererInterface;
+use League\CommonMark\Util\HtmlElement;
 
-final class CalloutRenderer implements BlockRendererInterface
+final class CalloutRenderer implements NodeRendererInterface
 {
-    public function render(AbstractBlock $block, ElementRendererInterface $htmlRenderer, bool $inTightList = false)
+    public function render(Node $node, ChildNodeRendererInterface $childRenderer)
     {
-        if (!($block instanceof Callout)) {
-            throw new \InvalidArgumentException('Incompatible block type: ' . \get_class($block));
-        }
+        Callout::assertInstanceOf($node);
 
-        $baseImageClass = 'w-20 h-20 mb-6 lg:mb-0 flex items-center justify-center flex-shrink-0';
-
-        $image = match ($block->type)  {
+        $image = match ($node->type)  {
             'note' => new HtmlElement(
                 'svg',
                 ['class' => 'opacity-75', 'width' => '6', 'height' => '35', 'viewBox' => '0 0 6 35', 'xmlns' => 'http://www.w3.org/2000/svg'],
@@ -39,22 +35,21 @@ final class CalloutRenderer implements BlockRendererInterface
             ),
         };
 
-        $imageWrapper = match ($block->type) {
-            'note' => new HtmlElement('div', ['class' => $baseImageClass . ' bg-red-600'], $image),
-            'tip' => new HtmlElement('div', ['class' => $baseImageClass . ' bg-purple-600'], $image),
-            'video', 'laracasts' => new HtmlElement('div', ['class' => $baseImageClass . ' bg-blue-600'], $image),
+        $imageWrapper = match ($node->type) {
+            'note' => new HtmlElement('div', ['class' => 'callout__img bg-red-600'], $image),
+            'tip' => new HtmlElement('div', ['class' => 'callout__img bg-purple-600'], $image),
+            'video', 'laracasts' => new HtmlElement('div', ['class' => 'callout__img bg-blue-600'], $image),
         };
 
-        foreach ($block->children() as $child) {
+        foreach ($node->children() as $child) {
             if ($child instanceof Paragraph) {
-                $child->data['attributes'] = $child->data['attributes'] ?? [];
-                $child->data['attributes']['class'] = $child->data['attributes']['class'] ?? '';
-                $child->data['attributes']['class'] .= ' !mb-0 lg:!ml-6';
+                $child->data->set('attributes.class', $child->data->get('attributes.class', ''));
+                $child->data->set('attributes.class', trim($child->data->get('attributes.class') . ' !mb-0 lg:!ml-6'));
             }
         }
 
         return new HtmlElement('div', [
-            'class' => 'callout mb-10 max-w-2xl mx-auto px-4 py-8 shadow-lg lg:flex lg:items-center',
-        ], [$imageWrapper, $htmlRenderer->renderBlocks($block->children())]);
+            'class' => 'callout',
+        ], [$imageWrapper, $childRenderer->renderNodes($node->children())]);
     }
 }
