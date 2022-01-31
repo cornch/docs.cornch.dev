@@ -11,7 +11,7 @@
             >
                 <div class="relative m-2">
                     <select
-                        class="w-full px-4 pr-8 py-2 border border-red-400 hover:border-red-300 text-gray-900 rounded appearance-none"
+                        class="w-full px-4 pr-8 py-2 border border-zinc-400 hover:border-red-300 text-gray-900 bg-zinc-200 transition-colors rounded appearance-none"
                         x-model="locale"
                         x-on:change="window.location.href = locales[locale].url"
                     >
@@ -30,7 +30,7 @@
                 </div>
                 <div class="relative m-2">
                     <select
-                        class="w-full px-4 pr-8 py-2 border border-red-400 hover:border-red-300 text-gray-900 rounded appearance-none"
+                        class="w-full px-4 pr-8 py-2 border border-zinc-400 hover:border-red-300 text-gray-900 bg-zinc-200 transition-colors rounded appearance-none"
                         x-model="version"
                         x-on:change="window.location.href = '{{ $versionUrl }}'.replace('__version__', version)"
                     >
