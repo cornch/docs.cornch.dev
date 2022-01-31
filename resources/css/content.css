@@ -96,11 +96,12 @@
     }
 
     code {
-        @apply text-[.775em] text-gray-900 font-mono leading-[1.714em];
+        @apply text-[.8em];
+        @apply text-gray-900 font-mono leading-[1.714em];
     }
 
     :not(pre) > code {
-        @apply py-0 px-[.25em] bg-gray-50 text-red-800;
+        @apply text-base py-0 px-[.25em] bg-gray-50 text-red-800;
     }
 
     .list-custom li {
@@ -177,16 +178,8 @@
         @apply ml-[-18px] text-[17px];
     }
 
-    code {
-        line-height: 1.9;
-        @apply text-[.8rem] font-medium text-gray-900;
-    }
-
     p {
         @apply text-base leading-[1.8em];
-        code {
-            @apply text-[.8rem];
-        }
     }
 
     ul:not(:first-of-type),
@@ -198,10 +191,6 @@
 
             a {
                 @apply no-underline;
-            }
-
-            code {
-                @apply text-[.875em];
             }
 
             &::before {
