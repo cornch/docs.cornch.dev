@@ -9,7 +9,7 @@
         "htmlmin/htmlmin": "^8.0",
         "laravel/lumen-framework": "^8.0",
         "league/commonmark": "^2.2",
-        "league/flysystem": "^1.0",
+        "league/flysystem": "^3.0",
         "spatie/once": "^3.0"
     },
     "require-dev": {
