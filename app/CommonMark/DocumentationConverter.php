@@ -12,6 +12,7 @@ use App\CommonMark\Listeners\LinkableHeader;
 use App\CommonMark\Listeners\LinkFixer;
 use App\CommonMark\Parsers\CalloutParser;
 use App\CommonMark\Parsers\MarkdownDivParser;
+use App\CommonMark\Parsers\RubyParser;
 use League\CommonMark\Environment\Environment;
 use League\CommonMark\Event\DocumentParsedEvent;
 use League\CommonMark\Extension\Attributes\AttributesExtension;
@@ -37,6 +38,8 @@ final class DocumentationConverter extends MarkdownConverter
 
         $environment->addBlockStartParser(MarkdownDivParser::createBlockStartParser(), 50);
         $environment->addRenderer(MarkdownDiv::class, new MarkdownDivRenderer());
+
+        $environment->addInlineParser(new RubyParser());
 
         parent::__construct($environment);
     }

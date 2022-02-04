@@ -237,6 +237,12 @@
     @apply font-medium;
 }
 
+[lang^="zh-"] ruby rt,
+[lang="ja-jp"] ruby rt {
+    /** ruby-align: start; **/
+    @apply w-1 whitespace-nowrap overflow-visible;
+}
+
 .callout {
     @apply mb-10 max-w-2xl mx-auto px-4 py-8 shadow-lg lg:flex lg:items-center;
 }
