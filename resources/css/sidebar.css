@@ -1,53 +1,57 @@
 .sidebar {
     ul {
         @apply list-none m-0 p-0;
+    }
 
-        li {
-            @apply block py-[.65em] px-0 whitespace-nowrap;
+    li {
+        @apply block py-[.65em] px-0 whitespace-nowrap;
+    }
 
-            h2 {
-                @apply block mb-0 text-[.875em] font-medium text-gray-900 no-underline cursor-pointer transition-all duration-[.3s] ease-in-out;
+    li h2 {
+        @apply block mb-0;
+        @apply text-[.875em] font-medium;
+        @apply text-gray-900 dark:text-gray-100;
+        @apply no-underline cursor-pointer;
+        @apply transition-all duration-[.3s] ease-in-out;
 
-                &:hover {
-                    transform: translate3d(5px, 0, 0);
-                }
-            }
+        @apply hover:translate-x-1;
+    }
 
-            a {
-                @apply block text-[.875em] font-medium text-gray-900 no-underline transition-transform duration-[.3s] ease-in-out;
+    li a {
+        @apply block;
+        @apply text-[.875em] font-medium;
+        @apply text-gray-900 dark:text-gray-100;
+        @apply no-underline;
+        @apply transition-transform duration-[.3s] ease-in-out;
 
-                &:hover {
-                    transform: translate3d(5px, 0, 0);
-                }
-            }
-        }
+        @apply hover:translate-x-1;
+    }
 
-        ul {
-            transition: max-height .45s ease;
-            @apply overflow-hidden max-h-0;
 
-            li {
-                a {
-                    line-height: 1.25;
-                    @apply relative pl-[1em] font-normal;
-                }
+    ul ul {
+        @apply transition-[max-height] ease-in-out;
+        @apply overflow-hidden max-h-0;
+    }
 
-                &.active a::before {
-                    content: "";
-                    background-image: url("data:image/svg+xml;utf8,%3Csvg%20width%3D%228%22%20height%3D%228%22%20viewBox%3D%220%200%208%208%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Ctitle%3Eactive_marker%3C/title%3E%3Cpath%20d%3D%22M4%200l3.464%202v4L4%208%20.536%206V2z%22%20fill%3D%22%23FF2D20%22%20fill-rule%3D%22nonzero%22/%3E%3C/svg%3E");
-                    @apply absolute top-[.25em] left-0 w-2 h-2 bg-no-repeat bg-center;
-                }
-            }
-        }
+    ul ul li a {
+        @apply relative;
+        @apply -my-2 py-2 ml-6;
+        @apply font-normal leading-tight;
+    }
 
-        .sub--on {
-            &> h2 {
-                @apply mb-[1em];
-            }
+    ul ul li.active a {
+        @apply before:absolute;
+        @apply before:top-[calc(50%_-_.25rem)] before:left-[-1rem];
+        @apply before:w-2 before:h-2;
+        @apply before:bg-list-solid;
+        @apply before:bg-no-repeat before:bg-center;
+    }
 
-            ul {
-                max-height: none;
-            }
-        }
+    .sub--on > h2 {
+        @apply mb-[1em];
+    }
+
+    .sub--on ul {
+        @apply max-h-[none];
     }
 }

@@ -1,5 +1,5 @@
-<div {{ $attributes->merge(['class' => 'bg-zinc-200']) }}">
-    <div class="container mx-auto px-6 py-12">
+<div {{ $attributes->merge(['class' => 'bg-zinc-200 dark:bg-zinc-700']) }}">
+    <div class="container max-w-5xl mx-auto px-6 py-12">
         <div class="flex flex-col md:flex-row items-center justify-between -m-2">
             <div class="w-1/3 m-2">
                 <x-logo.laravel class="h-16 -ml-4" />

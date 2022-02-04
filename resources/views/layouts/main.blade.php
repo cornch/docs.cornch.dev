@@ -20,7 +20,7 @@
 </head>
 
 <body>
-<header class="container mx-auto px-6 antialiased">
+<header class="container max-w-5xl mx-auto px-6 antialiased">
     <nav class="flex flex-wrap items-center justify-between lg:justify-start py-1">
         <div class="inline-flex items-center -mx-2">
             <x-logo class="w-12 mx-2" />
@@ -37,12 +37,18 @@
     @yield('content')
 </div>
 
-<footer class="container mx-auto px-6 mb-16">
-    <div class="w-full rounded bg-zinc-200 py-4">
-        <div class="text-center text-sm text-gray-600">
+<footer class="container max-w-5xl mx-auto px-6 mb-16">
+    <div class="w-full rounded bg-zinc-200 bg-zinc-600 py-4">
+        <div class="text-center text-sm text-gray-600 text-gray-400">
             <p>This software is licensed under AGPL-3.0-or-later. You can get a copy of it's source code from <a href="https://github.com/cornch/docs.cornch.dev" class="hover:text-gray-500 underline hover:no-underline" target="_blank" rel="nofollow noopener">its GitHub repository</a>.</p>
             <p>cornch.dev &copy; {{ date('Y') }} All Rights Reserved.</p>
         </div>
+    </div>
+
+    <div class="flex items-center justify-center">
+        <a href="https://cornch.dev/" target="_blank">
+            <x-logo class="w-12" />
+        </a>
     </div>
 </footer>
 

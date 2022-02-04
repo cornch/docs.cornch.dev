@@ -28,17 +28,17 @@
     }
 
     h5 {
-        @apply text-base text-gray-700 font-bold leading-[1.666em];
+        @apply text-base text-gray-700 dark:text-gray-100 font-bold leading-[1.666em];
     }
 
     h6 {
-        @apply text-base text-gray-600 font-medium;
+        @apply text-base text-gray-600 dark:text-white font-medium;
     }
 
     h2 a,
     h4 a,
     h3 a {
-        @apply text-gray-900;
+        @apply text-gray-900 dark:text-white;
 
         @apply before:content-["#"];
         @apply before:absolute;
@@ -59,7 +59,7 @@
     }
 
     p {
-        @apply text-gray-700 text-base leading-loose;
+        @apply text-gray-700 dark:text-gray-400 text-base leading-loose;
     }
 
     p, ul, ol {
@@ -84,12 +84,14 @@
     }
 
     code {
-        @apply text-gray-900 font-mono;
+        @apply text-gray-900 dark:text-gray-200 font-mono;
     }
 
     :not(pre) > code {
-        @apply -my-1 px-2 py-1 border-b border-r rounded;
-        @apply bg-zinc-100 text-base text-red-800;
+        @apply -my-1 px-2 py-1 border-b border-r dark:border-zinc-800 rounded;
+
+        @apply text-[#24292f] bg-white;
+        @apply dark:text-[#adbac7] dark:bg-[#2d333b];
     }
 
     .list-custom li {
@@ -123,7 +125,9 @@
         @apply list-none m-0 mb-[2.5em] p-0;
 
         li {
-            @apply relative block pl-5 mb-4 text-sm text-gray-700;
+            @apply relative block;
+            @apply pl-5 mb-4;
+            @apply text-sm text-gray-700 dark:text-gray-100;
 
             @apply before:absolute;
             @apply before:top-[.40em] before:left-0;
@@ -144,7 +148,10 @@
             @apply block mb-[.5em];
 
             a {
-                @apply relative text-[.89em] font-medium text-gray-900 no-underline;
+                @apply relative;
+                @apply text-[.89em] font-medium;
+                @apply text-gray-900 dark:text-gray-200;
+                @apply no-underline;
 
                 @apply before:content-["#"];
                 @apply before:mr-1;

@@ -4,4 +4,7 @@ import Prism from 'prismjs'
 
 Prism.manual = true
 
-Prism.highlightAll()
+;[...document.querySelectorAll('pre code')]
+    .forEach((el) => {
+      Prism.highlightElement(el)
+    })
