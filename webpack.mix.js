@@ -18,3 +18,5 @@ mix.css('resources/css/app.css', 'public/dist/css', [
   require('tailwindcss'),
   require('postcss-preset-env')({ stage: 0 })
 ])
+
+mix.version()
