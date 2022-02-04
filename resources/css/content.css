@@ -10,72 +10,60 @@
     }
 
     h1 {
-        @apply mb-[.65em] text-[2em] tracking-[-1px] leading-[1.125em];
-        @apply md:text-[2.5em] lg:text-[3em] xl:text-[3.5em] 2xl:text-[4em];
+        @apply mb-[.65em] tracking-[-1px] leading-[1.125em];
+        @apply text-5xl;
     }
 
     h2 {
-        @apply text-[1.75em] font-normal tracking-[-.5px] leading-[1.125em];
-        @apply md:text-[2.25em] lg:text-[3em];
+        @apply text-3xl font-normal tracking-[-.5px] leading-[1.125em];
     }
 
     h3 {
-        @apply text-[1.25em] font-medium tracking-[-.33px] leading-[1.25em];
-        @apply sm:text-[1.75em] md:text-[2em];
+        @apply text-xl font-medium tracking-[-.33px] leading-[1.25em];
     }
 
     h4 {
-        @apply text-[1em] font-normal tracking-[-.25px];
+        @apply text-lg font-normal tracking-[-.25px];
         @apply sm:text-[1.5em];
     }
 
     h5 {
-        @apply text-[.95em] text-gray-700 font-bold leading-[1.666em];
-        @apply sm:text-[1.125em];
+        @apply text-base text-gray-700 font-bold leading-[1.666em];
     }
 
     h6 {
-        @apply text-[.875em] text-gray-600 font-medium;
+        @apply text-base text-gray-600 font-medium;
+    }
+
+    h2 a,
+    h4 a,
+    h3 a {
+        @apply text-gray-900;
+
+        @apply before:content-["#"];
+        @apply before:absolute;
+        @apply before:ml-[-1em];
+        @apply before:font-normal before:text-red-600;
+        @apply before:opacity-60;
     }
 
     a {
-        @apply relative no-underline transition-all duration-[.3s] ease-in-out;
+        @apply relative;
+        @apply text-red-600 hover:text-red-800;
+        @apply no-underline;
+        @apply transition-all duration-[.3s] ease-in-out;
+    }
 
-        &.learn_more {
-            @apply text-red-600 font-medium;
-
-            span {
-                @apply inline-block transition-transform duration-[.3s] ease-in-out;
-            }
-
-            &:hover span {
-                @apply transform translate-x-[.5em];
-            }
-        }
+    a[name] {
+        @apply relative block invisible top-[-1em];
     }
 
     p {
-        @apply text-[1em] md:text-[1.125em] text-gray-700 leading-[1.666em];
-
-        strong {
-            @apply font-medium;
-        }
-
-        &.small {
-            @apply text-[.75em] md:text-[.875em] leading-[1.714em];
-        }
+        @apply text-gray-700 text-base leading-loose;
     }
 
     p, ul, ol {
         @apply mb-[2em];
-
-        a {
-            @apply text-red-600 break-words no-underline;
-
-            &:hover {
-                color: darken(theme('colors.red.600'), 10%);
-            }
-        }
     }
 
     /* @TODO quotes for other languages */
@@ -96,27 +84,21 @@
     }
 
     code {
-        @apply text-[.8em];
-        @apply text-gray-900 font-mono leading-[1.714em];
+        @apply text-gray-900 font-mono;
     }
 
     :not(pre) > code {
-        @apply text-base py-0 px-[.25em] bg-gray-50 text-red-800;
+        @apply -my-1 px-2 py-1 border-b border-r rounded;
+        @apply bg-zinc-100 text-base text-red-800;
     }
 
     .list-custom li {
         @apply relative pl-4;
 
-        &:before {
-            content: "";
-            background-image: url("data:image/svg+xml;utf8,%3Csvg%20width%3D%2210%22%20height%3D%2211%22%20viewBox%3D%220%200%2010%2011%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Ctitle%3EPolygon%3C/title%3E%3Cpath%20d%3D%22M5.036%201.965l-3.492%201.94v3.88l3.492%201.94%203.492-1.94v-3.88l-3.492-1.94zm0-1.12l4.5%202.5v5l-4.5%202.5-4.5-2.5v-5l4.5-2.5z%22%20fill%3D%22%23FF2D20%22%20fill-rule%3D%22nonzero%22/%3E%3C/svg%3E");
-            background-position: 50%;
-            @apply absolute top-[.15em] left-0 w-[9px] h-[10px] bg-no-repeat;
-        }
-    }
-
-    a[name] {
-        @apply relative block invisible top-[-45px];
+        @apply before:absolute;
+        @apply before:top-[.15em] before:left-0;
+        @apply before:w-[9px] before:h-[10px];
+        @apply before:bg-list-dot before:bg-center before:bg-no-repeat;
     }
 
     table {
@@ -132,54 +114,8 @@
         }
     }
 
-    @screen sm {
-        a[name] {
-            @apply top-[-30px];
-        }
-    }
-
     .page_title {
         @apply hidden;
-    }
-
-    h1 {
-        @apply text-[2.5em] tracking-normal;
-    }
-
-    h2 {
-        @apply text-[1.75em] tracking-normal;
-    }
-
-    h3 {
-        @apply text-[1.25em] font-medium tracking-normal;
-    }
-
-    h4 {
-        @apply text-base font-medium tracking-normal;
-    }
-
-    h4 a, h3 a, h2 a {
-        @apply text-gray-900;
-    }
-
-    h4 a:before,
-    h3 a:before,
-    h2 a:before {
-        content: "#";
-        @apply absolute font-normal text-red-600 opacity-60;
-    }
-
-    h3 a:before,
-    h2 a:before {
-        @apply ml-[-25px] text-[28px];
-    }
-
-    h4 a:before {
-        @apply ml-[-18px] text-[17px];
-    }
-
-    p {
-        @apply text-base leading-[1.8em];
     }
 
     ul:not(:first-of-type),
@@ -187,16 +123,16 @@
         @apply list-none m-0 mb-[2.5em] p-0;
 
         li {
-            @apply relative block pl-5 mb-4 text-[.89em] text-gray-700 leading-[1.714em];
+            @apply relative block pl-5 mb-4 text-sm text-gray-700;
+
+            @apply before:absolute;
+            @apply before:top-[.40em] before:left-0;
+            @apply before:w-[9px] before:h-[10px];
+            @apply before:bg-list-dot;
+            @apply before:bg-no-repeat before:bg-center before:bg-contain;
 
             a {
                 @apply no-underline;
-            }
-
-            &::before {
-                content: "";
-                background-image: url("data:image/svg+xml;utf8,%3Csvg%20width%3D%2210%22%20height%3D%2211%22%20viewBox%3D%220%200%2010%2011%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Ctitle%3EPolygon%3C/title%3E%3Cpath%20d%3D%22M5.036%201.965l-3.492%201.94v3.88l3.492%201.94%203.492-1.94v-3.88l-3.492-1.94zm0-1.12l4.5%202.5v5l-4.5%202.5-4.5-2.5v-5l4.5-2.5z%22%20fill%3D%22%23FF2D20%22%20fill-rule%3D%22nonzero%22/%3E%3C/svg%3E");
-                @apply absolute top-[.40em] left-0 w-[9px] h-[10px] bg-no-repeat bg-center bg-contain;
             }
         }
     }
@@ -210,10 +146,9 @@
             a {
                 @apply relative text-[.89em] font-medium text-gray-900 no-underline;
 
-                &::before {
-                    content: "# ";
-                    @apply text-red-600;
-                }
+                @apply before:content-["#"];
+                @apply before:mr-1;
+                @apply before:text-red-600;
             }
         }
 
