@@ -14,7 +14,7 @@ final class LinkFixer
     ) {
     }
 
-    public function __invoke(DocumentParsedEvent $event)
+    public function __invoke(DocumentParsedEvent $event): void
     {
         if ($this->fixer === null) {
             return;

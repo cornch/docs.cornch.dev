@@ -7,8 +7,9 @@ namespace App;
 use App\CommonMark\DocumentationConverter;
 use App\CommonMark\NavigationConverter;
 use App\Exceptions\LocaleNotFoundException;
-use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Storage;
 use JetBrains\PhpStorm\ArrayShape;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -50,8 +51,7 @@ final class DocLoader
         $string,
         #[ArrayShape(['doc' => 'string|null', 'locale' => 'string|null', 'version' => 'string|null', 'page' => 'string|null'])]
         array $replace = []
-    ): string
-    {
+    ): string {
         return str_replace(
             ['{{doc}}', '{{locale}}', '{{version}}', '{{page}}'],
             [
@@ -86,8 +86,8 @@ final class DocLoader
     {
         $path = $this->resolveDocPath();
 
-        return app('cache')
-            ->remember(
+        return Cache
+            ::remember(
                 $this->getDocHash('page'),
                 self::CACHE_TTL,
                 function () use ($path) {
@@ -97,8 +97,8 @@ final class DocLoader
                     // remove style
                     $markdown = preg_replace('#<style>[\w\W]+?</style>#', '', $markdown);
 
-                    $html = (new DocumentationConverter($this->config['link-fixer']))->convert($markdown);
-                    $html = app('htmlmin')->html($html);
+                    $html = (new DocumentationConverter($this->config['link-fixer']))->convert($markdown)->getContent();
+//                    $html = app('htmlmin')->html($html);
                     $html = $this->replaceStubStrings($html);
 
                     return $html;
@@ -110,8 +110,8 @@ final class DocLoader
     {
         $path = $this->resolveDocPath();
 
-        return app('cache')
-            ->remember(
+        return Cache
+            ::remember(
                 $this->getDocHash('style'),
                 self::CACHE_TTL,
                 function () use ($path) {
@@ -125,7 +125,7 @@ final class DocLoader
 
     public function getPageTitle(): string
     {
-        return app('cache')->remember(
+        return Cache::remember(
             $this->getDocHash('title'),
             self::CACHE_TTL,
             function () {
@@ -141,15 +141,15 @@ final class DocLoader
 
     public function getNavigation(): string
     {
-        return app('cache')->remember(
+        return Cache::remember(
             $this->getDocHash('nav'),
             self::CACHE_TTL,
             function () {
                 $markdown = $this->getFile($this->replaceStubStrings($this->config['locales'][$this->locale]['navigation']));
                 $markdown = $this->replaceStubStrings($markdown);
 
-                $html = (new NavigationConverter($this->config['link-fixer']))->convert($markdown);
-                $html = app('htmlmin')->html($html);
+                $html = (new NavigationConverter($this->config['link-fixer']))->convert($markdown)->getContent();
+//                $html = app('htmlmin')->html($html);
 
                 return $this->replaceStubStrings($html);
             },
@@ -191,11 +191,8 @@ final class DocLoader
 
     private function getFile(string $path): string
     {
-        try {
-            return app('filesystem')->disk(self::DISK)->get($path);
-        } catch (FileNotFoundException $fileNotFoundException) {
-            throw new NotFoundHttpException('Page not found', $fileNotFoundException);
-        }
+        return Storage::disk(self::DISK)->get($path) ??
+            throw new NotFoundHttpException('Page not found');
     }
 
     private function resolveDocPath(): string

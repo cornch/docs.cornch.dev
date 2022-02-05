@@ -12,7 +12,7 @@ use League\CommonMark\Node\Block\Paragraph;
 
 final class LinkableHeader
 {
-    public function __invoke(DocumentParsedEvent $event)
+    public function __invoke(DocumentParsedEvent $event): void
     {
         $walker = $event->getDocument()->walker();
         $replaces = [];

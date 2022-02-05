@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\CommonMark\Block\Renderer;
 
-
 use App\CommonMark\Block\Element\MarkdownDiv;
 use League\CommonMark\Node\Node;
 use League\CommonMark\Renderer\ChildNodeRendererInterface;

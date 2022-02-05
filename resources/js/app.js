@@ -1,4 +1,4 @@
-import 'alpinejs'
+import Alpine from 'alpinejs'
 
 import Prism from 'prismjs'
 
@@ -8,3 +8,5 @@ Prism.manual = true
     .forEach((el) => {
       Prism.highlightElement(el)
     })
+
+Alpine.start()

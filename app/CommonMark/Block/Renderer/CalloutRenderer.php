@@ -17,7 +17,7 @@ final class CalloutRenderer implements NodeRendererInterface
     {
         Callout::assertInstanceOf($node);
 
-        $image = match ($node->type)  {
+        $image = match ($node->type) {
             'note' => new HtmlElement(
                 'svg',
                 ['class' => 'opacity-75', 'width' => '6', 'height' => '35', 'viewBox' => '0 0 6 35', 'xmlns' => 'http://www.w3.org/2000/svg'],

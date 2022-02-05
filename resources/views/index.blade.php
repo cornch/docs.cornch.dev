@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ config('app.name') }}</title>
-    <link rel="stylesheet" href="{{ url('dist/css/app.css') }}">
+    <link rel="stylesheet" href="{{ mix('dist/css/app.css') }}">
 </head>
 
 <body>
@@ -30,8 +30,8 @@
 </div>
 
 <footer class="container mx-auto px-6 mb-16">
-    <div class="w-full rounded bg-zinc-200 py-4">
-        <div class="text-center text-sm text-gray-600">
+    <div class="w-full rounded bg-zinc-200 dark:bg-zinc-600 py-4">
+        <div class="text-center text-sm text-gray-600 dark:text-gray-400">
             <p>&quot;Laravel&quot; is a Trademark of Taylor Otwell.</p>
             <p>This software is licensed under AGPL-3.0-or-later. You can get a copy of it's source code from <a href="https://github.com/cornch/docs.cornch.dev" class="hover:text-gray-500 underline hover:no-underline" target="_blank" rel="nofollow noopener">its GitHub repository</a>.</p>
             <p>cornch.dev &copy; {{ date('Y') }} All Rights Reserved.</p>
@@ -39,6 +39,6 @@
     </div>
 </footer>
 
-<script src="{{ url('dist/js/app.js') }}"></script>
+<script src="{{ mix('dist/js/app.js') }}"></script>
 </body>
 </html>

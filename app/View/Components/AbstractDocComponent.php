@@ -16,8 +16,7 @@ abstract class AbstractDocComponent extends Component
         public string $doc,
         public string $version,
         public string $page
-    )
-    {
+    ) {
         $this->docLoader = app(DocLoader::class, [
             'locale' => $this->locale,
             'doc' => $this->doc,

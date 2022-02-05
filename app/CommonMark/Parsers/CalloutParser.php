@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\CommonMark\Parsers;
 
-
 use App\CommonMark\Block\Element\Callout;
 use JetBrains\PhpStorm\Pure;
 use League\CommonMark\Node\Block\AbstractBlock;
@@ -54,8 +53,7 @@ final class CalloutParser extends AbstractBlockContinueParser
 
     public static function createBlockStartParser(): BlockStartParserInterface
     {
-        return new class implements BlockStartParserInterface
-        {
+        return new class () implements BlockStartParserInterface {
             private const START_STRING = '> {';
 
             public function tryStart(Cursor $cursor, MarkdownParserStateInterface $parserState): ?BlockStart

@@ -11,7 +11,7 @@ use Ramsey\Uuid\Uuid;
 
 final class NavigationLinkEvent
 {
-    public function __invoke(DocumentParsedEvent $event)
+    public function __invoke(DocumentParsedEvent $event): void
     {
         $walker = $event->getDocument()->walker();
         while ($current = $walker->next()) {

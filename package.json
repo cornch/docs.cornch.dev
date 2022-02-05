@@ -1,25 +1,26 @@
 {
     "private": true,
     "scripts": {
-        "dev": "mix",
+        "dev": "npm run development",
+        "development": "mix",
         "watch": "mix watch",
         "watch-poll": "mix watch -- --watch-options-poll=1000",
         "hot": "mix watch --hot",
-        "prod": "mix --production"
+        "prod": "npm run production",
+        "production": "mix --production"
     },
     "devDependencies": {
         "autoprefixer": "^10.4.2",
-        "axios": "^0.21",
-        "babel-plugin-prismjs": "^2.0.1",
+        "axios": "^0.25.0",
+        "babel-plugin-prismjs": "^2.1.0",
         "laravel-mix": "^6.0.41",
-        "lodash": "^4.17.19",
-        "postcss": "^8.4.5",
+        "postcss": "^8.4.6",
         "postcss-import": "^14.0.2",
-        "postcss-preset-env": "^7.2.3"
+        "postcss-preset-env": "^7.3.1"
     },
     "dependencies": {
-        "alpinejs": "^2.8.2",
-        "prismjs": "^1.23.0",
-        "tailwindcss": "^3.0.15"
+        "alpinejs": "^3.8.1",
+        "prismjs": "^1.26.0",
+        "tailwindcss": "^3.0.18"
     }
 }

@@ -1,0 +1,96 @@
+name: Tests
+
+on:
+  push:
+    branches: [ '**', '!dependabot/**' ]
+  pull_request_target:
+    types: [ opened, edited, reopened, synchronize, unlocked ]
+
+permissions: read-all
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with: { submodules: recursive }
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'
+          tools: php-cs-fixer, cs2pr
+
+      - name: Composer Install
+        uses: ./.github/actions/composer-install
+
+      - name: PHP-CS-Fixer
+        run: composer lint -- --dry-run --using-cache=no --config=.php-cs-fixer.php --format=checkstyle | cs2pr
+        env:
+          PHP_CS_FIXER_IGNORE_ENV: 1
+
+  mix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with: { submodules: recursive }
+
+      - uses: bahmutov/npm-install@v1
+
+      - name: Mix
+        run: npm run dev
+
+      - name: Upload Compiled Resources
+        uses: actions/upload-artifact@v2
+        with:
+          name: mix
+          path: |
+            public/dist
+            public/fonts
+
+  tests:
+    runs-on: ubuntu-latest
+    needs: mix
+    steps:
+      - uses: actions/checkout@v2
+        with: { submodules: recursive }
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with: { php-version: 8.1 }
+
+      - name: Composer Install
+        uses: ./.github/actions/composer-install
+
+      - name: Prepare Laravel
+        uses: ./.github/actions/prepare-laravel
+
+      - name: Download Mix Resources
+        uses: actions/download-artifact@v2
+        with: { name: mix, path: public }
+
+      - name: Run PEST
+        run: php artisan test --coverage --coverage-clover coverage.xml
+
+      - name: Upload Coverage Report
+        if: success()
+        uses: actions/upload-artifact@v2
+        with:
+          name: coverage
+          path: coverage.xml
+
+      - name: Upload Logs
+        if: failure()
+        uses: actions/upload-artifact@v2
+        with: { name: logs, path: storage/logs }
+
+  clean-up:
+    runs-on: ubuntu-latest
+    if: ${{ always() }}
+    needs: [tests]
+    steps:
+      - uses: geekyeggo/delete-artifact@v1
+        with:
+          name: mix
+          failOnError: false
+
