@@ -23,9 +23,9 @@ final class MarkdownDivParser extends AbstractBlockContinueParser
     private MarkdownDiv $markdownDiv;
 
     #[Pure]
-    public function __construct(string $class)
+    public function __construct(string $id, string $class)
     {
-        $this->markdownDiv = new MarkdownDiv($class);
+        $this->markdownDiv = new MarkdownDiv($id, $class);
     }
 
     public function getBlock(): AbstractBlock
@@ -67,17 +67,24 @@ final class MarkdownDivParser extends AbstractBlockContinueParser
                     return BlockStart::none();
                 }
 
-                if (!str_contains($subStringForDetermine, 'markdown="1"')) {
+                if (
+                    !str_contains($subStringForDetermine, 'markdown="1"') &&
+                    !str_contains($subStringForDetermine, "markdown='1'") &&
+                    !str_contains($subStringForDetermine, 'markdown=1')
+                ) {
                     return BlockStart::none();
                 }
 
                 $cursor->advanceToEnd();
 
                 // extract class
-                preg_match('/class="([^"]*?)"/', $subStringForDetermine, $matches);
-                $class = $matches[1] ?? '';
+                preg_match('/class=([\'"])([^"]*?)\1/', $subStringForDetermine, $matches);
+                $class = $matches[2] ?? '';
 
-                return BlockStart::of(new MarkdownDivParser($class))->at($cursor);
+                preg_match('/id=([\'"])([^"]*?)\1/', $subStringForDetermine, $matches);
+                $id = $matches[2] ?? '';
+
+                return BlockStart::of(new MarkdownDivParser($id, $class))->at($cursor);
             }
         };
     }

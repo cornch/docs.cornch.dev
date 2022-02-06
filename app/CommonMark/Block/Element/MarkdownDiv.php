@@ -9,13 +9,9 @@ use League\CommonMark\Node\Block\AbstractBlock;
 final class MarkdownDiv extends AbstractBlock
 {
     public function __construct(
-        private string $class = '',
+        public readonly string $id = '',
+        public readonly string $class = '',
     ) {
         parent::__construct();
-    }
-
-    public function getClass(): string
-    {
-        return $this->class;
     }
 }

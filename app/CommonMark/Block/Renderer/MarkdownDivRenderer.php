@@ -18,6 +18,9 @@ final class MarkdownDivRenderer implements NodeRendererInterface
 
         /** @var MarkdownDiv $node */
 
-        return new HtmlElement('div', ['class' => $node->getClass()], $childRenderer->renderNodes($node->children()));
+        return new HtmlElement('div', array_filter([
+            'id' => $node->id,
+            'class' => $node->class
+        ]), $childRenderer->renderNodes($node->children()));
     }
 }
