@@ -1,3 +1,5 @@
+<?php /** @var \App\Documentation\Models\PathInfo $pathInfo */ ?>
+
 <div {{ $attributes->merge(['class' => 'bg-zinc-200 dark:bg-zinc-700']) }}">
     <div class="container max-w-5xl mx-auto px-6 py-12">
         <div class="flex flex-col md:flex-row items-center justify-between -m-2">
@@ -6,7 +8,7 @@
             </div>
             {{-- use SINGLE QUOTE here for x-data as json_encode is using double quote for string --}}
             <div class="flex flex-col md:flex-row justify-end items-stretch"
-                 x-data='{ locale: "{{ $locale }}", locales: @json($locales), version: "{{ $version }}" }'
+                 x-data='{ locale: "{{ $pathInfo->locale }}", locales: @json($locales), version: "{{ $pathInfo->version }}" }'
                  x-cloak
             >
                 <div class="relative m-2">
@@ -17,7 +19,7 @@
                     >
                         @foreach ($locales as $code => ['name' => $name])
                             <option value="{{ $code }}"
-                                @if ($code === $locale)
+                                @if ($code === $pathInfo->locale)
                                     selected
                                 @endif
                             >{{ $name }}</option>
@@ -36,7 +38,7 @@
                     >
                         @foreach ($versions as $tag => $v)
                             <option value="{{ $v }}"
-                                @if ($v === $version)
+                                @if ($v === $pathInfo->version)
                                     selected
                                 @endif
                             >{{ $tag }}</option>
@@ -53,12 +55,12 @@
                 <div class="flex justify-end -mx-2">
                     <div class="mx-2 px-2 py-1 border border-zinc-700 rounded">
                         <details class="relative">
-                            <summary>Language - {{ $locales[$locale]['name'] }}</summary>
+                            <summary>Language - {{ $locales[$pathInfo->locale]['name'] }}</summary>
 
                             <ul class="absolute top-full mt-1 px-2 py-1 border border-zinc-700 border-t-0 rounded-b">
                                 @foreach($locales as $code => ['url' => $url, 'name' => $name])
                                     <li class="text-sm">
-                                        @if ($locale === $code)
+                                        @if ($code === $pathInfo->locale)
                                             {{ $name }}
                                         @else
                                             <a href="{{ $url }}"
@@ -75,15 +77,15 @@
 
                     <div class="mx-2 px-2 py-1 border border-zinc-700 rounded">
                         <details class="relative">
-                            <summary>Version - {{ $version }}</summary>
+                            <summary>Version - {{ $pathInfo->version }}</summary>
 
                             <ul class="absolute top-full mt-1 px-2 py-1 border border-zinc-700 border-t-0 rounded-b">
                                 @foreach($versions as $name => $code)
                                     <li class="text-sm">
-                                        @if ($version === $code)
+                                        @if ($code === $pathInfo->version)
                                             {{ $name }}
                                         @else
-                                            <a href="{{ route('docs.show', ['locale' => $locale, 'doc' => 'laravel', 'version' => $code, 'page' => $page]) }}"
+                                            <a href="{{ route('docs.show', [...$pathInfo->toRouteParameters(), 'version' => $code]) }}"
                                                class="rounded underline hover:no-underline"
                                             >
                                                 {{ $name }}

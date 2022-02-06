@@ -8,7 +8,7 @@ final class DocSidebar extends AbstractDocComponent
 {
     public function render(): View
     {
-        $html = $this->docLoader->getNavigation();
+        $html = $this->page->navigation;
 
         return view('components.doc-sidebar', [
             'html' => $html,

@@ -2,24 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\DocLoader;
+use App\Documentation\Loader;
+use App\Documentation\Models\PathInfo;
 use Illuminate\Contracts\View\View;
-use Illuminate\Http\Request;
 
-final class DocumentationController extends Controller
+final class DocumentationController
 {
     public function __invoke(string $locale, string $doc, string $version, string $page): View
     {
-        $docLoader = app(DocLoader::class, compact('locale', 'doc', 'version', 'page'));
+        $pathInfo = new PathInfo($doc, $locale, $version, $page);
+        $loader = app(Loader::class, ['pathInfo' => $pathInfo]);
 
         return view('docs.show', [
-            'title' => $docLoader->getPageTitle(),
-            'content' => $docLoader->getPage(),
-            'style' => $docLoader->getStyle(),
-            'locale' => $locale,
-            'doc' => $doc,
-            'version' => $version,
-            'page' => $page,
+            'pathInfo' => $pathInfo,
+            'page' => $loader->getPage(),
         ]);
     }
 }

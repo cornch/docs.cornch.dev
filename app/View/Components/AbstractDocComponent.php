@@ -4,24 +4,17 @@ declare(strict_types=1);
 
 namespace App\View\Components;
 
-use App\DocLoader;
+use App\Documentation\Models\Page;
+use App\Documentation\Models\PathInfo;
 use Illuminate\View\Component;
 
 abstract class AbstractDocComponent extends Component
 {
-    protected DocLoader $docLoader;
+    public readonly PathInfo $pathInfo;
 
     public function __construct(
-        public string $locale,
-        public string $doc,
-        public string $version,
-        public string $page
+        public readonly Page $page
     ) {
-        $this->docLoader = app(DocLoader::class, [
-            'locale' => $this->locale,
-            'doc' => $this->doc,
-            'version' => $this->version,
-            'page' => $this->page,
-        ]);
+        $this->pathInfo = $page->pathInfo;
     }
 }

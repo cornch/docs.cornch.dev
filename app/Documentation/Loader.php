@@ -2,18 +2,31 @@
 
 declare(strict_types=1);
 
-namespace App;
+namespace App\Documentation;
 
 use App\CommonMark\DocumentationConverter;
 use App\CommonMark\NavigationConverter;
+use App\Documentation\Models\Page;
+use App\Documentation\Models\PathInfo;
 use App\Exceptions\LocaleNotFoundException;
-use Illuminate\Contracts\View\View;
+use App\Utils\Pipe;
+use Closure;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\HtmlString;
+use Illuminate\Support\Str;
 use JetBrains\PhpStorm\ArrayShape;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-final class DocLoader
+use Wikimedia\CSS\Objects\CSSObject;
+use Wikimedia\CSS\Parser\Parser as CSSParser;
+
+use Wikimedia\CSS\Sanitizer\StylesheetSanitizer;
+
+use function config;
+use function once;
+
+final class Loader
 {
     private const CACHE_TTL = 60 * 60 * 24;
     private const DISK = 'docs';
@@ -24,25 +37,16 @@ final class DocLoader
         'header' => 'string',
         'footer' => 'string',
         'versions' => 'array',
-        'link-fixer' => \Closure::class
+        'link-fixer' => Closure::class
     ])]
-    private array $config;
+    public readonly array $config;
 
-    /**
-     * @param string $doc
-     * @param string $locale
-     * @param string $version
-     * @param string $page
-     */
     public function __construct(
-        private string $doc,
-        private string $locale,
-        private string $version,
-        private string $page
+        public readonly PathInfo $pathInfo
     ) {
-        $this->config = config("docs.docsets.{$this->doc}");
+        $this->config = config("docs.docsets.{$this->pathInfo->doc}");
 
-        if (!array_key_exists($this->locale, $this->config['locales'])) {
+        if (!array_key_exists($this->pathInfo->locale, $this->config['locales'])) {
             throw new LocaleNotFoundException();
         }
     }
@@ -55,10 +59,10 @@ final class DocLoader
         return str_replace(
             ['{{doc}}', '{{locale}}', '{{version}}', '{{page}}'],
             [
-                $replace['doc'] ?? $this->doc,
-                $replace['locale'] ?? $this->locale,
-                $replace['version'] ?? $this->version,
-                $replace['page'] ?? $this->page
+                $replace['doc'] ?? $this->pathInfo->doc,
+                $replace['locale'] ?? $this->pathInfo->locale,
+                $replace['version'] ?? $this->pathInfo->version,
+                $replace['page'] ?? $this->pathInfo->page,
             ],
             $string,
         );
@@ -74,7 +78,7 @@ final class DocLoader
 
     public function getDocName(): string
     {
-        return $this->config['locales'][$this->locale]['title'];
+        return $this->config['locales'][$this->pathInfo->locale]['title'];
     }
 
     public function getLocales(): array
@@ -82,7 +86,18 @@ final class DocLoader
         return $this->config['locales'];
     }
 
-    public function getPage(): string
+    public function getPage(): Page
+    {
+        return new Page(
+            loader: $this,
+            styles: $this->getStyle(),
+            title: $this->getPageTitle(),
+            navigation: $this->getNavigation(),
+            content: $this->getContent(),
+        );
+    }
+
+    public function getContent(): HtmlString
     {
         $path = $this->resolveDocPath();
 
@@ -98,15 +113,15 @@ final class DocLoader
                     $markdown = preg_replace('#<style>[\w\W]+?</style>#', '', $markdown);
 
                     $html = (new DocumentationConverter($this->config['link-fixer']))->convert($markdown)->getContent();
-//                    $html = app('htmlmin')->html($html);
+                    // $html = app('htmlmin')->html($html);
                     $html = $this->replaceStubStrings($html);
 
-                    return $html;
+                    return new HtmlString($html);
                 },
             );
     }
 
-    public function getStyle(): string
+    public function getStyle(): HtmlString
     {
         $path = $this->resolveDocPath();
 
@@ -114,12 +129,13 @@ final class DocLoader
             ::remember(
                 $this->getDocHash('style'),
                 self::CACHE_TTL,
-                function () use ($path) {
-                    $matches = [];
-                    preg_match_all('#<style>([\w\W]+?)</style>#', $this->getFile($path), $matches);
-
-                    return implode('', $matches[1] ?: []);
-                },
+                fn () => Pipe::from($this->getFile($path))
+                    (static fn (string $c) => Str::matchAll('#<style>([\w\W]+?)</style>#', $c)->implode(''))
+                    ([CSSParser::class, 'newFromString'])
+                    (static fn (CSSParser $p) => $p->parseStylesheet())
+                    (static fn (CSSObject $parser) => StylesheetSanitizer::newDefault()->sanitize($parser))
+                    (static fn ($css) => new HtmlString((string) $css))
+                    ->endpipe,
             );
     }
 
@@ -145,48 +161,15 @@ final class DocLoader
             $this->getDocHash('nav'),
             self::CACHE_TTL,
             function () {
-                $markdown = $this->getFile($this->replaceStubStrings($this->config['locales'][$this->locale]['navigation']));
+                $markdown = $this->getFile($this->replaceStubStrings($this->config['locales'][$this->pathInfo->locale]['navigation']));
                 $markdown = $this->replaceStubStrings($markdown);
 
                 $html = (new NavigationConverter($this->config['link-fixer']))->convert($markdown)->getContent();
-//                $html = app('htmlmin')->html($html);
+                // $html = app('htmlmin')->html($html);
 
                 return $this->replaceStubStrings($html);
             },
         );
-    }
-
-    public function getHeader(): View
-    {
-        $view = $this->config['header'];
-        $locales = collect($this->config['locales'])
-            ->map(function (array $config, $code): array {
-                return [
-                    'name' => $config['name'],
-                    'url' => route('docs.show', ['version' => $this->version, 'locale' => $code, 'doc' => $this->doc, 'page' => $this->page]),
-                ];
-            })
-            ->toArray();
-
-        return view($view, [
-            'versions' => $this->config['versions'],
-            'locales' => $locales,
-            'version' => $this->version,
-            'locale' => $this->locale,
-            'page' => $this->page,
-            'versionUrl' => route('docs.show', ['version' => '__version__', 'locale' => $this->locale, 'doc' => $this->doc, 'page' => $this->page])
-        ]);
-    }
-
-    public function getFooter(): View
-    {
-        $view = $this->config['footer'];
-
-        return view($view, [
-            'version' => $this->version,
-            'locale' => $this->locale,
-            'page' => $this->page,
-        ]);
     }
 
     private function getFile(string $path): string
@@ -197,6 +180,6 @@ final class DocLoader
 
     private function resolveDocPath(): string
     {
-        return $this->replaceStubStrings($this->config['locales'][$this->locale]['path']);
+        return $this->replaceStubStrings($this->config['locales'][$this->pathInfo->locale]['path']);
     }
 }

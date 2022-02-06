@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Stringable;
 
 final class AppServiceProvider extends ServiceProvider
 {
@@ -23,6 +24,8 @@ final class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Stringable::macro('surround', function ($left, $right): Stringable {
+            return new Stringable($left . $this->__toString() . $right);
+        });
     }
 }

@@ -10,7 +10,8 @@
         "laravel/framework": "^9.0",
         "laravel/tinker": "^2.7",
         "league/commonmark": "^2.2",
-        "spatie/once": "^3.0"
+        "spatie/once": "^3.0",
+        "wikimedia/css-sanitizer": "^3.0"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.12",
