@@ -24,7 +24,6 @@
 
     h4 {
         @apply text-lg font-normal tracking-[-.25px];
-        @apply sm:text-[1.5em];
     }
 
     h5 {
