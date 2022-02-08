@@ -6,7 +6,7 @@ return [
             'header' => 'docs.headers.laravel',
             'footer' => 'docs.footers.laravel',
             'version' => true,
-            'default_version' => '8.x',
+            'default_version' => '9.x',
             'locales' => [
                 'zh-tw' => [
                     'name' => '繁體中文（臺灣）',
@@ -24,6 +24,7 @@ return [
             'index' => 'installation',
             'versions' => [
                 '8.x' => '8.x',
+                '9.x' => '9.x',
                 'Master' => 'master',
             ],
             'link-fixer' => function (string $url): string {
