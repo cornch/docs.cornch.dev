@@ -1,6 +1,6 @@
 {
     "name": "cornch/cornch-docs",
-    "description": "A documentation site provide translations of various laravel projects.",
+    "description": "A documentation site that provides translations of various laravel projects.",
     "keywords": ["laravel", "documentation", "translation"],
     "license": "AGPL-3.0-or-later",
     "require": {

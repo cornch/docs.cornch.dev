@@ -2,6 +2,31 @@
 
 `\Cornch\Docs::class` is a website that aims to provide translated documentations of Laravel framework and various Laravel's 1st party packages.
 
+## Installation
+
+1. Install Git Submodules
+
+```bash
+git submodule update --init --recursive
+```
+
+2. Install Dependencies
+```bash
+composer install
+npm ci
+```
+
+3. Configure `.env`
+```bash
+cp .env.example .env
+php artisan key:generate
+```
+
+4. Compile Assets
+```bash
+npm run prod
+```
+
 ## License
 
 ```
