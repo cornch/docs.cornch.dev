@@ -102,6 +102,10 @@
         @apply before:bg-list-dot before:bg-center before:bg-no-repeat;
     }
 
+    .table__wrapper {
+        @apply max-w-full overflow-x-auto;
+    }
+
     table {
         border-collapse: collapse;
         @apply w-full text-base mb-8;

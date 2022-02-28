@@ -8,6 +8,7 @@ use App\CommonMark\Block\Element\Callout;
 use App\CommonMark\Block\Element\MarkdownDiv;
 use App\CommonMark\Block\Renderer\CalloutRenderer;
 use App\CommonMark\Block\Renderer\MarkdownDivRenderer;
+use App\CommonMark\Block\Renderer\TableRenderer;
 use App\CommonMark\Listeners\LinkableHeader;
 use App\CommonMark\Listeners\LinkFixer;
 use App\CommonMark\Parsers\CalloutParser;
@@ -18,6 +19,7 @@ use League\CommonMark\Event\DocumentParsedEvent;
 use League\CommonMark\Extension\Attributes\AttributesExtension;
 use League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension;
 use League\CommonMark\Extension\GithubFlavoredMarkdownExtension;
+use League\CommonMark\Extension\Table\Table;
 use League\CommonMark\MarkdownConverter;
 
 final class DocumentationConverter extends MarkdownConverter
@@ -38,6 +40,8 @@ final class DocumentationConverter extends MarkdownConverter
 
         $environment->addBlockStartParser(MarkdownDivParser::createBlockStartParser(), 50);
         $environment->addRenderer(MarkdownDiv::class, new MarkdownDivRenderer());
+
+        $environment->addRenderer(Table::class, new TableRenderer(), 10);
 
         $environment->addInlineParser(new RubyParser());
 
