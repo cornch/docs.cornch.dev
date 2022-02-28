@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Documentation\Loader;
 use App\Documentation\Models\PathInfo;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Str;
 
 final class DocumentationController
 {

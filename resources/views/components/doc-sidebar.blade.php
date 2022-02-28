@@ -1,5 +1,5 @@
 <div
-    x-data="{ opening: '' }"
+    x-data="{ openedPage: '' }"
     x-init="$el.querySelectorAll('a').forEach((link) => {
         if (
             link.pathname === window.location.pathname &&
@@ -11,10 +11,10 @@
             link.parentNode.classList.add('active');
 
             let $li = link.parentNode;
-            while (!$li.dataset.uuid) {
+            while (!$li.dataset.id) {
                 $li = $li.parentNode;
             }
-            opening = $li.dataset.uuid;
+            openedPage = $li.dataset.id;
         }
     })"
 >

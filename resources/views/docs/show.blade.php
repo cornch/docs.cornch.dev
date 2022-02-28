@@ -15,7 +15,7 @@
 
     <div class="container max-w-5xl mx-auto px-6 mb-6 overflow-x-hidden">
         <div class="flex flex-col md:flex-row justify-between items-stretch md:-mx-2">
-            <div class="sidebar md:w-1/4 mx-6 mb-16 md:mb-0 md:mx-2">
+            <div class="sidebar md:block hidden md:w-1/4 mx-6 mb-16 md:mb-0 md:mx-2">
                 <x-doc-sidebar :page="$page" />
             </div>
 

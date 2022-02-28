@@ -3,11 +3,11 @@
 <div {{ $attributes->merge(['class' => 'bg-zinc-200 dark:bg-zinc-700']) }}">
     <div class="container max-w-5xl mx-auto px-6 py-12">
         <div class="flex flex-col md:flex-row items-center justify-between -m-2">
-            <div class="w-1/3 m-2">
+            <div class="md:w-1/3 m-2">
                 <x-logo.laravel class="h-16 -ml-4" />
             </div>
             {{-- use SINGLE QUOTE here for x-data as json_encode is using double quote for string --}}
-            <div class="flex flex-col md:flex-row justify-end items-stretch"
+            <div class="flex flex-row justify-end items-stretch"
                  x-data='{ locale: "{{ $pathInfo->locale }}", locales: @json($locales), version: "{{ $pathInfo->version }}" }'
                  x-cloak
             >
@@ -55,7 +55,7 @@
                 <div class="flex justify-end -mx-2">
                     <div class="mx-2 px-2 py-1 border border-zinc-700 rounded">
                         <details class="relative">
-                            <summary>Language - {{ $locales[$pathInfo->locale]['name'] }}</summary>
+                            <summary class="flex items-center gap-2">{{ $locales[$pathInfo->locale]['name'] }}</summary>
 
                             <ul class="absolute top-full mt-1 px-2 py-1 border border-zinc-700 border-t-0 rounded-b">
                                 @foreach($locales as $code => ['url' => $url, 'name' => $name])
@@ -77,7 +77,7 @@
 
                     <div class="mx-2 px-2 py-1 border border-zinc-700 rounded">
                         <details class="relative">
-                            <summary>Version - {{ $pathInfo->version }}</summary>
+                            <summary class="flex items-center gap-2">{{ $pathInfo->version }}</summary>
 
                             <ul class="absolute top-full mt-1 px-2 py-1 border border-zinc-700 border-t-0 rounded-b">
                                 @foreach($versions as $name => $code)
@@ -98,6 +98,15 @@
                     </div>
                 </div>
             </noscript>
+        </div>
+    </div>
+
+    <div class="md:hidden h-full py-4 border-b bg-white h-full">
+        <div class="container px-6">
+            <a href="{{ url($pathInfo->locale . '/laravel/' . $pathInfo->version . '/documentation')  }}" class="flex items-center gap-2">
+                <x-heroicon-o-menu class="w-4 h-4" aria-hidden="true" />
+                {{ __('Show Menu') }}
+            </a>
         </div>
     </div>
 </div>
