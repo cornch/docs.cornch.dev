@@ -21,6 +21,7 @@ use League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension;
 use League\CommonMark\Extension\GithubFlavoredMarkdownExtension;
 use League\CommonMark\Extension\Table\Table;
 use League\CommonMark\MarkdownConverter;
+use Torchlight\Commonmark\V2\TorchlightExtension;
 
 final class DocumentationConverter extends MarkdownConverter
 {
@@ -31,6 +32,8 @@ final class DocumentationConverter extends MarkdownConverter
         $environment->addExtension(new GithubFlavoredMarkdownExtension());
 
         $environment->addExtension(new AttributesExtension());
+
+        $environment->addExtension(new TorchlightExtension());
 
         $environment->addEventListener(DocumentParsedEvent::class, new LinkFixer($linkFixer));
         $environment->addEventListener(DocumentParsedEvent::class, new LinkableHeader());

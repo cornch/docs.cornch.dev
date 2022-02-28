@@ -18,5 +18,5 @@
 @layer components {
     @import './content.css';
     @import './sidebar.css';
-    @import './prism.css';
+    @import './torchlight.css';
 }

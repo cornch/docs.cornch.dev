@@ -61,7 +61,7 @@
         @apply text-gray-700 dark:text-gray-400 text-base leading-loose;
     }
 
-    p, ul, ol {
+    p, ul, ol, pre > code {
         @apply mb-[2em];
     }
 
