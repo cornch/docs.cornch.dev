@@ -39,7 +39,7 @@
         @apply font-normal leading-tight;
     }
 
-    ul ul li.active a {
+    ul ul li p.active a {
         @apply before:absolute;
         @apply before:top-[calc(50%_-_.25rem)] before:left-[-1rem];
         @apply before:w-2 before:h-2;
