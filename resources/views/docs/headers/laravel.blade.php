@@ -101,7 +101,7 @@
         </div>
     </div>
 
-    <div class="md:hidden h-full py-4 border-b bg-white h-full">
+    <div class="md:hidden h-full py-4 border-b dark:border-b-zinc-700 bg-zinc-100 dark:bg-zinc-800">
         <div class="container px-6">
             <a href="{{ url($pathInfo->locale . '/laravel/' . $pathInfo->version . '/documentation')  }}" class="flex items-center gap-2">
                 <x-heroicon-o-menu class="w-4 h-4" aria-hidden="true" />
