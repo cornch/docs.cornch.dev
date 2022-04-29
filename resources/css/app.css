@@ -20,3 +20,11 @@
     @import './sidebar.css';
     @import './torchlight.css';
 }
+
+@layer utilities {
+    .no-marker::marker,
+    .no-marker::-webkit-details-marker {
+        display: none;
+        content: "";
+    }
+}

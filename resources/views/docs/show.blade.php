@@ -11,21 +11,11 @@
 @endunless
 
 @section('content')
-    <x-doc-header class="mb-16" :page="$page" />
+    <article class="content language-php">
+        {{ $page->content }}
+    </article>
 
-    <div class="container max-w-5xl mx-auto px-6 mb-6 overflow-x-hidden">
-        <div class="flex flex-col md:flex-row justify-between items-stretch md:-mx-2">
-            <div class="sidebar md:block hidden md:w-1/4 mx-6 mb-16 md:mb-0 md:mx-2">
-                <x-doc-sidebar :page="$page" />
-            </div>
-
-            <div class="content md:w-3/4 mx-6 md:mx-2 language-php">
-                {{ $page->content }}
-            </div>
-        </div>
-    </div>
-
-    <div class="container max-w-5xl mx-auto px-6">
+    <div class="max-w-5xl mx-auto px-6 mb-16">
         <x-doc-footer :page="$page" />
     </div>
 @endsection

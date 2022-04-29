@@ -20,4 +20,33 @@ final class Page
     ) {
         $this->pathInfo = $this->loader->pathInfo;
     }
+
+    public function locales(): array
+    {
+        return once(fn () => collect($this->loader->config['locales'])
+            ->map(fn (array $config, $code) => [
+                'name' => $config['name'],
+                'code' => $code,
+                'url' => route('docs.show', [
+                    ...$this->pathInfo->toRouteParameters(),
+                    'locale' => $code,
+                ]),
+            ])
+            ->toArray());
+    }
+
+    public function versions(): array
+    {
+        return once(fn () => collect($this->loader->config['versions'])
+            ->map(fn (string $code, string $name) => [
+                'name' => $name,
+                'code' => $code,
+                'url' => route('docs.show', [
+                    ...$this->pathInfo->toRouteParameters(),
+                    'version' => $code,
+                ]),
+            ])
+            ->values()
+            ->toArray());
+    }
 }

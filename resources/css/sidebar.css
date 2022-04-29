@@ -4,7 +4,7 @@
     }
 
     li {
-        @apply block py-[.65em] px-0 whitespace-nowrap;
+        @apply block py-2 px-0 whitespace-nowrap;
     }
 
     li h2 {
@@ -13,8 +13,6 @@
         @apply text-gray-900 dark:text-gray-100;
         @apply no-underline cursor-pointer;
         @apply transition-all duration-[.3s] ease-in-out;
-
-        @apply hover:translate-x-1;
     }
 
     li a {
@@ -23,8 +21,6 @@
         @apply text-gray-900 dark:text-gray-100;
         @apply no-underline;
         @apply transition-transform duration-[.3s] ease-in-out;
-
-        @apply hover:translate-x-1;
     }
 
 
@@ -48,7 +44,7 @@
     }
 
     .sub--on > h2 {
-        @apply mb-[1em];
+        @apply mb-1;
     }
 
     .sub--on ul {

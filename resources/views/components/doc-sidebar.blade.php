@@ -17,6 +17,7 @@
             openedPage = $li.dataset.id;
         }
     })"
+    {{ $attributes->merge(['class' => 'px-6']) }}
 >
     {!! $html !!}
 </div>
