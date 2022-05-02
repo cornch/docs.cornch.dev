@@ -3,6 +3,7 @@ const plugin = require('tailwindcss/plugin')
 module.exports = {
   content: [
     'app/CommonMark/Block/Renderer/**/*.php',
+    'app/View/**/*.php',
     'resources/views/**/*.blade.php',
     'resources/docs/laravel/build/**/*.md',
   ],

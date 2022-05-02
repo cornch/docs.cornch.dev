@@ -40,64 +40,46 @@
                 @endempty
             </h1>
 
-            <div
-                class="flex group mx-4 md:mx-0"
+            <x-icon-dropdown
+                class="mx-4 md:mx-0"
                 x-data="{{ Js::from(['current' => $pathInfo->locale, 'url' => '', 'locales' => $page->locales()]) }}"
                 x-cloak
             >
-                <div class="flex justify-center items-center pl-4 border border-r-0 border-zinc-400 group-hover:border-red-300 text-gray-900 rounded-l-full" aria-hidden="true">
+                <x-slot:icon>
                     <x-heroicon-o-globe class="w-4 h-4 mr-2 text-gray-900 dark:text-zinc-100" />
-                </div>
-                <div class="relative">
-                    <select
-                        class="w-full pr-8 py-1 border border-l-0 border-zinc-400 group-hover:border-red-300 bg-white dark:bg-zinc-800 text-gray-900 dark:text-zinc-100 transition-colors rounded-r-full appearance-none"
-                        x-model="url"
-                        x-on:change="window.location.href = url"
-                    >
-                        <template x-for="locale in locales">
-                            <option
-                                x-bind:value="locale.url"
-                                x-bind:selected="locale.code === current"
-                                x-text="locale.name"
-                            ></option>
-                        </template>
-                    </select>
+                </x-slot:icon>
 
-                    <span class="absolute top-0 right-4 h-full flex items-center justify-center">
-                        <x-heroicon-o-chevron-down class="w-4 h-4 text-gray-900 dark:text-zinc-300" />
-                    </span>
-                </div>
-            </div>
-            <noscript>
-                <div class="mx-2 px-2 py-1 border border-zinc-400 rounded-full">
-                    <details class="relative">
-                        <summary class="flex items-center no-marker w-48 px-2">
-                            <x-heroicon-o-globe class="w-4 h-4 mr-2 text-gray-900"></x-heroicon-o-globe>
-                            <span class="flex-grow">
-                                {{ $page->locales()[$pathInfo->locale]['name'] }}
-                            </span>
-                            <x-heroicon-o-chevron-down class="w-4 h-4 text-gray-900" />
-                        </summary>
+                <x-slot:select
+                    x-model="url"
+                    x-on:change="window.location.href = url"
+                >
+                    <template x-for="locale in locales">
+                        <option
+                            x-bind:value="locale.url"
+                            x-bind:selected="locale.code === current"
+                            x-text="locale.name"
+                        ></option>
+                    </template>
+                </x-slot:select>
 
-                        <ul class="absolute top-full right-0 mt-1 mr-2 px-2 py-1 w-36 border border-t-0 border-zinc-400 rounded-b">
-                            @foreach($page->locales() as $code => ['url' => $url, 'name' => $name])
-                                <li class="text-sm my-1 py-1">
-                                    @if ($code === $pathInfo->locale)
-                                        {{ $name }}
-                                    @else
-                                        <a
-                                            href="{{ $url }}"
-                                            class="rounded underline hover:no-underline"
-                                        >
-                                            {{ $name }}
-                                        </a>
-                                    @endif
-                                </li>
-                            @endforeach
-                        </ul>
-                    </details>
-                </div>
-            </noscript>
+                <x-slot:current class="w-48">{{ $page->locales()[$pathInfo->locale]['name'] }}</x-slot:current>
+                <x-slot:noscriptList class="w-36">
+                    @foreach($page->locales() as $code => ['url' => $url, 'name' => $name])
+                        <li class="text-sm my-1 py-1">
+                            @if ($code === $pathInfo->locale)
+                                {{ $name }}
+                            @else
+                                <a
+                                    href="{{ $url }}"
+                                    class="rounded underline hover:no-underline"
+                                >
+                                    {{ $name }}
+                                </a>
+                            @endif
+                        </li>
+                    @endforeach
+                </x-slot:noscriptList>
+            </x-icon-dropdown>
         </nav>
     </div>
 </header>
@@ -148,63 +130,48 @@
         <div class="py-4 px-6 border-b border-gray-300 dark:border-zinc-800 flex flex-col items-center justify-center">
             <x-doc-logo class="h-16" :page="$page" />
 
-            <div
+            <x-icon-dropdown
+                size="sm"
                 class="flex flex-row justify-end items-stretch"
                 x-data="{{ Js::from(['current' => $pathInfo->version, 'url' => '', 'versions' => $page->versions()]) }}"
                 x-cloak
             >
-                <div class="relative m-2">
-                    <select
-                        class="w-full px-4 pr-8 py-1 border border-zinc-400 hover:border-red-300 text-gray-900 bg-gray-200 dark:bg-zinc-700 dark:text-white text-sm transition-colors rounded-full appearance-none"
-                        x-model="url"
-                        x-on:change="window.location.href = url"
-                    >
-                        <template x-for="version in versions">
-                            <option
-                                x-bind:value="version.url"
-                                x-bind:selected="version.code === current"
-                                x-text="version.name"
-                            ></option>
-                        </template>
-                    </select>
+                <x-slot:icon>
+                    <x-heroicon-o-tag class="w-3 h-3 mr-2 text-gray-900 dark:text-zinc-100" />
+                </x-slot:icon>
 
-                    <span class="absolute top-0 right-2 h-full flex items-center justify-center">
-                        <x-heroicon-o-chevron-down class="w-4 h-4 text-gray-900 dark:text-zinc-400" />
-                    </span>
-                </div>
-            </div>
+                <x-slot:select
+                    class="bg-gray-200 dark:bg-zinc-700 text-sm"
+                    x-model="url"
+                    x-on:change="window.location.href = url"
+                >
+                    <template x-for="version in versions">
+                        <option
+                            x-bind:value="version.url"
+                            x-bind:selected="version.code === current"
+                            x-text="version.name"
+                        ></option>
+                    </template>
+                </x-slot:select>
 
-            <noscript>
-                <div class="flex justify-end -mx-2">
-                    <div class="mx-2 px-2 py-1 text-sm border border-zinc-400 rounded-full">
-                        <details class="relative">
-                            <summary class="flex items-center no-marker w-24 px-2">
-                                <span class="flex-grow">
-                                    {{ $pathInfo->version }}
-                                </span>
-                                <x-heroicon-o-chevron-down class="w-4 h-4 text-gray-900" />
-                            </summary>
-
-                            <ul class="absolute top-full w-24 mt-1 px-2 py-1 border border-zinc-400 border-t-0 bg-gray-200 rounded-b">
-                                @foreach($page->versions() as $version)
-                                    <li class="text-sm">
-                                        @if ($version['code'] === $pathInfo->version)
-                                            {{ $version['name'] }}
-                                        @else
-                                            <a
-                                                href="{{ $version['url'] }}"
-                                                class="rounded underline hover:no-underline"
-                                            >
-                                                {{ $version['name'] }}
-                                            </a>
-                                        @endif
-                                    </li>
-                                @endforeach
-                            </ul>
-                        </details>
-                    </div>
-                </div>
-            </noscript>
+                <x-slot:current class="w-24">{{ $page->version() }}</x-slot:current>
+                <x-slot:noscriptList class="w-24 bg-gray-200 dark:bg-zinc-700">
+                    @foreach($page->versions() as $version)
+                        <li class="text-sm">
+                            @if ($version['code'] === $pathInfo->version)
+                                {{ $version['name'] }}
+                            @else
+                                <a
+                                    href="{{ $version['url'] }}"
+                                    class="rounded underline hover:no-underline"
+                                >
+                                    {{ $version['name'] }}
+                                </a>
+                            @endif
+                        </li>
+                    @endforeach
+                </x-slot:noscriptList>
+            </x-icon-dropdown>
         </div>
 
         <x-doc-sidebar class="sidebar flex-grow overflow-y-auto py-4 px-6" :page="$page" />
