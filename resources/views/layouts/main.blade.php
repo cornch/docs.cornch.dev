@@ -85,7 +85,7 @@
 </header>
 
 <div
-    class="md:h-screen flex flex-col md:flex-row justify-center items-stretch md:-mx-2 md:pt-14"
+    class="md:h-screen flex flex-col md:flex-row justify-center items-stretch md:pt-14"
     x-data="{show_menu: window.innerWidth > 768}"
     x-on:keyup.m.window="show_menu = !show_menu"
     x-transition
@@ -109,7 +109,7 @@
     </button>
 
     <aside
-        class="flex flex-col md:w-1/5 mb-16 md:mb-0 md:mx-2 bg-gray-200 dark:bg-zinc-700"
+        class="flex flex-col md:w-1/5 mb-16 md:mb-0 bg-gray-200 dark:bg-zinc-700"
         x-show="show_menu"
     >
         <template x-teleport="body">
