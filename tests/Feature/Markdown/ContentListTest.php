@@ -13,16 +13,7 @@ it('parses content list', function () {
 _MD
 )->getContent();
 
-    $expected = '#
-        <div\s+class="content-list">[\w\W]*?
-            <ul>[\w\W]*?
-                <li>list\sitem</li>[\w\W]*?
-                <li>list\s2</li>[\w\W]*?
-            </ul>[\w\W]*?
-        </div>
-    #ix';
-
-    expect($html)->toMatch($expected);
+    expect($html)->toMatchSnapshot();
 });
 
 it('parses content list with id', function () {
@@ -36,14 +27,5 @@ it('parses content list with id', function () {
 _MD
     )->getContent();
 
-    $expected = '#
-        <div\s+id="test-content-list"\s+class="content-list">[\w\W]*?
-            <ul>[\w\W]*?
-                <li>list\sitem</li>[\w\W]*?
-                <li>list\s2</li>[\w\W]*?
-            </ul>[\w\W]*?
-        </div>
-    #ix';
-
-    expect($html)->toMatch($expected);
+    expect($html)->toMatchSnapshot();
 });

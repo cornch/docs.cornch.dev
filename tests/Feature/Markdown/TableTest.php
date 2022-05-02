@@ -10,5 +10,5 @@ it('should have a wrapper on table', function () {
 _MARKDOWN
     )->getContent();
 
-    expect(str_replace("\n", '', $html))->toBe('<div class="table__wrapper"><table><thead><tr><th>header 1</th><th>header 2</th></tr></thead><tbody><tr><td>cell 1</td><td>cell 2</td></tr></tbody></table></div>');
+    expect($html)->toMatchSnapshot();
 });
