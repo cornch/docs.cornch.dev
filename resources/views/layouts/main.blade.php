@@ -20,15 +20,16 @@
 </head>
 
 <body>
-<header class="fixed w-full">
-    <div class="container max-w-5xl mx-auto px-6 bg-white dark:bg-zinc-800 antialiased">
-        <nav class="flex flex-wrap items-center justify-between py-1">
-            <div class="inline-flex items-center -mx-2">
-                <x-logo class="w-12 mx-2" />
+<header class="md:fixed w-full">
+    <div class="container max-w-5xl mx-auto md:px-6 bg-white dark:bg-zinc-800 antialiased">
+        <nav class="flex flex-wrap items-center justify-between md:py-1">
+            <x-logo class="w-12 mx-4" />
+
+            <h1 class="flex-grow w-full md:w-auto flex items-center order-3 md:order-none md:-mx-2 py-2 px-4 md:px-0 bg-gray-100 dark:bg-zinc-700 md:bg-transparent">
                 @empty ($pathInfo?->doc)
-                    <a href="/" class="block mx-2 text-xl lg:inline-block mr-12 font-black font-mono">\Cornch\Docs::class</a>
+                    <a href="/" class="block mx-2 md:text-xl lg:inline-block mr-12 font-black font-mono">\Cornch\Docs::class</a>
                 @else
-                    <span class="flex lg:inline-flex mx-2 text-xl mr-12 font-black font-mono hover:text-gray-600">
+                    <span class="flex lg:inline-flex mx-2 md:text-xl mr-12 font-black font-mono hover:text-gray-600">
                         <a href="{{ url('/') }}" class="hover:text-red-400 transition-colors">\Cornch\Docs</a>
                         <a
                           href="{{ route('docs.show', ['locale' => $pathInfo->locale, 'doc' => $pathInfo->doc, 'version' => $pathInfo->version, 'page' => $page->loader->config['index']]) }}"
@@ -37,10 +38,10 @@
                         <a href="{{ url()->current() }}" class="hover:text-red-400 transition-colors">\{{ str($pathInfo->page)->camel()->ucfirst() }}</a>::class</a>
                     </span>
                 @endempty
-            </div>
+            </h1>
 
             <div
-                class="flex group"
+                class="flex group mx-4 md:mx-0"
                 x-data="{{ Js::from(['current' => $pathInfo->locale, 'url' => '', 'locales' => $page->locales()]) }}"
                 x-cloak
             >
@@ -101,17 +102,37 @@
     </div>
 </header>
 
-<div class="h-screen flex flex-col md:flex-row justify-center items-stretch md:-mx-2 pt-14">
+<div
+    class="md:h-screen flex flex-col md:flex-row justify-center items-stretch md:-mx-2 md:pt-14"
+    x-data="{show_menu: window.innerWidth > 768}"
+    x-on:keyup.m.window="show_menu = !show_menu"
+    x-transition
+>
+    <button
+        type="button"
+        class="text-center flex md:hidden items-center justify-between px-4 py-2 border-b border-gray-300 dark:border-zinc-700"
+        x-show="!show_menu"
+        x-on:click="show_menu = true"
+        x-cloak
+    >
+        <span class="inline-flex items-center justify-center">
+            <x-heroicon-o-menu class="w-4 h-4 mr-2" />
+            {{ __('Show Menu') }}
+        </span>
+
+        <span class="inline-flex items-center justify-center">
+            <x-heroicon-o-tag class="w-4 h-4 mr-2" />
+            {{ $page->version() }}
+        </span>
+    </button>
+
     <aside
-        class="hidden md:flex flex-col md:w-1/5 mx-6 mb-16 md:mb-0 md:mx-2 bg-gray-200 dark:bg-zinc-700"
-        x-data="{show_menu: true}"
+        class="flex flex-col md:w-1/5 mb-16 md:mb-0 md:mx-2 bg-gray-200 dark:bg-zinc-700"
         x-show="show_menu"
-        x-on:keyup.m.window="show_menu = !show_menu"
-        x-transition
     >
         <template x-teleport="body">
             <button
-                type="button" class="fixed top-0 left-0 h-full flex items-center justify-center"
+                type="button" class="fixed top-0 left-0 h-full hidden md:flex items-center justify-center"
                 x-show="!show_menu"
                 x-on:click="show_menu = true"
                 x-transition
@@ -124,7 +145,7 @@
             </button>
         </template>
 
-        <div class="py-4 border-b border-gray-300 dark:border-zinc-800 flex flex-col items-center justify-center">
+        <div class="py-4 px-6 border-b border-gray-300 dark:border-zinc-800 flex flex-col items-center justify-center">
             <x-doc-logo class="h-16" :page="$page" />
 
             <div
@@ -186,7 +207,7 @@
             </noscript>
         </div>
 
-        <x-doc-sidebar class="sidebar flex-grow overflow-y-auto py-4" :page="$page" />
+        <x-doc-sidebar class="sidebar flex-grow overflow-y-auto py-4 px-6" :page="$page" />
 
         <button
             class="
@@ -197,14 +218,16 @@
             "
             x-on:click="show_menu = false"
         >
-            <x-heroicon-o-chevron-double-left class="h-4 w-4 mr-2" /> {{ __('Hide Menu') }}
+            <x-heroicon-o-chevron-double-left class="hidden md:inline h-4 w-4 mr-2" />
+            <x-heroicon-o-chevron-double-up class="inline md:hidden h-4 w-4 mr-2" />
+            {{ __('Hide Menu') }}
         </button>
     </aside>
 
-    <div class="overflow-x-hidden container md:max-w-5xl py-6 mx-12">
+    <div class="overflow-x-hidden container md:max-w-5xl py-12 md:py-6 px-6 md:px-12">
         @yield('content')
 
-        <footer class="px-6 mb-16">
+        <footer class="md:px-6 mb-16">
             <div class="w-full flex py-4">
                 <div class="px-4 flex justify-center items-center">
                     <a href="https://cornch.dev/" target="_blank">

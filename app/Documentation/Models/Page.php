@@ -35,10 +35,15 @@ final class Page
             ->toArray());
     }
 
+    public function version(): ?string
+    {
+        return $this->loader->config['versions'][$this->pathInfo->version] ?? null;
+    }
+
     public function versions(): array
     {
         return once(fn () => collect($this->loader->config['versions'])
-            ->map(fn (string $code, string $name) => [
+            ->map(fn (string $name, string $code) => [
                 'name' => $name,
                 'code' => $code,
                 'url' => route('docs.show', [

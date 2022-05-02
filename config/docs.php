@@ -25,7 +25,7 @@ return [
             'versions' => [
                 '8.x' => '8.x',
                 '9.x' => '9.x',
-                'Master' => 'master',
+                'master' => 'Master',
             ],
             'link-fixer' => function (string $url): string {
                 return preg_replace(
