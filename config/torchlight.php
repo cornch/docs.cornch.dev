@@ -9,6 +9,10 @@ return [
     // Cache blocks for 30 days.
     'cache_seconds' => env('TORCHLIGHT_CACHE_TTL', 60 * 60 * 24 * 30),
 
+    // Request timeout in 20 seconds. For pages with many code blocks,
+    // timeout will cause Torchlight to stop work.
+    'request_timeout' => env('TORCHLIGHT_TIMEOUT', 20),
+
     // Which theme you want to use. You can find all of the themes at
     // https://torchlight.dev/docs/themes.
     // 'theme' => env('TORCHLIGHT_THEME', 'material-theme-palenight'),
