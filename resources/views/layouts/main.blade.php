@@ -191,7 +191,12 @@
         </button>
     </aside>
 
-    <div class="overflow-x-hidden container md:max-w-5xl py-12 md:py-6 px-6 md:px-12">
+    <div
+        id="content"
+        class="overflow-x-hidden container md:max-w-5xl py-12 md:py-6 px-6 md:px-12"
+        x-data="{ current: 0, display_zone: 1000 }"
+        x-on:scroll.throttle.100ms="current = $el.scrollTop"
+    >
         @yield('content')
 
         <footer class="md:px-6 mb-16">
@@ -209,6 +214,18 @@
                 </div>
             </div>
         </footer>
+
+        <button
+            type="button"
+            class="fixed right-12 bottom-12 p-4 rounded bg-white bg-opacity-70 backdrop-blur shadow"
+            aria-hidden="true"
+            title="{{ __('Back to Top') }}"
+            x-show="current > display_zone"
+            x-on:click="$root.scrollTo({ left: 0, top: 0, behavior: 'smooth' });current=0"
+            x-transition
+        >
+            <x-heroicon-o-arrow-up class="w-6 h-6" />
+        </button>
     </div>
 </div>
 
