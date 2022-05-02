@@ -11,7 +11,7 @@
 @endunless
 
 @section('content')
-    <article class="content language-php">
+    <article class="content language-php mb-32">
         {{ $page->content }}
     </article>
 
