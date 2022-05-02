@@ -177,7 +177,7 @@
                     </a>
                 </div>
                 <div class="text-gray-600 dark:text-gray-500 text-sm">
-                    <p class="mb-4">Code Hightlight Provided by <a href="https://torchlight.dev/" class="hover:text-gray-500 underline hover:no-underline" target="_blank" rel="noopener noreferrer">Torchlight</a></p>
+                    <p class="mb-4">Code Highlight Provided by <a href="https://torchlight.dev/" class="hover:text-gray-500 underline hover:no-underline" target="_blank" rel="noopener noreferrer">Torchlight</a></p>
 
                     <p class="mb-2"><a href="https://github.com/cornch/docs.cornch.dev/blob/main/LICENSE" class="hover:text-gray-500 underline hover:no-underline" target="_blank" rel="nofollow noopener">License</a> | <a href="https://github.com/cornch/docs.cornch.dev" class="hover:text-gray-500 underline hover:no-underline" target="_blank" rel="nofollow noopener">Source Code</a></p>
                     <p>cornch.dev &copy; {{ date('Y') }} All Rights Reserved.</p>
