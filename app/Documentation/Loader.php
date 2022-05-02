@@ -11,6 +11,7 @@ use App\Documentation\Models\PathInfo;
 use App\Exceptions\LocaleNotFoundException;
 use App\Utils\Pipe;
 use Closure;
+use HTMLMin\HTMLMin\Facades\HTMLMin;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\HtmlString;
@@ -113,7 +114,7 @@ final class Loader
                     $markdown = preg_replace('#<style>[\w\W]+?</style>#', '', $markdown);
 
                     $html = (new DocumentationConverter($this->config['link-fixer']))->convert($markdown)->getContent();
-                    // $html = app('htmlmin')->html($html);
+                    $html = HTMLMin::html($html);
                     $html = $this->replaceStubStrings($html);
 
                     return new HtmlString($html);
@@ -165,7 +166,7 @@ final class Loader
                 $markdown = $this->replaceStubStrings($markdown);
 
                 $html = (new NavigationConverter($this->config['link-fixer']))->convert($markdown)->getContent();
-                // $html = app('htmlmin')->html($html);
+                $html = HTMLMin::html($html);
 
                 return $this->replaceStubStrings($html);
             },
