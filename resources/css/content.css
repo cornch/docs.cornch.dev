@@ -61,7 +61,7 @@
         @apply text-gray-700 dark:text-gray-400 text-base leading-loose;
     }
 
-    & > p, ul, ol, pre > code {
+    & > p, ul, ol {
         @apply mb-[2em];
     }
 
@@ -84,6 +84,13 @@
 
     code {
         @apply text-gray-900 dark:text-gray-200 font-mono;
+    }
+    pre {
+        @apply -mx-6 mb-12 p-4 bg-gray-100 dark:bg-zinc-700 rounded;
+
+        & > code {
+            @apply rounded shadow-sm;
+        }
     }
 
     :not(pre) > code {
