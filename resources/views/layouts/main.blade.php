@@ -20,88 +20,111 @@
 </head>
 
 <body>
-<header class="container max-w-5xl mx-auto px-6 bg-white dark:bg-zinc-800 antialiased">
-    <nav class="flex flex-wrap items-center justify-between py-1">
-        <div class="inline-flex items-center -mx-2">
-            <x-logo class="w-12 mx-2" />
-            @empty ($pathInfo?->doc)
-                <a href="/" class="block mx-2 text-xl lg:inline-block mr-12 font-black font-mono">\Cornch\Docs::class</a>
-            @else
-                <span class="flex lg:inline-flex mx-2 text-xl mr-12 font-black font-mono hover:text-gray-600">
-                    <a href="{{ url('/') }}" class="hover:text-red-400 transition-colors">\Cornch\Docs</a>
-                    <a
-                      href="{{ route('docs.show', ['locale' => $pathInfo->locale, 'doc' => $pathInfo->doc, 'version' => $pathInfo->version, 'page' => $page->loader->config['index']]) }}"
-                      class="hover:text-red-400 transition-colors"
-                    >\{{ str($pathInfo->doc)->camel()->ucfirst() }}</a>
-                    <a href="{{ url()->current() }}" class="hover:text-red-400 transition-colors">\{{ str($pathInfo->page)->camel()->ucfirst() }}</a>::class</a>
-                </span>
-            @endempty
-        </div>
-
-        <div
-            class="flex group"
-            x-data="{{ Js::from(['current' => $pathInfo->locale, 'url' => '', 'locales' => $page->locales()]) }}"
-            x-cloak
-        >
-            <div class="flex justify-center items-center pl-4 border border-r-0 border-zinc-400 group-hover:border-red-300 text-gray-900 rounded-l-full" aria-hidden="true">
-                <x-heroicon-o-globe class="w-4 h-4 mr-2 text-gray-900 dark:text-zinc-100" />
+<header class="fixed w-full">
+    <div class="container max-w-5xl mx-auto px-6 bg-white dark:bg-zinc-800 antialiased">
+        <nav class="flex flex-wrap items-center justify-between py-1">
+            <div class="inline-flex items-center -mx-2">
+                <x-logo class="w-12 mx-2" />
+                @empty ($pathInfo?->doc)
+                    <a href="/" class="block mx-2 text-xl lg:inline-block mr-12 font-black font-mono">\Cornch\Docs::class</a>
+                @else
+                    <span class="flex lg:inline-flex mx-2 text-xl mr-12 font-black font-mono hover:text-gray-600">
+                        <a href="{{ url('/') }}" class="hover:text-red-400 transition-colors">\Cornch\Docs</a>
+                        <a
+                          href="{{ route('docs.show', ['locale' => $pathInfo->locale, 'doc' => $pathInfo->doc, 'version' => $pathInfo->version, 'page' => $page->loader->config['index']]) }}"
+                          class="hover:text-red-400 transition-colors"
+                        >\{{ str($pathInfo->doc)->camel()->ucfirst() }}</a>
+                        <a href="{{ url()->current() }}" class="hover:text-red-400 transition-colors">\{{ str($pathInfo->page)->camel()->ucfirst() }}</a>::class</a>
+                    </span>
+                @endempty
             </div>
-            <div class="relative">
-                <select
-                    class="w-full pr-8 py-1 border border-l-0 border-zinc-400 group-hover:border-red-300 bg-white dark:bg-zinc-800 text-gray-900 dark:text-zinc-100 transition-colors rounded-r-full appearance-none"
-                    x-model="url"
-                    x-on:change="window.location.href = url"
-                >
-                    <template x-for="locale in locales">
-                        <option
-                            x-bind:value="locale.url"
-                            x-bind:selected="locale.code === current"
-                            x-text="locale.name"
-                        ></option>
-                    </template>
-                </select>
 
-                <span class="absolute top-0 right-4 h-full flex items-center justify-center">
-                    <x-heroicon-o-chevron-down class="w-4 h-4 text-gray-900 dark:text-zinc-300" />
-                </span>
+            <div
+                class="flex group"
+                x-data="{{ Js::from(['current' => $pathInfo->locale, 'url' => '', 'locales' => $page->locales()]) }}"
+                x-cloak
+            >
+                <div class="flex justify-center items-center pl-4 border border-r-0 border-zinc-400 group-hover:border-red-300 text-gray-900 rounded-l-full" aria-hidden="true">
+                    <x-heroicon-o-globe class="w-4 h-4 mr-2 text-gray-900 dark:text-zinc-100" />
+                </div>
+                <div class="relative">
+                    <select
+                        class="w-full pr-8 py-1 border border-l-0 border-zinc-400 group-hover:border-red-300 bg-white dark:bg-zinc-800 text-gray-900 dark:text-zinc-100 transition-colors rounded-r-full appearance-none"
+                        x-model="url"
+                        x-on:change="window.location.href = url"
+                    >
+                        <template x-for="locale in locales">
+                            <option
+                                x-bind:value="locale.url"
+                                x-bind:selected="locale.code === current"
+                                x-text="locale.name"
+                            ></option>
+                        </template>
+                    </select>
+
+                    <span class="absolute top-0 right-4 h-full flex items-center justify-center">
+                        <x-heroicon-o-chevron-down class="w-4 h-4 text-gray-900 dark:text-zinc-300" />
+                    </span>
+                </div>
             </div>
-        </div>
-        <noscript>
-            <div class="mx-2 px-2 py-1 border border-zinc-400 rounded-full">
-                <details class="relative">
-                    <summary class="flex items-center no-marker w-48 px-2">
-                        <x-heroicon-o-globe class="w-4 h-4 mr-2 text-gray-900"></x-heroicon-o-globe>
-                        <span class="flex-grow">
-                            {{ $page->locales()[$pathInfo->locale]['name'] }}
-                        </span>
-                        <x-heroicon-o-chevron-down class="w-4 h-4 text-gray-900" />
-                    </summary>
+            <noscript>
+                <div class="mx-2 px-2 py-1 border border-zinc-400 rounded-full">
+                    <details class="relative">
+                        <summary class="flex items-center no-marker w-48 px-2">
+                            <x-heroicon-o-globe class="w-4 h-4 mr-2 text-gray-900"></x-heroicon-o-globe>
+                            <span class="flex-grow">
+                                {{ $page->locales()[$pathInfo->locale]['name'] }}
+                            </span>
+                            <x-heroicon-o-chevron-down class="w-4 h-4 text-gray-900" />
+                        </summary>
 
-                    <ul class="absolute top-full right-0 mt-1 mr-2 px-2 py-1 w-36 border border-t-0 border-zinc-400 rounded-b">
-                        @foreach($page->locales() as $code => ['url' => $url, 'name' => $name])
-                            <li class="text-sm my-1 py-1">
-                                @if ($code === $pathInfo->locale)
-                                    {{ $name }}
-                                @else
-                                    <a
-                                        href="{{ $url }}"
-                                        class="rounded underline hover:no-underline"
-                                    >
+                        <ul class="absolute top-full right-0 mt-1 mr-2 px-2 py-1 w-36 border border-t-0 border-zinc-400 rounded-b">
+                            @foreach($page->locales() as $code => ['url' => $url, 'name' => $name])
+                                <li class="text-sm my-1 py-1">
+                                    @if ($code === $pathInfo->locale)
                                         {{ $name }}
-                                    </a>
-                                @endif
-                            </li>
-                        @endforeach
-                    </ul>
-                </details>
-            </div>
-        </noscript>
-    </nav>
+                                    @else
+                                        <a
+                                            href="{{ $url }}"
+                                            class="rounded underline hover:no-underline"
+                                        >
+                                            {{ $name }}
+                                        </a>
+                                    @endif
+                                </li>
+                            @endforeach
+                        </ul>
+                    </details>
+                </div>
+            </noscript>
+        </nav>
+    </div>
 </header>
 
-<div class="flex flex-col md:flex-row justify-between items-stretch md:-mx-2">
-    <aside class="bg-gray-200 dark:bg-zinc-700 md:block hidden md:w-1/5 mx-6 mb-16 md:mb-0 md:mx-2">
-        <div class="mb-4 py-4 border-b border-gray-300 dark:border-zinc-800 flex flex-col items-center justify-center">
+<div class="h-screen flex flex-col md:flex-row justify-center items-stretch md:-mx-2 pt-14">
+    <aside
+        class="hidden md:flex flex-col md:w-1/5 mx-6 mb-16 md:mb-0 md:mx-2 bg-gray-200 dark:bg-zinc-700"
+        x-data="{show_menu: true}"
+        x-show="show_menu"
+        x-on:keyup.m.window="show_menu = !show_menu"
+        x-transition
+    >
+        <template x-teleport="body">
+            <button
+                type="button" class="fixed top-0 left-0 h-full flex items-center justify-center"
+                x-show="!show_menu"
+                x-on:click="show_menu = true"
+                x-transition
+            >
+                <div class="flex items-center justify-center pl-1 pr-2 py-4 rounded-r bg-gray-200 hover:bg-gray-100 dark:bg-zinc-600 dark:hover:bg-zinc-500 writing-rl transition-colors">
+                    {{ __('Show Menu') }}
+
+                    <x-heroicon-o-chevron-double-right class="w-4 h-4 mt-1" />
+                </div>
+            </button>
+        </template>
+
+        <div class="py-4 border-b border-gray-300 dark:border-zinc-800 flex flex-col items-center justify-center">
             <x-doc-logo class="h-16" :page="$page" />
 
             <div
@@ -163,7 +186,19 @@
             </noscript>
         </div>
 
-        <x-doc-sidebar class="sidebar" :page="$page" />
+        <x-doc-sidebar class="sidebar flex-grow overflow-y-auto py-4" :page="$page" />
+
+        <button
+            class="
+                flex items-center justify-center
+                p-2 border-t border-gray-300 dark:border-zinc-800
+                bg-gray-200 hover:bg-gray-100 dark:bg-zinc-700 hover:dark:bg-zinc-600
+                transition-colors
+            "
+            x-on:click="show_menu = false"
+        >
+            <x-heroicon-o-chevron-double-left class="h-4 w-4 mr-2" /> {{ __('Hide Menu') }}
+        </button>
     </aside>
 
     <div class="overflow-x-hidden container md:max-w-5xl py-6 mx-12">

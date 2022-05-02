@@ -1,3 +1,5 @@
+const plugin = require('tailwindcss/plugin')
+
 module.exports = {
   content: [
     'app/CommonMark/Block/Renderer/**/*.php',
@@ -47,5 +49,17 @@ module.exports = {
         }
     },
   },
-  plugins: [],
+  plugins: [
+      plugin(({ addUtilities }) => addUtilities({
+          '.writing-tb': {
+              'writing-mode': 'horizontal-tb',
+          },
+          '.writing-rl': {
+              'writing-mode': 'vertical-rl',
+          },
+          '.writing-lr': {
+              'writing-mode': 'vertical-lr',
+          },
+      }))
+  ],
 }
