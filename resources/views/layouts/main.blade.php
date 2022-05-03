@@ -1,15 +1,18 @@
+<?php /** @var \App\Documentation\Models\Page $page */ ?>
+<?php /** @var \App\Documentation\Models\PathInfo $pathInfo */ ?>
+
 <!doctype html>
-@if (app('view')->hasSection('lang'))
+@if (View::hasSection('lang'))
     <html lang="@yield('lang')">
 @else
-    <html>
+    <html lang="en">
 @endif
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    @if(app('view')->hasSection('title'))
+    @if(View::hasSection('title'))
         <title>@yield('title') - {{ config('app.name') }}</title>
     @else
         <title>{{ config('app.name') }}</title>
@@ -32,17 +35,17 @@
                     <span class="flex lg:inline-flex mx-2 md:text-xl mr-12 font-black font-mono hover:text-gray-600">
                         <a href="{{ url('/') }}" class="hover:text-red-400 transition-colors">\Cornch\Docs</a>
                         <a
-                          href="{{ route('docs.show', ['locale' => $pathInfo->locale, 'doc' => $pathInfo->doc, 'version' => $pathInfo->version, 'page' => $page->loader->config['index']]) }}"
+                          href="{{ route('docs.show', ['locale' => $pathInfo->locale->value, 'doc' => $pathInfo->doc, 'version' => $pathInfo->version, 'page' => $page->loader->config['index']]) }}"
                           class="hover:text-red-400 transition-colors"
                         >\{{ str($pathInfo->doc)->camel()->ucfirst() }}</a>
-                        <a href="{{ url()->current() }}" class="hover:text-red-400 transition-colors">\{{ str($pathInfo->page)->camel()->ucfirst() }}</a>::class</a>
+                        <a href="{{ url()->current() }}" class="hover:text-red-400 transition-colors">\{{ str($pathInfo->page)->camel()->ucfirst() }}</a>::class
                     </span>
                 @endempty
             </h1>
 
             <x-icon-dropdown
                 class="mx-4 md:mx-0"
-                x-data="{{ Js::from(['current' => $pathInfo->locale, 'url' => '', 'locales' => $page->locales()]) }}"
+                x-data="{{ Js::from(['current' => $pathInfo->locale->value, 'url' => '', 'locales' => $page->locales()]) }}"
                 x-cloak
             >
                 <x-slot:icon>
@@ -62,7 +65,7 @@
                     </template>
                 </x-slot:select>
 
-                <x-slot:current class="w-48">{{ $page->locales()[$pathInfo->locale]['name'] }}</x-slot:current>
+                <x-slot:current class="w-48">{{ $page->locales()[$pathInfo->locale->value]['name'] }}</x-slot:current>
                 <x-slot:noscriptList class="w-36">
                     @foreach($page->locales() as $code => ['url' => $url, 'name' => $name])
                         <li class="text-sm my-1 py-1">
@@ -199,7 +202,7 @@
     >
         @yield('content')
 
-        <footer class="md:px-6 mb-16">
+        <footer class="md:px-6 mb-16" lang="en">
             <div class="w-full flex py-4">
                 <div class="px-4 flex justify-center items-center">
                     <a href="https://cornch.dev/" target="_blank">

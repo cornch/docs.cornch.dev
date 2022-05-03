@@ -17,6 +17,5 @@ use Illuminate\Support\Facades\Route;
 Route::view('/', 'index');
 Route::get('{locale}/{doc}/{version}/{page}', DocumentationController::class)
     ->name('docs.show')
-    ->where('locale', '[\w]+([\-_]\w+){0,2}')
     ->where('doc', 'laravel') // @TODO: support more docs
     ->where('page', '[\w\-_/]+');

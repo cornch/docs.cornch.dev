@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace App\Documentation\Models;
 
+use App\Enums\Locale;
 use JetBrains\PhpStorm\ArrayShape;
 
 final class PathInfo
 {
     public function __construct(
         public readonly string $doc,
-        public readonly string $locale,
+        public readonly Locale $locale,
         public readonly string $version,
         public readonly string $page,
     ) {
@@ -21,7 +22,7 @@ final class PathInfo
     {
         return [
             'doc' => $this->doc,
-            'locale' => $this->locale,
+            'locale' => $this->locale->value,
             'version' => $this->version,
             'page' => $this->page,
         ];

@@ -47,7 +47,7 @@ final class Loader
     ) {
         $this->config = config("docs.docsets.{$this->pathInfo->doc}");
 
-        if (!array_key_exists($this->pathInfo->locale, $this->config['locales'])) {
+        if (!array_key_exists($this->pathInfo->locale->value, $this->config['locales'])) {
             throw new LocaleNotFoundException();
         }
     }
@@ -61,7 +61,7 @@ final class Loader
             ['{{doc}}', '{{locale}}', '{{version}}', '{{page}}'],
             [
                 $replace['doc'] ?? $this->pathInfo->doc,
-                $replace['locale'] ?? $this->pathInfo->locale,
+                $replace['locale'] ?? $this->pathInfo->locale->value,
                 $replace['version'] ?? $this->pathInfo->version,
                 $replace['page'] ?? $this->pathInfo->page,
             ],
@@ -79,7 +79,7 @@ final class Loader
 
     public function getDocName(): string
     {
-        return $this->config['locales'][$this->pathInfo->locale]['title'];
+        return $this->config['locales'][$this->pathInfo->locale->value]['title'];
     }
 
     public function getLocales(): array
@@ -162,7 +162,7 @@ final class Loader
             $this->getDocHash('nav'),
             self::CACHE_TTL,
             function () {
-                $markdown = $this->getFile($this->replaceStubStrings($this->config['locales'][$this->pathInfo->locale]['navigation']));
+                $markdown = $this->getFile($this->replaceStubStrings($this->config['locales'][$this->pathInfo->locale->value]['navigation']));
                 $markdown = $this->replaceStubStrings($markdown);
 
                 $html = (new NavigationConverter($this->config['link-fixer']))->convert($markdown)->getContent();
@@ -181,6 +181,6 @@ final class Loader
 
     private function resolveDocPath(): string
     {
-        return $this->replaceStubStrings($this->config['locales'][$this->pathInfo->locale]['path']);
+        return $this->replaceStubStrings($this->config['locales'][$this->pathInfo->locale->value]['path']);
     }
 }

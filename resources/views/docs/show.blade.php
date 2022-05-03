@@ -2,7 +2,7 @@
 
 @section('title', $page->title)
 
-@section('lang', $pathInfo->locale)
+@section('lang', $pathInfo->locale->toBcp47())
 
 @unless(empty($page->styles))
     @push('header-styles')
