@@ -193,7 +193,7 @@
 
     <div
         id="content"
-        class="overflow-x-hidden container md:max-w-5xl py-12 md:py-6 px-6 md:px-12"
+        class="overflow-x-hidden container md:max-w-5xl mx-auto py-12 md:py-6 px-6 md:px-12"
         x-data="{ current: 0, display_zone: 1000 }"
         x-on:scroll.throttle.100ms="current = $el.scrollTop"
     >

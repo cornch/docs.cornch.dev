@@ -86,10 +86,10 @@
         @apply text-gray-900 dark:text-gray-200 font-mono;
     }
     pre {
-        @apply -mx-6 mb-12 p-4 bg-gray-100 dark:bg-zinc-700 rounded;
+        @apply -mx-6 mb-12 py-4 sm:px-4 bg-gray-100 dark:bg-zinc-700 sm:rounded;
 
         & > code {
-            @apply rounded shadow-sm;
+            @apply sm:rounded shadow-sm;
         }
     }
 
