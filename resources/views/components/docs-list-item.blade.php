@@ -6,7 +6,7 @@
     </div>
     <div class="md:w-full mx-2">
         <ul class="list-none">
-            @foreach(config("docs.docsets.{$doc}.versions") as $versionName => $version)
+            @foreach(config("docs.docsets.{$doc}.versions") as $version => $versionName)
                 <li class="mb-4">
                     <p class="mb-2"><b class="font-bold">{{ $versionName }}</b></p>
 
