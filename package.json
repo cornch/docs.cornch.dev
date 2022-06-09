@@ -13,7 +13,7 @@
         "autoprefixer": "^10.4.2",
         "axios": "^0.27.2",
         "babel-plugin-prismjs": "^2.1.0",
-        "laravel-mix": "^6.0.41",
+        "laravel-mix": "^6.0.49",
         "postcss": "^8.4.6",
         "postcss-import": "^14.0.2",
         "postcss-preset-env": "^7.3.1"
