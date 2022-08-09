@@ -10,4 +10,10 @@ it('parses callout', function () {
         ->getContent();
 
     expect($html)->toMatchSnapshot();
+
+    $html = $converter
+        ->convert('> **Note** 123')
+        ->getContent();
+
+    expect($html)->toMatchSnapshot();
 });

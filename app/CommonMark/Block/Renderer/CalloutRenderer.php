@@ -18,12 +18,12 @@ final class CalloutRenderer implements NodeRendererInterface
         Callout::assertInstanceOf($node);
 
         $image = match ($node->type) {
-            'note' => new HtmlElement(
+            'note', 'Warning' => new HtmlElement(
                 'svg',
                 ['class' => 'opacity-75 ml-2 md:ml-0 h-4 md:h-8', 'width' => '6', 'height' => '35', 'viewBox' => '0 0 6 35', 'xmlns' => 'http://www.w3.org/2000/svg'],
                 '<title>exclamation</title><path d="M0 29h6v6H0v-6zM0 0h6v24H0V0z" fill="#FFF" fill-rule="nonzero"/>'
             ),
-            'tip' => new HtmlElement(
+            'tip', 'Note' => new HtmlElement(
                 'svg',
                 ['class' => 'opacity-75 h-4 md:h-8', 'width' => '28', 'height' => '40', 'viewBox' => '0 0 28 40', 'xmlns' => 'http://www.w3.org/2000/svg'],
                 '<title>lightbulb</title><path d="M12 28h4v-8h-4v8zM8 40h12v-8H8v8zm13.98-14.52c-1.001.705-1.661 1.545-1.98 2.52H8c-.416-.959-1.076-1.799-1.98-2.52A13.99 13.99 0 0 1 0 14C0 6.272 6.272 0 14 0s14 6.272 14 14a13.99 13.99 0 0 1-6.02 11.48z" fill="#FFF" fill-rule="nonzero"/>'
@@ -36,8 +36,8 @@ final class CalloutRenderer implements NodeRendererInterface
         };
 
         $imageWrapper = match ($node->type) {
-            'note' => new HtmlElement('div', ['class' => 'callout__img bg-red-600'], $image),
-            'tip' => new HtmlElement('div', ['class' => 'callout__img bg-purple-600'], $image),
+            'note', 'Warning' => new HtmlElement('div', ['class' => 'callout__img bg-red-600'], $image),
+            'tip', 'Note' => new HtmlElement('div', ['class' => 'callout__img bg-purple-600'], $image),
             'video', 'laracasts' => new HtmlElement('div', ['class' => 'callout__img bg-blue-600'], $image),
         };
 
@@ -50,8 +50,8 @@ final class CalloutRenderer implements NodeRendererInterface
 
         return new HtmlElement('div', [
             'class' => match ($node->type) {
-                'note' => 'callout border-red-600',
-                'tip' => 'callout border-purple-600',
+                'note', 'Warning' => 'callout border-red-600',
+                'tip', 'Note' => 'callout border-purple-600',
                 'video', 'laracasts' => 'callout border-blue-600',
             },
         ], [$imageWrapper, $childRenderer->renderNodes($node->children())]);

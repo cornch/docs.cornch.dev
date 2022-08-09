@@ -54,7 +54,7 @@ final class CalloutParser extends AbstractBlockContinueParser
     public static function createBlockStartParser(): BlockStartParserInterface
     {
         return new class () implements BlockStartParserInterface {
-            private const START_STRING = '> {';
+            private const CALLOUT_PAIRS = [['> {', '}'], ['> **', '**']];
 
             public function tryStart(Cursor $cursor, MarkdownParserStateInterface $parserState): ?BlockStart
             {
@@ -62,21 +62,25 @@ final class CalloutParser extends AbstractBlockContinueParser
                     return BlockStart::none();
                 }
 
-                if (!str_starts_with($cursor->getSubstring($cursor->getPosition()), self::START_STRING)) {
-                    return BlockStart::none();
+                foreach (self::CALLOUT_PAIRS as [$startString, $endString]) {
+                    if (!str_starts_with($cursor->getSubstring($cursor->getPosition()), $startString)) {
+                        continue;
+                    }
+
+                    $cursor->advanceBy(strlen($startString));
+
+                    // extract type
+                    $sub = $cursor->getSubstring($cursor->getPosition());
+                    $typeClosingPosition = mb_strpos($sub, $endString);
+                    $cursor->advanceBy($typeClosingPosition + 2);
+                    $cursor->advanceBySpaceOrTab();
+
+                    $type = mb_substr($sub, 0, $typeClosingPosition);
+
+                    return BlockStart::of(new CalloutParser($type))->at($cursor);
                 }
 
-                $cursor->advanceBy(strlen(self::START_STRING));
-
-                // extract type
-                $sub = $cursor->getSubstring($cursor->getPosition());
-                $typeClosingPosition = mb_strpos($sub, '}');
-                $cursor->advanceBy($typeClosingPosition + 2);
-                $cursor->advanceBySpaceOrTab();
-
-                $type = mb_substr($sub, 0, $typeClosingPosition);
-
-                return BlockStart::of(new CalloutParser($type))->at($cursor);
+                return BlockStart::none();
             }
         };
     }
