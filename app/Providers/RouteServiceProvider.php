@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Enums\Locale;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Http\Request;
@@ -47,6 +48,8 @@ final class RouteServiceProvider extends ServiceProvider
                 ->namespace($this->namespace)
                 ->group(base_path('routes/web.php'));
         });
+
+        Route::bind('locale', fn ($value) => Locale::tryFrom($value));
     }
 
     /**

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\DocumentationController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,7 +16,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::view('/', 'index');
+
+Route::get('{locale}/{doc}/{version}/{page}/comments', [CommentController::class, 'form'])
+    ->name('docs.comments.form')
+    ->where('doc', 'laravel') // @TODO: support more docs
+    ->where('page', '[\w\-_/]+?');
+
 Route::get('{locale}/{doc}/{version}/{page}', DocumentationController::class)
     ->name('docs.show')
     ->where('doc', 'laravel') // @TODO: support more docs
-    ->where('page', '[\w\-_/]+');
+    ->where('page', '[\w\-_/]+?');

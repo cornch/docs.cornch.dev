@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Documentation\Loader;
 use App\Documentation\Models\PathInfo;
 use App\Enums\Locale;
+use App\Http\Requests\DocumentationBasedRequest;
 use App\Models\Comment;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\App;
@@ -12,21 +13,20 @@ use Illuminate\Support\Str;
 
 final class DocumentationController
 {
-    public function __invoke(Locale $locale, string $doc, string $version, string $page): View
+    public function __invoke(DocumentationBasedRequest $request): View
     {
-        $pathInfo = new PathInfo($doc, $locale, $version, $page);
-        $loader = app(Loader::class, ['pathInfo' => $pathInfo]);
+        $loader = $request->getDocLoader();
 
         $comments = Comment
             ::query()
-            ->where('locale', $locale->value)
-            ->where('doc', $doc)
-            ->where('page', $page)
+            ->where('locale', $loader->pathInfo->locale->value)
+            ->where('doc', $loader->pathInfo->doc)
+            ->where('page', $loader->pathInfo->page)
             ->whereApproved()
             ->get();
 
         return view('docs.show', [
-            'pathInfo' => $pathInfo,
+            'pathInfo' => $loader->pathInfo,
             'page' => $loader->getPage(),
             'comments' => $comments,
         ]);

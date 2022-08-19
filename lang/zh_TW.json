@@ -2,5 +2,19 @@
     "Show Menu": "顯示選單",
     "Hide Menu": "隱藏選單",
     "Back to Top": "回到頂端",
-    "Comments": "留言"
+
+    "Comments": "留言",
+    "Add Comment": "新增留言",
+    "Display Name": "顯示名稱",
+    "(Required)": "（必填）",
+    "Delete Password": "刪除密碼",
+    "Content": "本文",
+    "Markdown supported.": "支援 Markdown。",
+    "If you provide a “delete password”, you will be able to delete the comment later using the password.": "如果您提供了「刪除密碼」，在留言公開之後，您將可以使用該密碼來刪除留言。",
+
+    "Captcha": "驗證碼",
+    "If you're using accessibility technology such as screen reader, or having trouble using the following captcha, you can optionally using \"hCaptcha\" for this form.": "若您使用螢幕閱讀器等輔助工具，或是無法正常閱讀上方驗證碼，您可選擇使用「hCaptcha」。",
+    "Click here to switch to hCaptcha.": "點擊此處切換至 hCaptcha。",
+    "While hCaptcha providing more accessibility, it's a third party service and requires JavaScript.": "雖然 hCaptcha 提供了更好的無障礙功能，但 hCaptcha 屬於第三方服務，且需要 JavaScript。"
+
 }
