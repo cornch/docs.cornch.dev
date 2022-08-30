@@ -24,6 +24,7 @@
         "laravel/tinker": "^2.7",
         "league/commonmark": "^2.2",
         "mews/captcha": "^3.2",
+        "scyllaly/hcaptcha": "^4.4",
         "spatie/once": "^3.0",
         "torchlight/torchlight-commonmark": "^0.5.5",
         "torchlight/torchlight-laravel": "^0.5.11",

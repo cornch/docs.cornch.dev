@@ -20,13 +20,16 @@ final class CommentController
 
     public function form(DocumentationBasedRequest $request): View
     {
+        $captchaProvider = $request->input('captcha_provider');
         $loader = $request->getDocLoader();
-        $captcha = $this->captcha->create(api: true);
 
-        return view('comments.form', [
+        $viewData = [
             'pathInfo' => $loader->pathInfo,
             'page' => $loader->getPage(),
-            'captcha' => $captcha,
-        ]);
+            'captchaProvider' => $captchaProvider,
+            'captcha' => $captchaProvider === 'hCaptcha' ? null : $this->captcha->create(api: true),
+        ];
+
+        return view('comments.form', $viewData);
     }
 }

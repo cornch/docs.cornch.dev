@@ -234,5 +234,6 @@
 
 
 <script src="{{ mix('dist/js/app.js') }}"></script>
+@stack('footer-scripts')
 </body>
 </html>
