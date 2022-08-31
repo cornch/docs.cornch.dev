@@ -15,7 +15,7 @@
         "babel-plugin-prismjs": "^2.1.0",
         "laravel-mix": "^6.0.41",
         "postcss": "^8.4.6",
-        "postcss-import": "^14.0.2",
+        "postcss-import": "^15.0.0",
         "postcss-preset-env": "^7.3.1"
     },
     "dependencies": {
