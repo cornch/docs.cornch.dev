@@ -1,30 +1,12 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss/base';
 
-@layer base {
-    @import './fonts/iosevka-cornch-web/iosevka-cornch-web.css';
+@import './fonts/iosevka-cornch-web/iosevka-cornch-web.css';
+@import './base.css';
 
-    body {
-        @apply text-gray-800;
-        @apply dark:bg-zinc-800 dark:text-white;
-    }
+@import 'tailwindcss/components';
+@import './content.css';
+@import './sidebar.css';
+@import './torchlight.css';
 
-    [x-cloak] {
-        display: none !important;
-    }
-}
-
-@layer components {
-    @import './content.css';
-    @import './sidebar.css';
-    @import './torchlight.css';
-}
-
-@layer utilities {
-    .no-marker::marker,
-    .no-marker::-webkit-details-marker {
-        display: none;
-        content: "";
-    }
-}
+@import 'tailwindcss/utilities';
+@import './utilities.css';

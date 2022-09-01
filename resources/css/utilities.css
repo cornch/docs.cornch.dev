@@ -1,0 +1,5 @@
+.no-marker::marker,
+.no-marker::-webkit-details-marker {
+    display: none;
+    content: "";
+}

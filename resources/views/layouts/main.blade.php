@@ -17,7 +17,8 @@
     @else
         <title>{{ config('app.name') }}</title>
     @endif
-    <link rel="stylesheet" href="{{ mix('dist/css/app.css') }}">
+
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     @stack('header-styles')
 </head>
@@ -234,7 +235,6 @@
     </div>
 </div>
 
-<script src="{{ mix('dist/js/app.js') }}"></script>
 @stack('footer-scripts')
 </body>
 </html>

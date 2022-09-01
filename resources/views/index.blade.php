@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ config('app.name') }}</title>
-    <link rel="stylesheet" href="{{ mix('dist/css/app.css') }}">
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
 <body>
@@ -39,6 +39,5 @@
     </div>
 </footer>
 
-<script src="{{ mix('dist/js/app.js') }}"></script>
 </body>
 </html>

@@ -1,0 +1,8 @@
+body {
+    @apply text-gray-800;
+    @apply dark:bg-zinc-800 dark:text-white;
+}
+
+[x-cloak] {
+    display: none !important;
+}
