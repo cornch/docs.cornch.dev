@@ -4,6 +4,10 @@
 
 @section('lang', $pathInfo->locale->toBcp47())
 
+@push('breadcrumb')
+    <a href="{{ route('docs.comments.form', $pathInfo->toRouteParameters()) }}" class="hover:text-red-400 transition-colors">\CommentForm</a>
+@endpush
+
 @section('content')
     <div class="mb-32">
         <form

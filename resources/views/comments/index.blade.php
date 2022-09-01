@@ -4,17 +4,21 @@
 
 @section('lang', $pathInfo->locale->toBcp47())
 
+@push('breadcrumb')
+    <a href="{{ route('docs.comments.index', $pathInfo->toRouteParameters()) }}" class="hover:text-red-400 transition-colors">\Comments</a>
+@endpush
+
 @section('content')
     @if(!empty($success))
         <div
             class="
-            mb-8
-            px-6 py-4
-            rounded
-            border border-green-700
-            text-green-900
-            bg-green-100
-        "
+                mb-8
+                px-6 py-4
+                rounded
+                border border-green-700
+                text-green-900
+                bg-green-100
+            "
         >
             {{ $success }}
         </div>

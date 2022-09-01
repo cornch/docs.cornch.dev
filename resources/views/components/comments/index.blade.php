@@ -7,7 +7,7 @@
         @forelse ($comments as $comment)
             <x-comments.comment :comment="$comment" />
         @empty
-            <div class="mb-8 py-12 rounded border dark:border-zinc-500 text-center text-xl dark:text-zinc-600">
+            <div class="mb-4 py-12 rounded border dark:border-zinc-500 text-center text-xl text-zinc-400 dark:text-zinc-600">
                 {{ __('No Comments Yet') }}
             </div>
         @endforelse
