@@ -10,18 +10,7 @@
 
 @section('content')
     @if(!empty($success))
-        <div
-            class="
-                mb-8
-                px-6 py-4
-                rounded
-                border border-green-700
-                text-green-900
-                bg-green-100
-            "
-        >
-            {{ $success }}
-        </div>
+        <x-alert theme="success">{{ $success }}</x-alert>
     @endif
     <div class="mb-32">
         <x-comments.index :comments="$comments" :path-info="$pathInfo" />
