@@ -16,7 +16,7 @@ use JsonSerializable;
 
 use function Pest\Laravel\instance;
 
-final class CommentReactionsCount implements Castable, JsonSerializable, Jsonable
+final class CommentReactionsCounter implements Castable, JsonSerializable, Jsonable
 {
     public const COLLAPSE_THRESHOLD = 3;
 
@@ -67,20 +67,20 @@ final class CommentReactionsCount implements Castable, JsonSerializable, Jsonabl
     public static function castUsing(array $arguments): CastsAttributes
     {
         return new class () implements CastsAttributes {
-            public function get($model, string $key, $value, array $attributes): CommentReactionsCount
+            public function get($model, string $key, $value, array $attributes): CommentReactionsCounter
             {
                 if (empty($value)) {
-                    return new CommentReactionsCount();
+                    return new CommentReactionsCounter();
                 }
-                return CommentReactionsCount::fromJson($value);
+                return CommentReactionsCounter::fromJson($value);
             }
 
             public function set($model, string $key, $value, array $attributes): array
             {
-                throw_unless($value instanceof CommentReactionsCount || is_array($value), InvalidArgumentException::class, 'The value must be an instance of CommentReactionsCount or an array.');
+                throw_unless($value instanceof CommentReactionsCounter || is_array($value), InvalidArgumentException::class, 'The value must be an instance of CommentReactionsCount or an array.');
 
                 if (is_array($value)) {
-                    $value = CommentReactionsCount::fromArray($value);
+                    $value = CommentReactionsCounter::fromArray($value);
                 }
 
                 return [

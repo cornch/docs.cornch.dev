@@ -4,32 +4,55 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
-use App\Documentation\Loader;
-use App\Documentation\Models\PathInfo;
-use App\Enums\Locale;
+use App\Http\Requests\CommentRequest;
 use App\Http\Requests\DocumentationBasedRequest;
+use App\Models\Comment;
+use App\Models\CommentReactionsCounter;
+use App\Utils\Fingerprint;
 use Illuminate\Contracts\View\View;
-use Mews\Captcha\Captcha;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Redirect;
 
 final class CommentController
 {
-    public function __construct(
-        private readonly Captcha $captcha
-    ) {
+    public function index(DocumentationBasedRequest $request): View
+    {
+        $loader = $request->getDocLoader();
+
+        return view('comments.index', [
+            'pathInfo' => $loader->pathInfo,
+            'page' => $loader->getPage(),
+            'comments' => Comment
+                ::byPathInfo($loader->pathInfo)
+                ->whereApproved()
+                ->get(),
+            'success' => $request->session()->get('success'),
+        ]);
     }
 
     public function form(DocumentationBasedRequest $request): View
     {
-        $captchaProvider = $request->input('captcha_provider');
         $loader = $request->getDocLoader();
 
-        $viewData = [
+        return view('comments.form', [
             'pathInfo' => $loader->pathInfo,
             'page' => $loader->getPage(),
-            'captchaProvider' => $captchaProvider,
-            'captcha' => $captchaProvider === 'hCaptcha' ? null : $this->captcha->create(api: true),
-        ];
+        ]);
+    }
 
-        return view('comments.form', $viewData);
+    public function store(CommentRequest $request): RedirectResponse
+    {
+        $comment = new Comment();
+        $comment->fromPathInfo($request->getDocPathInfo());
+        $comment->commenter_fingerprint = Fingerprint::fromRequest($request);
+        $comment->name = $request->input('name');
+        $comment->delete_password = $request->input('delete_password') ?? '';
+        $comment->content = $request->input('content');
+        $comment->reactions_counter = new CommentReactionsCounter();
+
+        $comment->is_approved = false;
+        $comment->save();
+
+        return Redirect::route('docs.comments.index', $request->getDocPathInfo()->toRouteParameters())->with('success', __('Comment submitted. In order to prevent SPAM, we need to manually approve it before it is visible.'));
     }
 }

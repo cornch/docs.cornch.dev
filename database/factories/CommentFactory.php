@@ -11,20 +11,19 @@ final class CommentFactory extends Factory
         'commenter_fingerprint' => 'string',
         'name' => 'string',
         'email' => 'string',
-        'deletion_password' => 'string',
+        'delete_password' => 'string',
         'content' => 'string',
         'is_approved' => 'string',
-        'reactions_count' => 'string',
+        'reactions_counter' => 'array',
     ])] public function definition(): array
     {
         return [
             'commenter_fingerprint' => $this->faker->sha1,
             'name' => $this->faker->name,
-            'email' => $this->faker->boolean(70) ? '' : $this->faker->email,
-            'deletion_password' => '$argon2i$v=19$m=65536,t=4,p=1$ckx4QXRJcS9zU1BtTHk0MA$uHgysftvDsclh6Qjfz5fq0RtJR65zi2XyTmB+HZD5FA',
+            'delete_password' => '$argon2i$v=19$m=65536,t=4,p=1$ckx4QXRJcS9zU1BtTHk0MA$uHgysftvDsclh6Qjfz5fq0RtJR65zi2XyTmB+HZD5FA',
             'content' => $this->faker->text,
             'is_approved' => $this->faker->boolean(70),
-            'reactions_count' => [
+            'reactions_counter' => [
                 'thumbs_up' => $this->faker->numberBetween(0, 100),
                 'thumbs_down' => $this->faker->numberBetween(0, 100),
                 'laugh' => $this->faker->numberBetween(0, 100),

@@ -7,7 +7,7 @@ use App\Documentation\Models\PathInfo;
 use App\Enums\Locale;
 use Illuminate\Foundation\Http\FormRequest;
 
-final class DocumentationBasedRequest extends FormRequest
+class DocumentationBasedRequest extends FormRequest
 {
     public function authorize(): bool
     {

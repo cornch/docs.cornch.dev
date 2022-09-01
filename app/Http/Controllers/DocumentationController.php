@@ -18,10 +18,7 @@ final class DocumentationController
         $loader = $request->getDocLoader();
 
         $comments = Comment
-            ::query()
-            ->where('locale', $loader->pathInfo->locale->value)
-            ->where('doc', $loader->pathInfo->doc)
-            ->where('page', $loader->pathInfo->page)
+            ::byPathInfo($loader->pathInfo)
             ->whereApproved()
             ->get();
 

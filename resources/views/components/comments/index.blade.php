@@ -12,7 +12,7 @@
     <div class="flex justify-end">
         <a
             href="{{ route('docs.comments.form', $pathInfo->toRouteParameters()) }}"
-            class="inline-block px-4 py-2 rounded border border-green-800 bg-green-700 hover:bg-green-600 transition-colors"
+            class="inline-block px-4 py-2 rounded border border-green-800 bg-green-600 hover:bg-green-500 dark:bg-green-700 dark:hover:bg-green-600 text-white transition-colors"
         >
             {{ __('Add Comment') }}
         </a>

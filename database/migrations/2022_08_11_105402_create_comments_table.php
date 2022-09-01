@@ -21,14 +21,13 @@ return new class extends Migration
             $table->string('commenter_fingerprint');
 
             $table->string('name');
-            $table->string('email');
-            $table->string('deletion_password');
+            $table->string('delete_password');
 
             $table->text('content');
 
             $table->boolean('is_approved')->default(false);
 
-            $table->json('reactions_count');
+            $table->json('reactions_counter');
 
             $table->timestamps();
             $table->softDeletes();

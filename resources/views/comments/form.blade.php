@@ -7,14 +7,12 @@
 @section('content')
     <div class="mb-32">
         <form
+            action="{{ route('docs.comments.store', $pathInfo->toRouteParameters()) }}"
+            method="post"
             class="flex flex-col gap-2 relative"
-            @if($captchaProvider !== 'hCaptcha')
-                x-data="{ captcha: {{ Js::from($captcha) }} }"
-            @endif
         >
-            @if($captchaProvider !== 'hCaptcha')
-                <input type="hidden" name="captcha_key" value="{{ $captcha['key'] }}" x-bind:value="captcha.key">
-            @endif
+            @csrf
+            <x-honeypot />
             <h2 class="flex items-center gap-x-1 text-2xl">
                 <x-heroicon-o-chat class="w-4 h-4" />
                 {{ __('Add Comment') }}
@@ -22,21 +20,26 @@
             <div class="flex flex-col">
                 <label
                     for="comment-name"
-                    class="after:content-['*'] after:ml-0.5 after:text-red-400"
-                >{{ __('Display Name') }} <span class="sr-only">{{ __('(Required)') }}</span></label>
+                    class="after:content-['*'] after:ml-px after:text-red-400"
+                >{{ __('Display Name') }}<span class="sr-only">{{ __('(Required)') }}</span></label>
                 <input
                     id="comment-name"
                     name="name"
                     type="text"
                     placeholder="{{ __('Display Name') }}"
                     class="
-                px-2 py-1
-                border border-zinc-600
-                rounded
-                bg-zinc-800
-                text-gray-100
-            "
+                        px-2 py-1
+                        border
+                        border-zinc-400 dark:border-zinc-600
+                        rounded
+                        bg-white dark:bg-zinc-800
+                        text-zinc-900 dark:text-gray-100
+                    "
+                    value="{{ old('name') }}"
                 />
+                @error('name')
+                    <div class="text-red-400">{{ $message }}</div>
+                @enderror
             </div>
             <div class="flex flex-col">
                 <div class="flex">
@@ -51,17 +54,22 @@
                     placeholder="{{ __('Delete Password') }}"
                     class="
                         px-2 py-1
-                        border border-zinc-600
+                        border
+                        border-zinc-400 dark:border-zinc-600
                         rounded
-                        bg-zinc-800
-                        text-gray-100
+                        bg-white dark:bg-zinc-800
+                        text-zinc-900 dark:text-gray-100
                     "
+                    value="{{ old('delete_password') }}"
                 />
+                @error('delete_password')
+                    <div class="text-red-400">{{ $message }}</div>
+                @enderror
             </div>
             <div class="flex flex-col">
                 <label
                     for="comment-content"
-                    class="after:content-['*'] after:ml-0.5 after:text-red-400"
+                    class="after:content-['*'] after:ml-px after:text-red-400"
                 >{{ __('Content') }}<span class="sr-only">{{ __('(Required)') }}</span></label>
                 <textarea
                     id="comment-content"
@@ -69,64 +77,17 @@
                     placeholder="{{ __('Content') }}"
                     class="
                         px-2 py-1
-                        border border-zinc-600
+                        border
+                        border-zinc-400 dark:border-zinc-600
                         rounded
-                        bg-zinc-800
-                        text-gray-100
+                        bg-white dark:bg-zinc-800
+                        text-zinc-900 dark:text-gray-100
                     "
-                ></textarea>
-            </div>
-            <div class="flex flex-col">
-                @if($captchaProvider === 'hCaptcha')
-                    <label
-                        for="comment-captcha"
-                        class="after:content-['*'] after:ml-0.5 after:text-red-400"
-                    >{{ __('Captcha') }}<span class="sr-only">{{ __('(Required)') }}</span></label>
-                    <div class="flex gap-4 mb-2">
-                        {!! HCaptcha::display() !!}
-                    </div>
-                    <p class="text-sm text-zinc-500">
-                        <a
-                            href="{{ route('docs.comments.form', $pathInfo->toRouteParameters()) }}"
-                            class="hover:text-zinc-400 underline hover:no-underline transition-colors"
-                        >{{ __('Click here to switch to back to old, non-hCaptcha captcha.') }}</a><br />
-                    </p>
-                @else
-                    <label
-                        for="comment-captcha"
-                        class="after:content-['*'] after:ml-0.5 after:text-red-400"
-                    >{{ __('Captcha') }}<span class="sr-only">{{ __('(Required)') }}</span></label>
-                    <div class="flex gap-4 mb-2">
-                        <a
-                            href="{{ route('docs.comments.form', $pathInfo->toRouteParameters()) }}"
-                            x-on:click.prevent="fetch({{ Js::from(url('captcha/api')) }}).then((r) => r.json()).then((r) => captcha = r)"
-                        >
-                            <img src="{{ $captcha['img'] }}" x-bind:src="captcha.img" alt="Captcha" />
-                        </a>
-                        <input
-                            id="comment-captcha"
-                            name="captcha"
-                            type="text"
-                            placeholder="{{ __('Captcha') }}"
-                            class="
-                                w-full
-                                px-2 py-1
-                                border border-zinc-600
-                                rounded
-                                bg-zinc-800
-                                text-gray-100
-                            "
-                        />
-                    </div>
-                    <p class="text-sm text-zinc-500">
-                        {{ __('If you\'re using accessibility technology such as screen reader, or having trouble using the following captcha, you can optionally using "hCaptcha" for this form.') }}<br />
-                        <a
-                            href="{{ route('docs.comments.form', [...$pathInfo->toRouteParameters(), 'captcha_provider' => 'hCaptcha']) }}"
-                            class="hover:text-zinc-400 underline hover:no-underline transition-colors"
-                        >{{ __('Click here to switch to hCaptcha.') }}</a><br />
-                        {{ __('While hCaptcha providing more accessibility, it\'s a third party service and requires JavaScript.') }}
-                    </p>
-                @endif
+                    required
+                >{{ old('content') }}</textarea>
+                @error('content')
+                    <div class="text-red-400">{{ $message }}</div>
+                @enderror
             </div>
             <div class="flex justify-between">
                 <p class="text-sm text-zinc-600">
@@ -135,7 +96,7 @@
                 </p>
                 <button
                     type="submit"
-                    class="px-4 py-2 rounded border border-green-800 bg-green-700 hover:bg-green-600 transition-colors"
+                    class="inline-block px-4 py-2 rounded border border-green-800 bg-green-600 hover:bg-green-500 dark:bg-green-700 dark:hover:bg-green-600 text-white transition-colors"
                 >{{ __('Add Comment') }}</button>
             </div>
         </form>
@@ -145,9 +106,3 @@
         <x-doc-footer :page="$page" />
     </div>
 @endsection
-
-@if($captchaProvider === 'hCaptcha')
-    @push('footer-scripts')
-        {!! HCaptcha::renderJs() !!}
-    @endpush
-@endif
