@@ -51,6 +51,7 @@ module.exports = {
     },
   },
   plugins: [
+      require('@tailwindcss/typography'),
       plugin(({ addUtilities }) => addUtilities({
           '.writing-tb': {
               'writing-mode': 'horizontal-tb',

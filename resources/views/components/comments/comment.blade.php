@@ -38,9 +38,9 @@
     </header>
 
     <div class="p-4 border border-t-0 border-zinc-400 dark:border-zinc-700 rounded-b">
-        <p class="mb-2">
-            {{ $comment->content }}
-        </p>
+        <div class="mb-2 prose prose-neutral dark:prose-invert lg:prose-lg max-w-none">
+            {!! Str::markdown($comment->content) !!}
+        </div>
 
         <x-reactions :reactions-counter="$comment->reactions_counter" />
     </div>
