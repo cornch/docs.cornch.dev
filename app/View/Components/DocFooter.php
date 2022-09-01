@@ -10,8 +10,6 @@ final class DocFooter extends AbstractDocComponent
 {
     public function render(): View
     {
-        $view = $this->page->loader->config['footer'];
-
-        return view($view);
+        return view($this->page->loader->docset->footerView);
     }
 }

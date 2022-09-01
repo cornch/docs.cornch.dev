@@ -18,13 +18,24 @@ final class PathInfo
     }
 
     #[ArrayShape(['doc' => "string", 'locale' => "string", 'version' => "string", 'page' => "string"])]
-    public function toRouteParameters(): array
+    public function toRouteParameters(array $extra = []): array
     {
         return [
             'doc' => $this->doc,
             'locale' => $this->locale->value,
             'version' => $this->version,
             'page' => $this->page,
+            ...$extra,
         ];
+    }
+
+    public function toCacheKey(): string
+    {
+        return implode('-', [
+            $this->doc,
+            $this->locale->value,
+            $this->version,
+            $this->page,
+        ]);
     }
 }

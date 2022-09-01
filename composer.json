@@ -23,6 +23,7 @@
         "laravel/framework": "^9.0",
         "laravel/tinker": "^2.7",
         "league/commonmark": "^2.2",
+        "spatie/laravel-honeypot": "^4.3",
         "spatie/once": "^3.0",
         "torchlight/torchlight-commonmark": "^0.5.5",
         "torchlight/torchlight-laravel": "^0.5.11",
@@ -30,6 +31,7 @@
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.12",
+        "fakerphp/faker": "^1.20",
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^6.1",
         "pestphp/pest": "^1.21",

@@ -1,5 +1,18 @@
 {
     "Show Menu": "顯示選單",
     "Hide Menu": "隱藏選單",
-    "Back to Top": "回到頂端"
+    "Back to Top": "回到頂端",
+
+    "Comments": "留言",
+    "No Comments Yet": "尚無留言",
+    "Show all :count comment|Show all :count comments": "顯示全部 :count 則留言",
+    "Add Comment": "新增留言",
+    "Display Name": "顯示名稱",
+    "(Required)": "（必填）",
+    "Delete Password": "刪除密碼",
+    "Content": "本文",
+    "Markdown supported.": "支援 Markdown。",
+    "If you provide a “delete password”, you will be able to delete the comment later using the password.": "如果您提供了「刪除密碼」，在留言公開之後，您將可以使用該密碼來刪除留言。",
+
+    "Comment submitted. In order to prevent SPAM, we need to manually approve it before it is visible.": "已送出留言。為了預防廣告，所有留言都需要我們手動審核後才會顯示。"
 }

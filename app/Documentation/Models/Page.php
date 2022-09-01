@@ -23,33 +23,37 @@ final class Page
 
     public function locales(): array
     {
-        return once(fn () => collect($this->loader->config['locales'])
-            ->map(fn (array $config, $code) => [
-                'name' => $config['name'],
+        return once(fn () => collect($this->loader->docset->locales)
+            ->map(fn (Locale $locale, $code) => [
+                'name' => $locale->name,
                 'code' => $code,
-                'url' => route('docs.show', [
-                    ...$this->pathInfo->toRouteParameters(),
-                    'locale' => $code,
-                ]),
+                'url' => route(
+                    'docs.show',
+                    $this->pathInfo->toRouteParameters([
+                        'locale' => $code
+                    ]),
+                ),
             ])
             ->toArray());
     }
 
     public function version(): ?string
     {
-        return $this->loader->config['versions'][$this->pathInfo->version] ?? null;
+        return $this->loader->docset->getVersion($this->pathInfo->version)?->name ?? null;
     }
 
     public function versions(): array
     {
-        return once(fn () => collect($this->loader->config['versions'])
-            ->map(fn (string $name, string $code) => [
-                'name' => $name,
+        return once(fn () => collect($this->loader->docset->versions)
+            ->map(fn (Version $version, string $code) => [
+                'name' => $version->name,
                 'code' => $code,
-                'url' => route('docs.show', [
-                    ...$this->pathInfo->toRouteParameters(),
-                    'version' => $code,
-                ]),
+                'url' => route(
+                    'docs.show',
+                    $this->pathInfo->toRouteParameters([
+                        'version' => $code,
+                    ]),
+                ),
             ])
             ->values()
             ->toArray());
