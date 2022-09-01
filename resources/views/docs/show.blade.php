@@ -16,7 +16,11 @@
     </article>
 
     <div class="mb-32">
-        <x-comments :comments="$comments" :path-info="$pathInfo" />
+        <x-comments
+            :comments="$comments"
+            :comments-count="$commentsCount"
+            :path-info="$pathInfo"
+        />
     </div>
 
     <div class="max-w-5xl mx-auto px-6 mb-16">

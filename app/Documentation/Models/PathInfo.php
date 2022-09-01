@@ -28,4 +28,14 @@ final class PathInfo
             ...$extra,
         ];
     }
+
+    public function toCacheKey(): string
+    {
+        return implode('-', [
+            $this->doc,
+            $this->locale->value,
+            $this->version,
+            $this->page,
+        ]);
+    }
 }
