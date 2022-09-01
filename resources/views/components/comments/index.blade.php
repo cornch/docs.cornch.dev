@@ -4,9 +4,13 @@
     <h3 class="text-2xl mb-4">{{ __('Comments') }}</h3>
 
     <div class="flex flex-col gap-4">
-        @foreach ($comments as $comment)
+        @forelse ($comments as $comment)
             <x-comments.comment :comment="$comment" />
-        @endforeach
+        @empty
+            <div class="mb-8 py-12 rounded border dark:border-zinc-500 text-center text-xl dark:text-zinc-600">
+                {{ __('No Comments Yet') }}
+            </div>
+        @endforelse
     </div>
 
     @if($commentsCount !== null && $commentsCount > $comments->count())

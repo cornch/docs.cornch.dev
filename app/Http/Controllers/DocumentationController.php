@@ -21,11 +21,15 @@ final class DocumentationController
     {
         $loader = $request->getDocLoader();
 
-        $comments = Comment
-            ::byPathInfo($loader->pathInfo)
-            ->whereApproved()
-            ->limit(self::COMMENTS_LIMIT)
-            ->get();
+        $comments = Cache::remember(
+            'comments-doc:' . $loader->pathInfo->toCacheKey(),
+            self::CACHE_TTL_SECONDS,
+            static fn () => Comment
+                ::byPathInfo($loader->pathInfo)
+                ->whereApproved()
+                ->limit(self::COMMENTS_LIMIT)
+                ->get(),
+        );
 
         $commentsCount = Cache::remember(
             'comments-count:' . $loader->pathInfo->toCacheKey(),
