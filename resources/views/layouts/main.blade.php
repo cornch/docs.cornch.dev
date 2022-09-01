@@ -110,7 +110,7 @@
 
         <span class="inline-flex items-center justify-center">
             <x-heroicon-o-tag class="w-4 h-4 mr-2" />
-            {{ $page->version() }}
+            {{ $page->version()?->name }}
         </span>
     </button>
 
@@ -160,7 +160,7 @@
                     </template>
                 </x-slot:select>
 
-                <x-slot:current class="w-24">{{ $page->version() }}</x-slot:current>
+                <x-slot:current class="w-24">{{ $page->version()?->name }}</x-slot:current>
                 <x-slot:noscriptList class="w-24 bg-gray-200 dark:bg-zinc-700">
                     @foreach($page->versions() as $version)
                         <li class="text-sm">

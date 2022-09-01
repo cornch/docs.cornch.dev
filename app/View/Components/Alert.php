@@ -8,6 +8,11 @@ use Illuminate\View\Component;
 class Alert extends Component
 {
     private const THEME_STYLES = [
+        'warning' => [
+            'border-orange-700',
+            'text-orange-900',
+            'bg-orange-100',
+        ],
         'success' => [
             'border-green-700',
             'text-green-900',
@@ -22,7 +27,12 @@ class Alert extends Component
 
     public function themeStyles(): array
     {
-        return self::THEME_STYLES[$this->theme];
+        return self::THEME_STYLES[$this->theme] ?? [];
+    }
+
+    public function titleThemeStyles(): array
+    {
+        return [];
     }
 
     public function render(): View

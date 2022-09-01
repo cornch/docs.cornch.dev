@@ -21,6 +21,11 @@ final class Page
         $this->pathInfo = $this->loader->pathInfo;
     }
 
+    public function locale(): ?Locale
+    {
+        return $this->loader->docset->getLocale($this->pathInfo->locale);
+    }
+
     public function locales(): array
     {
         return once(fn () => collect($this->loader->docset->locales)
@@ -37,9 +42,9 @@ final class Page
             ->toArray());
     }
 
-    public function version(): ?string
+    public function version(): Version
     {
-        return $this->loader->docset->getVersion($this->pathInfo->version)?->name ?? null;
+        return $this->loader->docset->getVersion($this->pathInfo->version);
     }
 
     public function versions(): array
