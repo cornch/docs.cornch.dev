@@ -14,13 +14,5 @@
     "Markdown supported.": "支援 Markdown。",
     "If you provide a “delete password”, you will be able to delete the comment later using the password.": "如果您提供了「刪除密碼」，在留言公開之後，您將可以使用該密碼來刪除留言。",
 
-    "Captcha": "驗證碼",
-    "If you're using accessibility technology such as screen reader, or having trouble using the following captcha, you can optionally using \"hCaptcha\" for this form.": "若您使用螢幕閱讀器等輔助工具，或是無法正常閱讀上方驗證碼，您可選擇使用「hCaptcha」。",
-    "Click here to switch to hCaptcha.": "點擊此處切換至 hCaptcha。",
-    "Click here to switch to back to old, non-hCaptcha captcha.": "點擊此處以切換至舊的、非 hCpatcha 的驗證碼。",
-    "While hCaptcha providing more accessibility, it's a third party service and requires JavaScript.": "雖然 hCaptcha 提供了更好的無障礙功能，但 hCaptcha 屬於第三方服務，且需要 JavaScript。",
-
-    "Invalid Captcha": "無效的驗證碼",
-
     "Comment submitted. In order to prevent SPAM, we need to manually approve it before it is visible.": "已送出留言。為了預防廣告，所有留言都需要我們手動審核後才會顯示。"
 }
