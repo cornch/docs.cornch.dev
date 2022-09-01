@@ -17,8 +17,8 @@ return [
     // https://torchlight.dev/docs/themes.
     // 'theme' => env('TORCHLIGHT_THEME', 'material-theme-palenight'),
     'theme' => [
-         'dark' => 'github-dark',
-         'light' => 'github-light',
+        'dark' => 'github-dark',
+        'light' => 'github-light',
     ],
 
     // If you want to use two separate themes for dark and light modes,
@@ -48,7 +48,7 @@ return [
     // block, Torchlight will look for code snippets in the
     // following directories.
     'snippet_directories' => [
-        resource_path()
+        resource_path(),
     ],
 
     // Global options to control blocks-level settings.
@@ -72,5 +72,5 @@ return [
         // 'summaryCollapsedIndicator' => '...',
 
         'defaultLanguage' => 'php',
-    ]
+    ],
 ];

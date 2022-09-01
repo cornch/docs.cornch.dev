@@ -17,7 +17,7 @@ final class PathInfo
     ) {
     }
 
-    #[ArrayShape(['doc' => "string", 'locale' => "string", 'version' => "string", 'page' => "string"])]
+    #[ArrayShape(['doc' => 'string', 'locale' => 'string', 'version' => 'string', 'page' => 'string'])]
     public function toRouteParameters(array $extra = []): array
     {
         return [

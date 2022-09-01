@@ -53,7 +53,8 @@ final class CalloutParser extends AbstractBlockContinueParser
 
     public static function createBlockStartParser(): BlockStartParserInterface
     {
-        return new class () implements BlockStartParserInterface {
+        return new class() implements BlockStartParserInterface
+        {
             private const CALLOUT_PAIRS = [['> {', '}'], ['> **', '**']];
 
             public function tryStart(Cursor $cursor, MarkdownParserStateInterface $parserState): ?BlockStart
@@ -63,7 +64,7 @@ final class CalloutParser extends AbstractBlockContinueParser
                 }
 
                 foreach (self::CALLOUT_PAIRS as [$startString, $endString]) {
-                    if (!str_starts_with($cursor->getSubstring($cursor->getPosition()), $startString)) {
+                    if (! str_starts_with($cursor->getSubstring($cursor->getPosition()), $startString)) {
                         continue;
                     }
 

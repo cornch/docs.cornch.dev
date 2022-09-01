@@ -2,8 +2,6 @@
 
 namespace App\Http\Requests;
 
-use App\Rules\Captcha;
-
 final class CommentRequest extends DocumentationBasedRequest
 {
     public function rules(): array

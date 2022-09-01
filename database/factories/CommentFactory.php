@@ -15,7 +15,8 @@ final class CommentFactory extends Factory
         'content' => 'string',
         'is_approved' => 'string',
         'reactions_counter' => 'array',
-    ])] public function definition(): array
+    ])]
+    public function definition(): array
     {
         return [
             'commenter_fingerprint' => $this->faker->sha1,

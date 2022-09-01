@@ -18,6 +18,7 @@ use League\CommonMark\Parser\MarkdownParserStateInterface;
 final class MarkdownDivParser extends AbstractBlockContinueParser
 {
     private const CLOSE_TAG = '</div>';
+
     private const CLOSE_TAG_LENGTH = 6;
 
     private MarkdownDiv $markdownDiv;
@@ -48,6 +49,7 @@ final class MarkdownDivParser extends AbstractBlockContinueParser
         $substringForDetermine = $cursor->getSubstring($cursor->getNextNonSpacePosition(), self::CLOSE_TAG_LENGTH);
         if ($substringForDetermine === self::CLOSE_TAG) {
             $cursor->advanceBy(self::CLOSE_TAG_LENGTH);
+
             return BlockContinue::finished();
         }
 
@@ -56,21 +58,22 @@ final class MarkdownDivParser extends AbstractBlockContinueParser
 
     public static function createBlockStartParser(): BlockStartParserInterface
     {
-        return new class () implements BlockStartParserInterface {
+        return new class() implements BlockStartParserInterface
+        {
             private const START_STRING = '<div';
 
             public function tryStart(Cursor $cursor, MarkdownParserStateInterface $parserState): ?BlockStart
             {
                 $subStringForDetermine = $cursor->getSubstring($cursor->getNextNonSpacePosition());
 
-                if (!str_starts_with($subStringForDetermine, self::START_STRING)) {
+                if (! str_starts_with($subStringForDetermine, self::START_STRING)) {
                     return BlockStart::none();
                 }
 
                 if (
-                    !str_contains($subStringForDetermine, 'markdown="1"') &&
-                    !str_contains($subStringForDetermine, "markdown='1'") &&
-                    !str_contains($subStringForDetermine, 'markdown=1')
+                    ! str_contains($subStringForDetermine, 'markdown="1"') &&
+                    ! str_contains($subStringForDetermine, "markdown='1'") &&
+                    ! str_contains($subStringForDetermine, 'markdown=1')
                 ) {
                     return BlockStart::none();
                 }

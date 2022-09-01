@@ -8,7 +8,6 @@ use Illuminate\Support\Str;
 use League\CommonMark\Event\DocumentParsedEvent;
 use League\CommonMark\Extension\CommonMark\Node\Block\Heading;
 use League\CommonMark\Extension\CommonMark\Node\Block\ListItem;
-use Ramsey\Uuid\Uuid;
 
 final class NavigationLinkEvent
 {

@@ -20,7 +20,7 @@ final class MarkdownDivRenderer implements NodeRendererInterface
 
         return new HtmlElement('div', array_filter([
             'id' => $node->id,
-            'class' => $node->class
+            'class' => $node->class,
         ]), $childRenderer->renderNodes($node->children()));
     }
 }

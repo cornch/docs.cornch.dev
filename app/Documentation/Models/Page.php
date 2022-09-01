@@ -30,7 +30,7 @@ final class Page
                 'url' => route(
                     'docs.show',
                     $this->pathInfo->toRouteParameters([
-                        'locale' => $code
+                        'locale' => $code,
                     ]),
                 ),
             ])

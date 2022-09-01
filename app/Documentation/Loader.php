@@ -17,19 +17,16 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\HtmlString;
 use Illuminate\Support\Str;
 use JetBrains\PhpStorm\ArrayShape;
+use function once;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-
 use Wikimedia\CSS\Objects\CSSObject;
 use Wikimedia\CSS\Parser\Parser as CSSParser;
-
 use Wikimedia\CSS\Sanitizer\StylesheetSanitizer;
-
-use function config;
-use function once;
 
 final class Loader
 {
     private const CACHE_TTL = 60 * 60 * 24;
+
     private const DISK = 'docs';
 
     #[ArrayShape([
@@ -38,7 +35,7 @@ final class Loader
         'header' => 'string',
         'footer' => 'string',
         'versions' => 'array',
-        'link-fixer' => Closure::class
+        'link-fixer' => Closure::class,
     ])]
     public readonly array $config;
 
@@ -47,7 +44,7 @@ final class Loader
     ) {
         $this->docset = Documentation::get($pathInfo->doc);
 
-        if (!$this->docset->hasLocale($this->pathInfo->locale)) {
+        if (! $this->docset->hasLocale($this->pathInfo->locale)) {
             throw new LocaleNotFoundException();
         }
     }
@@ -73,6 +70,7 @@ final class Loader
     {
         return $prefix . '-' . once(function (): string {
             $path = $this->resolveDocPath();
+
             return md5($path);
         });
     }

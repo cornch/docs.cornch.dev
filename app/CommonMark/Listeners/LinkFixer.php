@@ -24,7 +24,7 @@ final class LinkFixer
 
         while ($current = $walker->next()) {
             $node = $current->getNode();
-            if (!$node instanceof Link || !$current->isEntering()) {
+            if (! $node instanceof Link || ! $current->isEntering()) {
                 continue;
             }
 

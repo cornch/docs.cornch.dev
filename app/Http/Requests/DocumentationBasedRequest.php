@@ -4,7 +4,6 @@ namespace App\Http\Requests;
 
 use App\Documentation\Loader as DocLoader;
 use App\Documentation\Models\PathInfo;
-use App\Enums\Locale;
 use Illuminate\Foundation\Http\FormRequest;
 
 class DocumentationBasedRequest extends FormRequest

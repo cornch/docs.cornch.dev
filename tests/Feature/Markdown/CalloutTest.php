@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-it('parses callout', function () {
+it('parses callout', function (): void {
     $converter = makeDocumentationConverter();
 
     $html = $converter

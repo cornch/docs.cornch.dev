@@ -6,23 +6,21 @@ namespace App\Models;
 
 use Illuminate\Contracts\Database\Eloquent\Castable;
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
-
 use Illuminate\Contracts\Support\Jsonable;
 use InvalidArgumentException;
-
 use JetBrains\PhpStorm\ArrayShape;
-
 use JsonSerializable;
-
-use function Pest\Laravel\instance;
 
 final class CommentReactionsCounter implements Castable, JsonSerializable, Jsonable
 {
     public const COLLAPSE_THRESHOLD = 3;
 
     public readonly bool $allActivated;
+
     public readonly bool $shouldBeCollapsed;
+
     public readonly array $topEmojis;
+
     public readonly int $total;
 
     public function __construct(
@@ -66,12 +64,14 @@ final class CommentReactionsCounter implements Castable, JsonSerializable, Jsona
 
     public static function castUsing(array $arguments): CastsAttributes
     {
-        return new class () implements CastsAttributes {
+        return new class() implements CastsAttributes
+        {
             public function get($model, string $key, $value, array $attributes): CommentReactionsCounter
             {
                 if (empty($value)) {
                     return new CommentReactionsCounter();
                 }
+
                 return CommentReactionsCounter::fromJson($value);
             }
 
@@ -98,20 +98,21 @@ final class CommentReactionsCounter implements Castable, JsonSerializable, Jsona
         'confused' => 'int',
         'heart' => 'int',
         'rocket' => 'int',
-        'eyes' => 'int'
-    ])] public function jsonSerialize(): array
-    {
-        return [
-            'thumbsUp' => $this->thumbsUp,
-            'thumbsDown' => $this->thumbsDown,
-            'laugh' => $this->laugh,
-            'hooray' => $this->hooray,
-            'confused' => $this->confused,
-            'heart' => $this->heart,
-            'rocket' => $this->rocket,
-            'eyes' => $this->eyes,
-        ];
-    }
+        'eyes' => 'int',
+    ])]
+ public function jsonSerialize(): array
+ {
+     return [
+         'thumbsUp' => $this->thumbsUp,
+         'thumbsDown' => $this->thumbsDown,
+         'laugh' => $this->laugh,
+         'hooray' => $this->hooray,
+         'confused' => $this->confused,
+         'heart' => $this->heart,
+         'rocket' => $this->rocket,
+         'eyes' => $this->eyes,
+     ];
+ }
 
     public function toJson($options = 0): string
     {

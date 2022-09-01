@@ -32,6 +32,7 @@
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.12",
         "fakerphp/faker": "^1.20",
+        "laravel/pint": "^1.1",
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^6.1",
         "pestphp/pest": "^1.21",
@@ -69,7 +70,7 @@
             "@php artisan key:generate --ansi"
         ],
         "lint": [
-            "php-cs-fixer fix -vvv --allow-risky=yes"
+            "pint"
         ]
     },
     "extra": {

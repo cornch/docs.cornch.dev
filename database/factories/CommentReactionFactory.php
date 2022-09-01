@@ -9,8 +9,9 @@ final class CommentReactionFactory extends Factory
 {
     #[ArrayShape([
         'reactor_fingerprint' => 'string',
-        'reaction' => 'mixed'
-    ])] public function definition(): array
+        'reaction' => 'mixed',
+    ])]
+    public function definition(): array
     {
         return [
             'reactor_fingerprint' => $this->faker->sha1,
