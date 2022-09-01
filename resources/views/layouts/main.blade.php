@@ -35,7 +35,7 @@
                     <span class="flex lg:inline-flex mx-2 md:text-xl mr-12 font-black font-mono hover:text-gray-600">
                         <a href="{{ url('/') }}" class="hover:text-red-400 transition-colors">\Cornch\Docs</a>
                         <a
-                          href="{{ route('docs.show', $pathInfo->toRouteParameters(['page' => $page->loader->config['index']])) }}"
+                          href="{{ route('docs.show', $pathInfo->toRouteParameters(['page' => $page->loader->docset->index])) }}"
                           class="hover:text-red-400 transition-colors"
                         >\{{ str($pathInfo->doc)->camel()->ucfirst() }}</a>
                         <a href="{{ route('docs.show', $pathInfo->toRouteParameters()) }}" class="hover:text-red-400 transition-colors">\{{ str($pathInfo->page)->camel()->ucfirst() }}</a>

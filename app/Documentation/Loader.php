@@ -45,9 +45,9 @@ final class Loader
     public function __construct(
         public readonly PathInfo $pathInfo
     ) {
-        $this->config = config("docs.docsets.{$this->pathInfo->doc}");
+        $this->docset = Documentation::get($pathInfo->doc);
 
-        if (!array_key_exists($this->pathInfo->locale->value, $this->config['locales'])) {
+        if (!$this->docset->hasLocale($this->pathInfo->locale)) {
             throw new LocaleNotFoundException();
         }
     }
@@ -79,12 +79,7 @@ final class Loader
 
     public function getDocName(): string
     {
-        return $this->config['locales'][$this->pathInfo->locale->value]['title'];
-    }
-
-    public function getLocales(): array
-    {
-        return $this->config['locales'];
+        return $this->docset->getLocale($this->pathInfo->locale)->title;
     }
 
     public function getPage(): Page
@@ -113,7 +108,7 @@ final class Loader
                     // remove style
                     $markdown = preg_replace('#<style>[\w\W]+?</style>#', '', $markdown);
 
-                    $html = (new DocumentationConverter($this->config['link-fixer']))->convert($markdown)->getContent();
+                    $html = (new DocumentationConverter($this->docset->linkFixer))->convert($markdown)->getContent();
                     $html = HTMLMin::html($html);
                     $html = $this->replaceStubStrings($html);
 
@@ -162,10 +157,10 @@ final class Loader
             $this->getDocHash('nav'),
             self::CACHE_TTL,
             function () {
-                $markdown = $this->getFile($this->replaceStubStrings($this->config['locales'][$this->pathInfo->locale->value]['navigation']));
+                $markdown = $this->getFile($this->replaceStubStrings($this->docset->getLocale($this->pathInfo->locale)->navigation));
                 $markdown = $this->replaceStubStrings($markdown);
 
-                $html = (new NavigationConverter($this->config['link-fixer']))->convert($markdown)->getContent();
+                $html = (new NavigationConverter($this->docset->linkFixer))->convert($markdown)->getContent();
                 $html = HTMLMin::html($html);
 
                 return $this->replaceStubStrings($html);
@@ -181,6 +176,6 @@ final class Loader
 
     private function resolveDocPath(): string
     {
-        return $this->replaceStubStrings($this->config['locales'][$this->pathInfo->locale->value]['path']);
+        return $this->replaceStubStrings($this->docset->getLocale($this->pathInfo->locale)->path);
     }
 }
