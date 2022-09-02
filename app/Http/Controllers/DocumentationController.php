@@ -35,6 +35,7 @@ final class DocumentationController
 
         return view('docs.show', [
             'pathInfo' => $loader->pathInfo,
+            'frontMatter' => $loader->getFrontMatter(),
             'page' => $loader->getPage(),
             'comments' => $comments,
             'commentsCount' => $commentsCount,

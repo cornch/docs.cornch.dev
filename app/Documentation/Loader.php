@@ -6,6 +6,7 @@ namespace App\Documentation;
 
 use App\CommonMark\DocumentationConverter;
 use App\CommonMark\NavigationConverter;
+use App\Documentation\Models\Docset;
 use App\Documentation\Models\Page;
 use App\Documentation\Models\PathInfo;
 use App\Exceptions\LocaleNotFoundException;
@@ -17,6 +18,8 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\HtmlString;
 use Illuminate\Support\Str;
 use JetBrains\PhpStorm\ArrayShape;
+use League\CommonMark\Extension\FrontMatter\Output\RenderedContentWithFrontMatter;
+use League\CommonMark\Output\RenderedContentInterface;
 use function once;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Wikimedia\CSS\Objects\CSSObject;
@@ -37,7 +40,8 @@ final class Loader
         'versions' => 'array',
         'link-fixer' => Closure::class,
     ])]
-    public readonly array $config;
+
+    public readonly Docset $docset;
 
     public function __construct(
         public readonly PathInfo $pathInfo
@@ -93,26 +97,29 @@ final class Loader
 
     public function getContent(): HtmlString
     {
-        $path = $this->resolveDocPath();
-
         return Cache
             ::remember(
                 $this->getDocHash('page'),
                 self::CACHE_TTL,
-                function () use ($path) {
-                    $markdown = $this->getFile($path);
-                    $markdown = $this->replaceStubStrings($markdown);
-
-                    // remove style
-                    $markdown = preg_replace('#<style>[\w\W]+?</style>#', '', $markdown);
-
-                    $html = (new DocumentationConverter($this->docset->linkFixer))->convert($markdown)->getContent();
+                function () {
+                    $html = $this->parse()->getContent();
                     $html = HTMLMin::html($html);
                     $html = $this->replaceStubStrings($html);
 
                     return new HtmlString($html);
                 },
             );
+    }
+
+    public function getFrontMatter(): ?array
+    {
+        $parsed = $this->parse();
+
+        if (!$parsed instanceof RenderedContentWithFrontMatter) {
+            return null;
+        }
+
+        return $parsed->getFrontMatter();
     }
 
     public function getStyle(): HtmlString
@@ -164,6 +171,26 @@ final class Loader
                 return $this->replaceStubStrings($html);
             },
         );
+    }
+
+    private function parse(): RenderedContentInterface
+    {
+        $path = $this->resolveDocPath();
+
+        return Cache
+            ::remember(
+                $this->getDocHash('markdown'),
+                self::CACHE_TTL,
+                function () use ($path) {
+                    $markdown = $this->getFile($path);
+                    $markdown = $this->replaceStubStrings($markdown);
+
+                    // remove style
+                    $markdown = preg_replace('#<style>[\w\W]+?</style>#', '', $markdown);
+
+                    return (new DocumentationConverter($this->docset->linkFixer))->convert($markdown);
+                },
+            );
     }
 
     private function getFile(string $path): string

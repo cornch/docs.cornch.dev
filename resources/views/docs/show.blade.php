@@ -29,7 +29,7 @@
             {{ __('You are viewing a pre-released version of :docName. We do not recommend reading a pre-released version of documentation unless you\'re framework or package developer. You can switch the version from the sidebar.', ['docName' => $page->loader->getDocName()]) }}
         </x-alert>
     @endif
-    @if($page->locale()?->translated)
+    @if($page->locale()?->translated && optional($frontMatter)['progress'] < 100)
         <x-alert theme="warning">
             <x-slot name="title">
                 {{ __('This is a translated version') }}
@@ -37,11 +37,17 @@
 
             {{ __('You are viewing a translated version of :docName. It is possible that some of the content in this page are not translated, or even been wrongly translated. You can switch to the original version by using the language switcher in the header.', ['docName' => $page->loader->getDocName()]) }}
         </x-alert>
+
+        <x-translation-info :info="$frontMatter" />
     @endif
 
     <article class="content language-php mb-16">
         {{ $page->content }}
     </article>
+
+    @if ($frontMatter !== null && $page->locale()?->translated)
+        <x-translation-info :info="$frontMatter" />
+    @endif
 
     <div class="mb-32">
         <x-comments

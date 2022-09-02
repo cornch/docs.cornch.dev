@@ -70,7 +70,7 @@
                     {{ __('Markdown supported.') }}<br />
                     {{ __('If you provide a “delete password”, you will be able to delete the comment later using the password.') }}
                 </p>
-                <x-button type="submit">{{ __('Add Comment') }}</x-button>
+                <x-button theme="success" type="submit">{{ __('Add Comment') }}</x-button>
             </div>
         </form>
     </div>

@@ -23,5 +23,12 @@
     "You are viewing a pre-released version of :docName. We do not recommend reading a pre-released version of documentation unless you're framework or package developer. You can switch the version from the sidebar.": "你正在檢視的是預先發佈的 :docName。除非你是框架或套件開發者，我們不建議閱讀預先發佈的文件。你可以在側欄中選擇其他版本。",
 
     "This is a translated version": "此文件是翻譯版本",
-    "You are viewing a translated version of :docName. It is possible that some of the content in this page are not translated, or even been wrongly translated. You can switch to the original version by using the language switcher in the header.": "你正在檢視的是翻譯版本的 :docName。此頁面中可能有部分或全部的內容還未翻譯，或甚至含有錯誤的翻譯。你可以在頁面頂端中的語言選擇來切換到原文。"
+    "You are viewing a translated version of :docName. It is possible that some of the content in this page are not translated, or even been wrongly translated. You can switch to the original version by using the language switcher in the header.": "你正在檢視的是翻譯版本的 :docName。此頁面中可能有部分或全部的內容還未翻譯，或甚至含有錯誤的翻譯。你可以在頁面頂端中的語言選擇來切換到原文。",
+
+    "Translation Progress": "翻譯進度",
+    "Translated": "已翻譯",
+    "Translated by": "翻譯人員：",
+    ",_": "、",
+    ",_and_": "、",
+    "Help Us Translate This Page": "幫我們翻譯此頁"
 }

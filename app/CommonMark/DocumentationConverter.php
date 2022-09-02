@@ -18,6 +18,7 @@ use League\CommonMark\Environment\Environment;
 use League\CommonMark\Event\DocumentParsedEvent;
 use League\CommonMark\Extension\Attributes\AttributesExtension;
 use League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension;
+use League\CommonMark\Extension\FrontMatter\FrontMatterExtension;
 use League\CommonMark\Extension\GithubFlavoredMarkdownExtension;
 use League\CommonMark\Extension\Table\Table;
 use League\CommonMark\MarkdownConverter;
@@ -30,6 +31,8 @@ final class DocumentationConverter extends MarkdownConverter
         $environment = new Environment(['allow_unsafe_links' => false]);
         $environment->addExtension(new CommonMarkCoreExtension());
         $environment->addExtension(new GithubFlavoredMarkdownExtension());
+
+        $environment->addExtension(new FrontMatterExtension());
 
         $environment->addExtension(new AttributesExtension());
 

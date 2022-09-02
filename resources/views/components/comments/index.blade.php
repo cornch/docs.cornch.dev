@@ -35,7 +35,7 @@
     @endif
 
     <div class="flex justify-end">
-        <x-link-button href="{{ route('docs.comments.form', $pathInfo->toRouteParameters()) }}">
+        <x-link-button theme="success" href="{{ route('docs.comments.form', $pathInfo->toRouteParameters()) }}">
             {{ __('Add Comment') }}
         </x-link-button>
     </div>
