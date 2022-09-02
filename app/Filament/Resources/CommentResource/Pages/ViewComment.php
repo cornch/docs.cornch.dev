@@ -14,7 +14,7 @@ final class ViewComment extends ViewRecord
     {
         return [
             Action::make('approve')
-                ->action(function () {
+                ->action(function (): void {
                     $this->record->is_approved = true;
                     $this->record->save();
                 })

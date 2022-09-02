@@ -46,7 +46,7 @@ final class CommentResource extends Resource
             ])
             ->filters([
                 Tables\Filters\Filter::make('approved')
-                    ->query(fn (Builder $query) => $query->ofApproved())
+                    ->query(fn (Builder $query) => $query->ofApproved()),
             ])
             ->actions([
                 Tables\Actions\ViewAction::make('view'),

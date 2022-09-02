@@ -40,7 +40,6 @@ final class Loader
         'versions' => 'array',
         'link-fixer' => Closure::class,
     ])]
-
     public readonly Docset $docset;
 
     public function __construct(
@@ -115,7 +114,7 @@ final class Loader
     {
         $parsed = $this->parse();
 
-        if (!$parsed instanceof RenderedContentWithFrontMatter) {
+        if (! $parsed instanceof RenderedContentWithFrontMatter) {
             return null;
         }
 

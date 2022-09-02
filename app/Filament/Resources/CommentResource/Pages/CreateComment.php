@@ -3,7 +3,6 @@
 namespace App\Filament\Resources\CommentResource\Pages;
 
 use App\Filament\Resources\CommentResource;
-use Filament\Pages\Actions;
 use Filament\Resources\Pages\CreateRecord;
 
 final class CreateComment extends CreateRecord
