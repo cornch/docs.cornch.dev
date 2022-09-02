@@ -11,6 +11,7 @@ use App\Models\CommentReactionsCounter;
 use App\Utils\Fingerprint;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 
 final class CommentController
@@ -46,7 +47,9 @@ final class CommentController
         $comment->fromPathInfo($request->getDocPathInfo());
         $comment->commenter_fingerprint = Fingerprint::fromRequest($request);
         $comment->name = $request->input('name');
-        $comment->delete_password = $request->input('delete_password') ?? '';
+        $comment->delete_password = $request->input('delete_password')
+            ? Hash::make($request->input('delete_password'))
+            : '';
         $comment->content = $request->input('content');
         $comment->reactions_counter = new CommentReactionsCounter();
 
