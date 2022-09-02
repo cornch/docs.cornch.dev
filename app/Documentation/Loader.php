@@ -149,7 +149,7 @@ final class Loader
                 $markdown = $this->getFile($this->resolveDocPath());
 
                 $matches = [];
-                preg_match('@^#([^#]+)\n@', $markdown, $matches);
+                preg_match('@#([^#]+)\n@m', $markdown, $matches);
 
                 return trim($matches[1] ?? '') . ' - ' . $this->getDocName();
             },
