@@ -38,7 +38,7 @@
             {{ __('You are viewing a translated version of :docName. It is possible that some of the content in this page are not translated, or even been wrongly translated. You can switch to the original version by using the language switcher in the header.', ['docName' => $page->loader->getDocName()]) }}
         </x-alert>
 
-        <x-translation-info :info="$frontMatter" />
+        <x-translation-info :info="$frontMatter" :locale="$pathInfo->locale" />
     @endif
 
     <article class="content language-php mb-16">
@@ -46,7 +46,7 @@
     </article>
 
     @if ($frontMatter !== null && $page->locale()?->translated)
-        <x-translation-info :info="$frontMatter" />
+        <x-translation-info :info="$frontMatter" :locale="$pathInfo->locale" />
     @endif
 
     <div class="mb-32">

@@ -1,4 +1,4 @@
-@props(['info'])
+@props(['info', 'locale'])
 
 <div class="mb-16 px-6 py-4 border dark:border-zinc-500 rounded flex items-center gap-8">
     <dl class="flex-grow flex flex-col gap-y-2">
@@ -14,6 +14,12 @@
             </dd>
         </div>
 
+        <div class="flex gap-1">
+            <dt class="text-zinc-500">{{ __('Updated at') }}</dt>
+            <dd class="text-zinc-400">
+                <x-datetime :datetime="Date::parse($info['updatedAt'])" :locale="$locale" />
+            </dd>
+        </div>
         <div class="flex gap-1">
             <dt class="text-zinc-500">{{ __('Translated by') }}</dt>
             <dd>
