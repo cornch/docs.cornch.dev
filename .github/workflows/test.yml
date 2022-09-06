@@ -24,8 +24,8 @@ jobs:
       - name: Composer Install
         uses: ./.github/actions/composer-install
 
-      - name: PHP-CS-Fixer
-        run: composer lint -- --dry-run --using-cache=no --config=.php-cs-fixer.php --format=checkstyle | cs2pr
+      - name: Pint
+        run: composer lint -- --test
         env:
           PHP_CS_FIXER_IGNORE_ENV: 1
 
