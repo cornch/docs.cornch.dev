@@ -23,7 +23,7 @@
     @stack('header-styles')
 </head>
 
-<body class="overflow-hidden">
+<body class="md:overflow-hidden">
 <header class="md:fixed w-full">
     <div class="container max-w-5xl mx-auto md:px-6 bg-white dark:bg-zinc-800 antialiased">
         <nav class="flex flex-wrap items-center justify-between md:py-1">
