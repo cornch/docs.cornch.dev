@@ -56,6 +56,7 @@ final class CalloutParser extends AbstractBlockContinueParser
         return new class() implements BlockStartParserInterface
         {
             private const CALLOUT_PAIRS = [['> {', '}'], ['> **', '**']];
+            private const VALID_CALLOUT_TYPES = ['note', 'tip', 'video', 'Warning', 'Note', 'laracasts'];
 
             public function tryStart(Cursor $cursor, MarkdownParserStateInterface $parserState): ?BlockStart
             {
@@ -77,6 +78,9 @@ final class CalloutParser extends AbstractBlockContinueParser
                     $cursor->advanceBySpaceOrTab();
 
                     $type = mb_substr($sub, 0, $typeClosingPosition);
+                    if (!in_array($type, self::VALID_CALLOUT_TYPES, true)) {
+                        return BlockStart::none();
+                    }
 
                     return BlockStart::of(new CalloutParser($type))->at($cursor);
                 }
