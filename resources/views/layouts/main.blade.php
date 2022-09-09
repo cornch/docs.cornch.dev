@@ -119,6 +119,7 @@
             md:fixed md:top-0 md:left-0
             flex flex-col
             md:w-1/5 md:max-h-screen
+            md:h-full
             mb-16 md:mb-0
             md:pt-14
             bg-gray-200 dark:bg-zinc-700
