@@ -19,22 +19,14 @@ use Spatie\Honeypot\ProtectAgainstSpam;
 Route::view('/', 'index');
 
 Route::get('{locale}/{doc}/{version}/{page}/comments', [CommentController::class, 'index'])
-    ->name('docs.comments.index')
-    ->where('doc', 'laravel') // @TODO: support more docs
-    ->where('page', '[\w\-_/]+?');
+    ->name('docs.comments.index');
 
 Route::get('{locale}/{doc}/{version}/{page}/comments/new', [CommentController::class, 'form'])
-    ->name('docs.comments.form')
-    ->where('doc', 'laravel') // @TODO: support more docs
-    ->where('page', '[\w\-_/]+?');
+    ->name('docs.comments.form');
 
 Route::post('{locale}/{doc}/{version}/{page}/comments', [CommentController::class, 'store'])
     ->name('docs.comments.store')
-    ->middleware([ProtectAgainstSpam::class])
-    ->where('doc', 'laravel') // @TODO: support more docs
-    ->where('page', '[\w\-_/]+?');
+    ->middleware([ProtectAgainstSpam::class]);
 
 Route::get('{locale}/{doc}/{version}/{page}', DocumentationController::class)
-    ->name('docs.show')
-    ->where('doc', 'laravel') // @TODO: support more docs
-    ->where('page', '[\w\-_/]+?');
+    ->name('docs.show');
