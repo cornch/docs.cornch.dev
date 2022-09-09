@@ -24,8 +24,8 @@
 </head>
 
 <body>
-<header class="md:fixed w-full bg-white z-40">
-    <div class="container max-w-5xl mx-auto md:px-6 bg-white dark:bg-zinc-800 antialiased">
+<header class="md:fixed w-full bg-white/90 dark:bg-zinc-800/90 backdrop-blur shadow z-40">
+    <div class="container max-w-5xl mx-auto md:px-6 antialiased">
         <nav class="flex flex-wrap items-center justify-between md:py-1">
             <x-logo class="w-12 mx-4" />
 
@@ -122,6 +122,7 @@
             mb-16 md:mb-0
             md:pt-14
             bg-gray-200 dark:bg-zinc-700
+            shadow
         "
         x-show="show_menu"
         x-transition
