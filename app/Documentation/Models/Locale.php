@@ -7,6 +7,7 @@ namespace App\Documentation\Models;
 final class Locale
 {
     public function __construct(
+        public readonly string $key,
         public readonly string $name,
         public readonly string $title,
         public readonly string $path,

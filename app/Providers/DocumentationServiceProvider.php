@@ -23,6 +23,7 @@ final class DocumentationServiceProvider extends ServiceProvider
                 defaultVersion: '9.x',
                 locales: [
                     'en' => new Locale(
+                        key: 'en',
                         name: 'English',
                         title: 'Laravel Documentation',
                         path: 'laravel/docs/{{version}}/{{page}}.md',
@@ -30,6 +31,7 @@ final class DocumentationServiceProvider extends ServiceProvider
                         translated: false,
                     ),
                     'zh-tw' => new Locale(
+                        key: 'zh_TW',
                         name: '繁體中文（臺灣）',
                         title: 'Laravel 繁體中文（臺灣）說明文件',
                         path: 'laravel/build/zh_TW/{{version}}/{{page}}.md',
@@ -40,18 +42,21 @@ final class DocumentationServiceProvider extends ServiceProvider
                 index: 'installation',
                 versions: [
                     '8.x' => new Version(
+                        key: '8.x',
                         name: '8.x',
                         old: true,
                         deprecated: false,
                         preRelease: false,
                     ),
                     '9.x' => new Version(
+                        key: '9.x',
                         name: '9.x',
                         old: false,
                         deprecated: false,
                         preRelease: false,
                     ),
                     'master' => new Version(
+                        key: 'master',
                         name: 'Master',
                         old: false,
                         deprecated: false,

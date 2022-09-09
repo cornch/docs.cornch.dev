@@ -52,7 +52,7 @@ final class RouteServiceProvider extends ServiceProvider
         Route::bind('locale', fn ($value) => Locale::tryFrom($value));
 
         Route::pattern('doc', 'laravel');
-        Route::pattern('page', '[\w\-_/]+?');
+        Route::pattern('page', '[\w\-_]+?');
     }
 
     /**

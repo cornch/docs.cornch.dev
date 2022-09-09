@@ -28,5 +28,8 @@ Route::post('{locale}/{doc}/{version}/{page}/comments', [CommentController::clas
     ->name('docs.comments.store')
     ->middleware([ProtectAgainstSpam::class]);
 
-Route::get('{locale}/{doc}/{version}/{page}', DocumentationController::class)
+Route::get('{locale}/{doc}/{version}/{page}', [DocumentationController::class, 'show'])
     ->name('docs.show');
+
+Route::get('{locale}/{doc}/{page}', [DocumentationController::class, 'detectsVersion'])
+    ->name('docs.detects-version');
