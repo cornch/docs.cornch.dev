@@ -48,10 +48,12 @@
     h4 a,
     h3 a {
         @apply text-gray-900 dark:text-white;
+        @apply md:pl-0;
 
         @apply before:content-["#"];
-        @apply before:absolute;
-        @apply before:ml-[-1em] before:align-middle;
+        @apply before:md:absolute;
+        @apply before:md:ml-[-1em] before:mr-1 before:md:mr-0;
+        @apply before:md:align-middle;
         @apply before:font-normal before:text-red-600;
         @apply before:opacity-60;
     }

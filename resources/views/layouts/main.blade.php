@@ -120,7 +120,7 @@
             flex flex-col
             md:w-1/5 md:max-h-screen
             mb-16 md:mb-0
-            pt-14
+            md:pt-14
             bg-gray-200 dark:bg-zinc-700
         "
         x-show="show_menu"
