@@ -5,6 +5,16 @@
  */
 
 .content {
+    /* fix link position with header */
+    h1:has(> a),
+    h2:has(> a),
+    h3:has(> a),
+    h4:has(> a),
+    h5:has(> a),
+    h6:has(> a) {
+        @apply md:-mt-16 md:pt-16;
+    }
+
     h1, h2, h3, h4, h5, h6 {
         @apply font-medium mb-[1em];
     }
