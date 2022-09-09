@@ -208,8 +208,8 @@
     </aside>
 
     <div
-        class="w-full overflow-x-scroll motion-safe:transition-[margin-left]"
-        x-bind:class="{ 'md:ml-[20vw]': show_menu }"
+        class="w-full md:ml-[20vw] overflow-x-scroll motion-safe:transition-[margin-left]"
+        x-bind:class="{ 'md:!ml-0': !show_menu }"
         x-data="{ current: 0, display_zone: 1000 }"
         x-on:scroll.document.throttle.100ms="current = document.documentElement.scrollTop"
     >
