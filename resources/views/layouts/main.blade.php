@@ -23,8 +23,8 @@
     @stack('header-styles')
 </head>
 
-<body class="md:overflow-hidden">
-<header class="md:fixed w-full">
+<body>
+<header class="md:fixed w-full bg-white z-40">
     <div class="container max-w-5xl mx-auto md:px-6 bg-white dark:bg-zinc-800 antialiased">
         <nav class="flex flex-wrap items-center justify-between md:py-1">
             <x-logo class="w-12 mx-4" />
@@ -91,7 +91,7 @@
 </header>
 
 <div
-    class="md:h-screen flex flex-col md:flex-row justify-center items-stretch md:pt-14"
+    class="min-h-screen flex flex-col md:flex-row justify-center items-stretch md:pt-14"
     x-data="{show_menu: window.innerWidth > 768}"
     x-on:keyup.m.window="show_menu = !show_menu"
     x-transition
@@ -115,8 +115,16 @@
     </button>
 
     <aside
-        class="flex flex-col md:w-1/5 mb-16 md:mb-0 bg-gray-200 dark:bg-zinc-700"
+        class="
+            md:fixed md:top-0 md:left-0
+            flex flex-col
+            md:w-1/5 md:max-h-screen
+            mb-16 md:mb-0
+            pt-14
+            bg-gray-200 dark:bg-zinc-700
+        "
         x-show="show_menu"
+        x-transition
     >
         <template x-teleport="body">
             <button
@@ -198,40 +206,47 @@
     </aside>
 
     <div
-        id="content"
-        class="overflow-x-hidden container md:max-w-5xl mx-auto py-12 md:py-6 px-6 md:px-12"
+        class="w-full overflow-x-scroll motion-safe:transition-[margin-left]"
+        x-bind:class="{ 'md:ml-[20vw]': show_menu }"
         x-data="{ current: 0, display_zone: 1000 }"
-        x-on:scroll.throttle.100ms="current = $el.scrollTop"
+        x-on:scroll.document.throttle.100ms="current = document.documentElement.scrollTop"
     >
-        @yield('content')
-
-        <footer class="md:px-6 mb-16" lang="en">
-            <div class="w-full flex py-4">
-                <div class="px-4 flex justify-center items-center">
-                    <a href="https://cornch.dev/" target="_blank">
-                        <x-logo class="w-12" />
-                    </a>
-                </div>
-                <div class="text-gray-600 dark:text-gray-500 text-sm">
-                    <p class="mb-4">Code Highlight Provided by <a href="https://torchlight.dev/" class="hover:text-gray-500 underline hover:no-underline" target="_blank" rel="noopener noreferrer">Torchlight</a></p>
-
-                    <p class="mb-2"><a href="https://github.com/cornch/docs.cornch.dev/blob/main/LICENSE" class="hover:text-gray-500 underline hover:no-underline" target="_blank" rel="nofollow noopener">License</a> | <a href="https://github.com/cornch/docs.cornch.dev" class="hover:text-gray-500 underline hover:no-underline" target="_blank" rel="nofollow noopener">Source Code</a></p>
-                    <p>cornch.dev &copy; {{ date('Y') }} All Rights Reserved.</p>
-                </div>
-            </div>
-        </footer>
-
-        <button
-            type="button"
-            class="fixed right-12 bottom-12 p-4 rounded bg-white bg-opacity-70 backdrop-blur shadow"
-            aria-hidden="true"
-            title="{{ __('Back to Top') }}"
-            x-show="current > display_zone"
-            x-on:click="$root.scrollTo({ left: 0, top: 0, behavior: 'smooth' });current=0"
-            x-transition
+        <div
+            id="content"
+            class="container md:max-w-5xl mx-auto py-12 md:py-6 px-6 md:px-12"
         >
-            <x-heroicon-o-arrow-up class="w-6 h-6" />
-        </button>
+            @yield('content')
+
+            <footer class="md:px-6 mb-16" lang="en">
+                <div class="w-full flex py-4">
+                    <div class="px-4 flex justify-center items-center">
+                        <a href="https://cornch.dev/" target="_blank">
+                            <x-logo class="w-12" />
+                        </a>
+                    </div>
+                    <div class="text-gray-600 dark:text-gray-500 text-sm">
+                        <p class="mb-4">Code Highlight Provided by <a href="https://torchlight.dev/" class="hover:text-gray-500 underline hover:no-underline" target="_blank" rel="noopener noreferrer">Torchlight</a></p>
+
+                        <p class="mb-2"><a href="https://github.com/cornch/docs.cornch.dev/blob/main/LICENSE" class="hover:text-gray-500 underline hover:no-underline" target="_blank" rel="nofollow noopener">License</a> | <a href="https://github.com/cornch/docs.cornch.dev" class="hover:text-gray-500 underline hover:no-underline" target="_blank" rel="nofollow noopener">Source Code</a></p>
+                        <p>cornch.dev &copy; {{ date('Y') }} All Rights Reserved.</p>
+                    </div>
+                </div>
+            </footer>
+
+            <template x-teleport="body">
+                <button
+                    type="button"
+                    class="fixed right-12 bottom-12 p-4 rounded bg-white bg-opacity-70 backdrop-blur shadow"
+                    aria-hidden="true"
+                    title="{{ __('Back to Top') }}"
+                    x-show="current > display_zone"
+                    x-on:click="document.documentElement.scrollTo({ left: 0, top: 0, behavior: 'smooth' });current=0"
+                    x-transition
+                >
+                    <x-heroicon-o-arrow-up class="w-6 h-6" />
+                </button>
+            </template>
+        </div>
     </div>
 </div>
 
