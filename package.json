@@ -5,7 +5,7 @@
         "build": "vite build"
     },
     "devDependencies": {
-        "autoprefixer": "^10.4.2",
+        "autoprefixer": "^10.4.10",
         "axios": "^0.27.2",
         "dayjs": "^1.11.4",
         "dotenv": "^16.0.2",
