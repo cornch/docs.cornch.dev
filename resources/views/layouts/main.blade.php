@@ -238,7 +238,7 @@
             <template x-teleport="body">
                 <button
                     type="button"
-                    class="fixed right-12 bottom-12 p-4 rounded bg-white bg-opacity-70 backdrop-blur shadow"
+                    class="fixed right-12 bottom-12 p-4 rounded bg-white hover:bg-gray-200 dark:bg-neutral-500/60 hover:dark:bg-neutral-400/60 backdrop-blur shadow transition-colors"
                     aria-hidden="true"
                     title="{{ __('Back to Top') }}"
                     x-show="current > display_zone"
