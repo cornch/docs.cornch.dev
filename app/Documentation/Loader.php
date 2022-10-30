@@ -150,7 +150,7 @@ final class Loader
                 $matches = [];
                 preg_match('@#([^#]+)\n@m', $markdown, $matches);
 
-                return trim($matches[1] ?? '') . ' - ' . $this->getDocName();
+                return trim($matches[1] ?? '') . ' – ' . $this->getDocName();
             },
         );
     }

@@ -13,7 +13,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     @if(View::hasSection('title'))
-        <title>@yield('title') - {{ config('app.name') }}</title>
+        <title>@yield('title') – {{ config('app.name') }}</title>
     @else
         <title>{{ config('app.name') }}</title>
     @endif
