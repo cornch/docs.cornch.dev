@@ -9,7 +9,7 @@
         "axios": "^1.1.3",
         "dayjs": "^1.11.4",
         "dotenv": "^16.0.2",
-        "laravel-vite-plugin": "^0.7.0",
+        "laravel-vite-plugin": "^0.7.1",
         "postcss-import": "^15.0.0",
         "postcss-preset-env": "^7.8.0",
         "vite": "^3.0.9"
