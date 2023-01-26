@@ -8,6 +8,7 @@ use App\Documentation\Documentation;
 use App\Documentation\Models\Docset;
 use App\Documentation\Models\Locale;
 use App\Documentation\Models\Version;
+use DateTime;
 use Illuminate\Support\ServiceProvider;
 
 final class DocumentationServiceProvider extends ServiceProvider
@@ -44,25 +45,26 @@ final class DocumentationServiceProvider extends ServiceProvider
                     '8.x' => new Version(
                         key: '8.x',
                         name: '8.x',
-                        old: true,
-                        deprecated: false,
+                        bugFixSupportEndsAt: new DateTime('2022-07-26T00:00:00+00:00'),
+                        securitySupportEndsAt: new DateTime('2023-01-24T00:00:00+00:00'),
                         preRelease: false,
                     ),
                     '9.x' => new Version(
                         key: '9.x',
                         name: '9.x',
-                        old: false,
-                        deprecated: false,
+                        bugFixSupportEndsAt: new DateTime('2023-08-08T00:00:00+00:00'),
+                        securitySupportEndsAt: new DateTime('2024-02-08T00:00:00+00:00'),
                         preRelease: false,
                     ),
                     'master' => new Version(
                         key: 'master',
                         name: 'Master',
-                        old: false,
-                        deprecated: false,
+                        bugFixSupportEndsAt: null,
+                        securitySupportEndsAt: null,
                         preRelease: true,
                     ),
                 ],
+                currentVersion: '9.x',
                 linkFixer: function (string $url): string {
                     return preg_replace(
                         ['#^/docs/#', '#^/api/#'],

@@ -6,6 +6,7 @@ namespace App\Documentation\Models;
 
 use App\Enums\Locale as LocaleEnum;
 use Closure;
+use InvalidArgumentException;
 
 final class Docset
 {
@@ -27,8 +28,12 @@ final class Docset
         public readonly array $locales,
         public readonly string $index,
         public readonly array $versions,
+        public readonly string $currentVersion,
         public readonly array|Closure $linkFixer,
     ) {
+        if (!array_key_exists($defaultVersion, $versions)) {
+            throw new InvalidArgumentException("The current version [{$defaultVersion}] is not defined.");
+        }
     }
 
     public function hasLocale(LocaleEnum $locale): bool

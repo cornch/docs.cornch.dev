@@ -23,7 +23,14 @@
     "You are viewing a pre-released version of :docName. We do not recommend reading a pre-released version of documentation unless you're framework or package developer. You can switch the version from the sidebar.": "你正在檢視的是預先發佈的 :docName。除非你是框架或套件開發者，我們不建議閱讀預先發佈的文件。你可以在側欄中選擇其他版本。",
 
     "This is a translated version": "此文件是翻譯版本",
+    "This is translation is incomplete": "此文件是尚未完成的翻譯版本",
     "You are viewing a translated version of :docName. It is possible that some of the content in this page are not translated, or even been wrongly translated. You can switch to the original version by using the language switcher in the header.": "你正在檢視的是翻譯版本的 :docName。此頁面中可能有部分或全部的內容還未翻譯，或甚至含有錯誤的翻譯。你可以在頁面頂端中的語言選擇來切換到原文。",
+
+    "Deprecated version": "已停止支援的版本",
+    "You are viewing a deprecated version of :docName. This version no longer receives bug fixes and security updates. You can switch the version from the sidebar.": "你正在檢視的是已停止支援的 :docName。此版本不再接收錯誤修正和安全更新。你可以在側欄中選擇其他版本。",
+    "You are viewing a deprecated version of :docName. This version no longer receives bug fixes. You can switch the version from the sidebar.": "你正在檢視的是已停止支援的 :docName。此版本不再接收錯誤修正。你可以在側欄中選擇其他版本。",
+    "If you are using this version, you should upgrade to the latest version as soon as possible.": "如果你正在使用此版本，應盡快升級到最新版本。",
+    "The current version of :docName is :version.": "目前的 :docName 版本為 :version。",
 
     "Translation Progress": "翻譯進度",
     "Translated": "已翻譯",
