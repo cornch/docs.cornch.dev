@@ -19,7 +19,7 @@
 
             {{ __('You are viewing a deprecated version of :docName. This version no longer receives bug fixes and security updates. You can switch the version from the sidebar.', ['docName' => $page->loader->getDocName()]) }}<br />
             {{ __('If you are using this version, you should upgrade to the latest version as soon as possible.') }}<br />
-            {{ __('The current version of :docName is :version.', ['docName' => $page->loader->getDocName(), 'version' => $page->loader->docset->currentVersion]) }}
+            {{ __('The current version of :packageName is :version.', ['packageName' => $page->loader->getPackageName(), 'version' => $page->loader->docset->currentVersion]) }}
         </x-alert>
     @elseif(!$page->version()?->receivesBugFixes())
         <x-alert theme="warning">
@@ -29,7 +29,7 @@
 
             {{ __('You are viewing a deprecated version of :docName. This version no longer receives bug fixes. You can switch the version from the sidebar.', ['docName' => $page->loader->getDocName()]) }}<br />
             {{ __('If you are using this version, you should upgrade to the latest version as soon as possible.') }} <br />
-            {{ __('The current version of :docName is :version.', ['docName' => $page->loader->getDocName(), 'version' => $page->loader->docset->currentVersion]) }}
+            {{ __('The current version of :packageName is :version.', ['packageName' => $page->loader->getPackageName(), 'version' => $page->loader->docset->currentVersion]) }}
         </x-alert>
     @elseif(!$page->version()?->preRelease && !$page->loader->docset->currentVersion !== $page->version()?->key)
         <x-alert theme="warning">
@@ -39,7 +39,7 @@
 
             {{ __('You are viewing an old version of :docName. You can switch the version from the sidebar.', ['docName' => $page->loader->getDocName()]) }}<br />
             {{ __('If you are using this version, please consider upgrading to the latest version.') }}<br />
-            {{ __('The current version of :docName is :version.', ['docName' => $page->loader->getDocName(), 'version' => $page->loader->docset->currentVersion]) }}
+            {{ __('The current version of :packageName is :version.', ['packageName' => $page->loader->getPackageName(), 'version' => $page->loader->docset->currentVersion]) }}
         </x-alert>
     @endif
     @if($page->version()?->preRelease)
@@ -48,7 +48,7 @@
                 {{ __('This is a pre-released version') }}
             </x-slot>
 
-            {{ __('You are viewing a pre-released version of :docName. We do not recommend reading a pre-released version of documentation unless you\'re framework or package developer. You can switch the version from the sidebar.', ['docName' => $page->loader->getDocName()]) }}
+            {{ __('You are viewing a pre-released version of :docName. We do not recommend reading a pre-released version of documentation unless you\'re framework or package developer. You can switch the version from the sidebar.', ['docName' => $page->loader->getPackageName()]) }}
         </x-alert>
     @endif
     @if($page->locale()?->translated && optional($frontMatter)['progress'] < 100)

@@ -83,6 +83,11 @@ final class Loader
         return $this->docset->getLocale($this->pathInfo->locale)->title;
     }
 
+    public function getPackageName(): string
+    {
+        return $this->docset->getLocale($this->pathInfo->locale)->packageName;
+    }
+
     public function getPage(): Page
     {
         return new Page(
