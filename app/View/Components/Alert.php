@@ -9,10 +9,10 @@ class Alert extends Component
 {
     private const WRAPPER_THEME_STYLES = [
         'warning' => [
-            'border-yellow-700',
+            'border-yellow-500',
         ],
         'success' => [
-            'border-green-700',
+            'border-green-500',
         ],
     ];
 
@@ -47,8 +47,7 @@ class Alert extends Component
             'flex justify-center items-center',
             'px-6',
             'rounded-l',
-            'text-white',
-            'dark:text-gray-900',
+            'text-white/70',
             ...(self::ICON_WRAPPER_THEME_STYLES[$this->theme] ?? []),
         ];
     }
