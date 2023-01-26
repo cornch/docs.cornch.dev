@@ -24,7 +24,7 @@ php artisan key:generate
 
 4. Compile Assets
 ```bash
-npm run prod
+npm run build
 ```
 
 ## License
