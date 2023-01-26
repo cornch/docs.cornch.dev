@@ -31,7 +31,7 @@
             {{ __('If you are using this version, you should upgrade to the latest version as soon as possible.') }} <br />
             {{ __('The current version of :packageName is :version.', ['packageName' => $page->loader->getPackageName(), 'version' => $page->loader->docset->currentVersion]) }}
         </x-alert>
-    @elseif(!$page->version()?->preRelease && !$page->loader->docset->currentVersion !== $page->version()?->key)
+    @elseif(!$page->version()?->preRelease && $page->loader->docset->currentVersion !== $page->version()?->key)
         <x-alert theme="warning">
             <x-slot name="title">
                 {{ __('This is an old version') }}
