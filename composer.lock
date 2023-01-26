@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7c6784f96ea2652c7de75288d0aed1a9",
+    "content-hash": "81349bbe88abb556ef4c851653047750",
     "packages": [
         {
             "name": "akaunting/laravel-money",
@@ -6528,16 +6528,16 @@
         },
         {
             "name": "wikimedia/css-sanitizer",
-            "version": "v3.0.2",
+            "version": "v4.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/wikimedia/css-sanitizer.git",
-                "reference": "718e2a79fc3fec4c7a43193b5e2ac3bae6756ee4"
+                "reference": "e8cd197f9c47da649fff3dad4c74c3d85276c208"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wikimedia/css-sanitizer/zipball/718e2a79fc3fec4c7a43193b5e2ac3bae6756ee4",
-                "reference": "718e2a79fc3fec4c7a43193b5e2ac3bae6756ee4",
+                "url": "https://api.github.com/repos/wikimedia/css-sanitizer/zipball/e8cd197f9c47da649fff3dad4c74c3d85276c208",
+                "reference": "e8cd197f9c47da649fff3dad4c74c3d85276c208",
                 "shasum": ""
             },
             "require": {
@@ -6545,16 +6545,17 @@
                 "ext-mbstring": "*",
                 "php": ">=7.2.0",
                 "wikimedia/at-ease": "^2.0.0",
+                "wikimedia/scoped-callback": "3.0.0 || 4.0.0",
                 "wikimedia/utfnormal": "2.0.0 || ^3.0.1"
             },
             "require-dev": {
-                "mediawiki/mediawiki-codesniffer": "35.0.0",
-                "mediawiki/mediawiki-phan-config": "0.10.6",
+                "mediawiki/mediawiki-codesniffer": "39.0.0",
+                "mediawiki/mediawiki-phan-config": "0.11.1",
                 "mediawiki/minus-x": "1.1.1",
-                "php-parallel-lint/php-console-highlighter": "0.5.0",
-                "php-parallel-lint/php-parallel-lint": "1.2.0",
+                "php-parallel-lint/php-console-highlighter": "1.0.0",
+                "php-parallel-lint/php-parallel-lint": "1.3.2",
                 "phpunit/phpunit": "^8.5",
-                "wikimedia/testing-access-wrapper": "1.0.0"
+                "wikimedia/testing-access-wrapper": "~2.0.0"
             },
             "type": "library",
             "autoload": {
@@ -6575,9 +6576,58 @@
             "description": "Classes to parse and sanitize CSS",
             "homepage": "https://www.mediawiki.org/wiki/Css-sanitizer",
             "support": {
-                "source": "https://github.com/wikimedia/css-sanitizer/tree/v3.0.2"
+                "source": "https://github.com/wikimedia/css-sanitizer/tree/v4.0.1"
             },
-            "time": "2021-03-21T17:30:58+00:00"
+            "time": "2022-07-09T23:19:05+00:00"
+        },
+        {
+            "name": "wikimedia/scoped-callback",
+            "version": "v4.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/wikimedia/scoped-callback.git",
+                "reference": "dd522a6cfb4c0180b0a39d12fc57046a347c4d81"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/wikimedia/scoped-callback/zipball/dd522a6cfb4c0180b0a39d12fc57046a347c4d81",
+                "reference": "dd522a6cfb4c0180b0a39d12fc57046a347c4d81",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2.9"
+            },
+            "require-dev": {
+                "mediawiki/mediawiki-codesniffer": "39.0.0",
+                "mediawiki/mediawiki-phan-config": "0.11.1",
+                "mediawiki/minus-x": "1.1.1",
+                "ockcyp/covers-validator": "1.4.0",
+                "php-parallel-lint/php-console-highlighter": "1.0.0",
+                "php-parallel-lint/php-parallel-lint": "1.3.2",
+                "phpunit/phpunit": "^8.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Wikimedia\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Aaron Schulz",
+                    "email": "aschulz@wikimedia.org"
+                }
+            ],
+            "description": "Make a callback run when a dummy object leaves the scope.",
+            "homepage": "https://www.mediawiki.org/wiki/ScopedCallback",
+            "support": {
+                "source": "https://github.com/wikimedia/scoped-callback/tree/v4.0.0"
+            },
+            "time": "2022-07-08T22:48:52+00:00"
         },
         {
             "name": "wikimedia/utfnormal",
