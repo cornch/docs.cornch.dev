@@ -7,32 +7,58 @@ use Illuminate\View\Component;
 
 class Alert extends Component
 {
-    private const THEME_STYLES = [
+    private const WRAPPER_THEME_STYLES = [
         'warning' => [
-            'border-orange-700',
-            'text-orange-900',
-            'bg-orange-100',
+            'border-yellow-700',
         ],
         'success' => [
             'border-green-700',
-            'text-green-900',
-            'bg-green-100',
+        ],
+    ];
+
+    private const ICON_WRAPPER_THEME_STYLES = [
+        'warning' => [
+            'bg-yellow-500',
+        ],
+        'success' => [
+            'bg-green-500',
         ],
     ];
 
     public function __construct(
         private readonly string $theme = 'primary',
+        private readonly ?string $icon = null,
     ) {
     }
 
-    public function themeStyles(): array
+    public function wrapperStyles(): array
     {
-        return self::THEME_STYLES[$this->theme] ?? [];
+        return self::WRAPPER_THEME_STYLES[$this->theme] ?? [];
     }
 
     public function titleThemeStyles(): array
     {
         return [];
+    }
+
+    public function iconWrapperStyles(): array
+    {
+        return [
+            'flex justify-center items-center',
+            'px-6',
+            'rounded-l',
+            'text-white',
+            'dark:text-gray-900',
+            ...(self::ICON_WRAPPER_THEME_STYLES[$this->theme] ?? []),
+        ];
+    }
+
+    public function icon(): string
+    {
+        return $this->icon ?? match($this->theme) {
+            'warning' => 'heroicon-s-exclamation',
+            'success' => 'heroicon-s-check-circle',
+        };
     }
 
     public function render(): View

@@ -1,18 +1,23 @@
 <div
     {{
         $attributes->class([
-            'flex flex-col gap-y-2',
+            'flex gap-y-2',
             'mb-8',
-            'px-6 py-4',
             'rounded',
             'border',
-            ...$themeStyles(),
+            ...$wrapperStyles(),
         ])
     }}
     role="alert"
 >
-    @isset($title)
-        <strong @class(['font-medium', ...$titleThemeStyles()])>{{ $title }}</strong>
-    @endisset
-    {{ $slot }}
+    <div @class($iconWrapperStyles())>
+        <x-dynamic-component :component="$icon" class="w-12 h-12" />
+    </div>
+
+    <p class="px-6 py-4 rounded-r flex flex-col gap-y-2">
+        @isset($title)
+            <strong @class(['font-medium', ...$titleThemeStyles()])>{{ $title }}</strong>
+        @endisset
+        {{ $slot }}
+    </p>
 </div>
