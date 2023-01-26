@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Documentation\Documentation;
 use App\Documentation\Models\Locale;
 use App\Documentation\Models\Version;
-use App\Enums\Locale as LocaleEnum;
 use App\Http\Requests\DocumentationBasedRequest;
 use App\Models\Comment;
 use Illuminate\Contracts\View\View;
@@ -63,7 +62,7 @@ final class DocumentationController
             ->partition(static fn (Version $version) => $version->preRelease);
 
         foreach ($stableVersions as $version) {
-            if (!$this->isPageInVersion($version, $docLocale, $doc, $page)) {
+            if (! $this->isPageInVersion($version, $docLocale, $doc, $page)) {
                 continue;
             }
 

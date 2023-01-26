@@ -13,7 +13,7 @@ final class DetectLocale
     {
         $locale = $request->route('locale');
 
-        if (is_string($locale) && !empty($locale)) {
+        if (is_string($locale) && ! empty($locale)) {
             $locale = Locale::tryFrom($locale);
         }
 

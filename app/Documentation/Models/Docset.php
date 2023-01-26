@@ -31,7 +31,7 @@ final class Docset
         public readonly string $currentVersion,
         public readonly array|Closure $linkFixer,
     ) {
-        if (!array_key_exists($defaultVersion, $versions)) {
+        if (! array_key_exists($defaultVersion, $versions)) {
             throw new InvalidArgumentException("The current version [{$defaultVersion}] is not defined.");
         }
     }

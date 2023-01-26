@@ -29,6 +29,6 @@ final class Version
 
     public function deprecated(): bool
     {
-        return !$this->receivesBugFixes() || !$this->receivesSecurityFixes();
+        return ! $this->receivesBugFixes() || ! $this->receivesSecurityFixes();
     }
 }
