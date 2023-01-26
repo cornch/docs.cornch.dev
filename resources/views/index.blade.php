@@ -21,7 +21,23 @@
     </div>
 </header>
 
-<div class="container mx-auto px-6 mb-36">
+<div class="container mx-auto px-6 mb-36" x-data="{ showDeprecated: false, showPreRelease: false }">
+    <div class="mb-6 flex justify-center md:justify-start gap-4 px-6">
+        <div class="flex items-center gap-2">
+            <input type="checkbox" id="show-deprecated" x-model="showDeprecated" class="form-checkbox" />
+            <label for="show-deprecated">
+                {{ __('Deprecated') }}
+            </label>
+        </div>
+
+        <div class="flex items-center gap-2">
+            <input type="checkbox" id="show-pre-release" x-model="showPreRelease" class="form-checkbox" />
+            <label for="show-pre-release">
+                {{ __('Pre-Release') }}
+            </label>
+        </div>
+    </div>
+
     <x-docs-list-item doc="laravel" class="flex flex-col md:flex-row justify-center items-center md:items-stretch md:-mx-2">
         <x-slot name="logo">
             <x-logo.laravel class="w-64 md:w-full py-2" />

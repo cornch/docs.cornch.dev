@@ -26,4 +26,9 @@ final class Version
     {
         return $this->securitySupportEndsAt === null || $this->securitySupportEndsAt->getTimestamp() > time();
     }
+
+    public function deprecated(): bool
+    {
+        return !$this->receivesBugFixes() || !$this->receivesSecurityFixes();
+    }
 }
