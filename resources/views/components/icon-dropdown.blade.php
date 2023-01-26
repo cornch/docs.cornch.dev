@@ -11,7 +11,7 @@
             {{ $select }}
         </select>
 
-        <span class="{{ $sizeStyle('chevron-wrapper') }} absolute top-0 h-full flex items-center justify-center">
+        <span class="{{ $sizeStyle('chevron-wrapper') }} absolute top-0 h-full flex items-center justify-center pointer-events-none" aria-hidden="true">
             <x-heroicon-o-chevron-down class="{{ $sizeStyle('chevron') }} text-gray-900 dark:text-zinc-300" />
         </span>
     </div>
@@ -28,7 +28,7 @@
                     <span class="flex-grow">
                         {{ $current }}
                     </span>
-                    <x-heroicon-o-chevron-down class="{{ $sizeStyle('chevron') }} text-gray-900" />
+                    <x-heroicon-o-chevron-down class="{{ $sizeStyle('chevron') }} text-gray-900 pointer-events-none" aria-hidden="true" />
                 </summary>
 
                 <ul
