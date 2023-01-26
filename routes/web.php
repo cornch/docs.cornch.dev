@@ -18,6 +18,8 @@ use Spatie\Honeypot\ProtectAgainstSpam;
 
 Route::view('/', 'index');
 
+Route::get('{locale}/about', [\App\Http\Controllers\PageController::class, 'about']);
+
 Route::get('{locale}/{doc}/{version}/{page}/comments', [CommentController::class, 'index'])
     ->name('docs.comments.index');
 

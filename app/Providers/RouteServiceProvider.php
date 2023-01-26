@@ -49,7 +49,7 @@ final class RouteServiceProvider extends ServiceProvider
                 ->group(base_path('routes/web.php'));
         });
 
-        Route::bind('locale', fn ($value) => Locale::tryFrom($value));
+//        Route::bind('locale', fn ($value) => Locale::tryFrom($value));
 
         Route::pattern('doc', 'laravel');
         Route::pattern('page', '[\w\-_]+?');
