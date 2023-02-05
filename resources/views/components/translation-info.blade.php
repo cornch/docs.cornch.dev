@@ -1,6 +1,6 @@
 @props(['info', 'locale'])
 
-<div class="mb-16 px-6 py-4 border dark:border-zinc-500 rounded flex items-center gap-8">
+<div class="mb-16 px-6 py-4 border dark:border-zinc-500 rounded flex flex-col md:flex-row items-start md:items-center gap-8">
     <dl class="flex-grow flex flex-col gap-y-2">
         <div class="w-full flex flex-col gap-y-1">
             <dt class="sr-only">{{ __('Translation Progress') }}</dt>
