@@ -21,6 +21,8 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     @stack('header-styles')
+
+    <x-plausible />
 </head>
 
 <body>
