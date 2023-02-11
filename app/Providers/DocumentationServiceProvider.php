@@ -58,6 +58,13 @@ final class DocumentationServiceProvider extends ServiceProvider
                         securitySupportEndsAt: new DateTime('2024-02-08T00:00:00+00:00'),
                         preRelease: false,
                     ),
+                    '10.x' => new Version(
+                        key: '10.x',
+                        name: '10.x',
+                        bugFixSupportEndsAt: new DateTime('2024-08-08T00:00:00+00:00'),
+                        securitySupportEndsAt: new DateTime('2025-02-08T00:00:00+00:00'),
+                        preRelease: true,
+                    ),
                     'master' => new Version(
                         key: 'master',
                         name: 'Master',
