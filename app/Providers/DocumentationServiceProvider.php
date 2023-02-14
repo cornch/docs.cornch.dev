@@ -21,7 +21,7 @@ final class DocumentationServiceProvider extends ServiceProvider
                 headerView: 'docs.headers.laravel',
                 footerView: 'docs.footers.laravel',
                 hasVersion: true,
-                defaultVersion: '9.x',
+                defaultVersion: '10.x',
                 locales: [
                     'en' => new Locale(
                         key: 'en',
@@ -61,9 +61,9 @@ final class DocumentationServiceProvider extends ServiceProvider
                     '10.x' => new Version(
                         key: '10.x',
                         name: '10.x',
-                        bugFixSupportEndsAt: new DateTime('2024-08-08T00:00:00+00:00'),
-                        securitySupportEndsAt: new DateTime('2025-02-08T00:00:00+00:00'),
-                        preRelease: true,
+                        bugFixSupportEndsAt: new DateTime('2024-08-07T00:00:00+00:00'),
+                        securitySupportEndsAt: new DateTime('2025-02-05T00:00:00+00:00'),
+                        preRelease: false,
                     ),
                     'master' => new Version(
                         key: 'master',
@@ -73,7 +73,7 @@ final class DocumentationServiceProvider extends ServiceProvider
                         preRelease: true,
                     ),
                 ],
-                currentVersion: '9.x',
+                currentVersion: '10.x',
                 linkFixer: function (string $url): string {
                     return preg_replace(
                         ['#^/docs/#', '#^/api/#'],
