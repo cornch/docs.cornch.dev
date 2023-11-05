@@ -32,14 +32,16 @@
         <div class="flex gap-1">
             <dt class="text-zinc-500 flex-shrink-0">{{ __('Translated by') }}</dt>
             <dd>
-                <ul role="list" class="flex text-zinc-400">
+                <ul role="list" class="flex text-zinc-400 gap-x-1">
                     @foreach(collect($info['contributors'])->pluck('name')->sort() as $translator)
                         <li
                             class="
                                 first:before:!content-none
-                                before:content-['{{ __(',_') }}']
-                                last:before:content-['{{ __(',_and_') }}']
+                                before:content-[attr(data-separator)]
+                                last:before:content-[attr(data-last-separator)]
                             "
+                            data-separator="{{ __(', ') }}"
+                            data-last-separator="{{ __(', and ') }}"
                         >
                             {{ $translator }}
                         </li>

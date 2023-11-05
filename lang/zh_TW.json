@@ -37,7 +37,7 @@
     "Translated": "已翻譯",
     "Updated at": "更新時間：",
     "Translated by": "翻譯人員：",
-    ",_": "、",
-    ",_and_": "、",
+    ", ": "、",
+    ", and ": " 與 ",
     "Help Us Translate This Page": "幫我們翻譯此頁"
 }
