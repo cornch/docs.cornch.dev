@@ -29,7 +29,7 @@
         "spatie/once": "^3.1.1",
         "torchlight/torchlight-commonmark": "^0.5.5",
         "torchlight/torchlight-laravel": "^0.5.14",
-        "wikimedia/css-sanitizer": "^3.0.2"
+        "wikimedia/css-sanitizer": "^5.3.0"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.15.1",
