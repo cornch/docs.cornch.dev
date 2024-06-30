@@ -25,8 +25,8 @@ final class CommentController
             'page' => $loader->getPage(),
             'comments' => Comment
                 ::byPathInfo($loader->pathInfo)
-                ->whereApproved()
-                ->get(),
+                    ->whereApproved()
+                    ->get(),
             'success' => $request->session()->get('success'),
         ]);
     }

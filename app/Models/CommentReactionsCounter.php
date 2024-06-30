@@ -11,7 +11,7 @@ use InvalidArgumentException;
 use JetBrains\PhpStorm\ArrayShape;
 use JsonSerializable;
 
-final class CommentReactionsCounter implements Castable, JsonSerializable, Jsonable
+final class CommentReactionsCounter implements Castable, Jsonable, JsonSerializable
 {
     public const COLLAPSE_THRESHOLD = 3;
 
@@ -45,7 +45,7 @@ final class CommentReactionsCounter implements Castable, JsonSerializable, Jsona
 
     public static function fromArray(array $value): self
     {
-        return new static(
+        return new self(
             thumbsUp: $value['thumbs_up'] ?? 0,
             thumbsDown: $value['thumbs_down'] ?? 0,
             laugh: $value['laugh'] ?? 0,
@@ -100,19 +100,19 @@ final class CommentReactionsCounter implements Castable, JsonSerializable, Jsona
         'rocket' => 'int',
         'eyes' => 'int',
     ])]
- public function jsonSerialize(): array
- {
-     return [
-         'thumbsUp' => $this->thumbsUp,
-         'thumbsDown' => $this->thumbsDown,
-         'laugh' => $this->laugh,
-         'hooray' => $this->hooray,
-         'confused' => $this->confused,
-         'heart' => $this->heart,
-         'rocket' => $this->rocket,
-         'eyes' => $this->eyes,
-     ];
- }
+    public function jsonSerialize(): array
+    {
+        return [
+            'thumbsUp' => $this->thumbsUp,
+            'thumbsDown' => $this->thumbsDown,
+            'laugh' => $this->laugh,
+            'hooray' => $this->hooray,
+            'confused' => $this->confused,
+            'heart' => $this->heart,
+            'rocket' => $this->rocket,
+            'eyes' => $this->eyes,
+        ];
+    }
 
     public function toJson($options = 0): string
     {

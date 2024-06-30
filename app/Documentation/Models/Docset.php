@@ -11,14 +11,8 @@ use InvalidArgumentException;
 final class Docset
 {
     /**
-     * @param  string  $headerView
-     * @param  string  $footerView
-     * @param  bool  $hasVersion
-     * @param  string  $defaultVersion
      * @param  array<string, Locale>  $locales
-     * @param  string  $index
      * @param  array<string, Version>  $versions
-     * @param  array|Closure  $linkFixer
      */
     public function __construct(
         public readonly string $headerView,

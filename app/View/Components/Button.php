@@ -24,8 +24,7 @@ class Button extends Component
 
     public function __construct(
         private readonly string $theme = 'primary',
-    ) {
-    }
+    ) {}
 
     public function themeStyles(): array
     {

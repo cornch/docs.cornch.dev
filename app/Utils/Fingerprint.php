@@ -11,12 +11,11 @@ final class Fingerprint
 {
     public function __construct(
         private array $data
-    ) {
-    }
+    ) {}
 
     public static function fromRequest(Request $request): static
     {
-        return new static([
+        return new self([
             $request->ip(),
             $request->userAgent(),
         ]);

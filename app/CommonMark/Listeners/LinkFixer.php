@@ -11,8 +11,7 @@ final class LinkFixer
 {
     public function __construct(
         private ?\Closure $fixer
-    ) {
-    }
+    ) {}
 
     public function __invoke(DocumentParsedEvent $event): void
     {

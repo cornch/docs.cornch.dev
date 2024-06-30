@@ -41,7 +41,7 @@ uses(Tests\TestCase::class)->in('Feature');
 |
 */
 
-function makeDocumentationConverter(Closure $linkFixer = null): DocumentationConverter
+function makeDocumentationConverter(?Closure $linkFixer = null): DocumentationConverter
 {
     return new DocumentationConverter($linkFixer);
 }

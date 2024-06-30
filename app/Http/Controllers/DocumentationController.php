@@ -28,9 +28,9 @@ final class DocumentationController
             self::CACHE_TTL_SECONDS,
             static fn () => Comment
                 ::byPathInfo($loader->pathInfo)
-                ->whereApproved()
-                ->limit(self::COMMENTS_LIMIT)
-                ->get(),
+                    ->whereApproved()
+                    ->limit(self::COMMENTS_LIMIT)
+                    ->get(),
         );
 
         $commentsCount = Cache::remember(

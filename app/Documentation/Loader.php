@@ -20,11 +20,12 @@ use Illuminate\Support\Str;
 use JetBrains\PhpStorm\ArrayShape;
 use League\CommonMark\Extension\FrontMatter\Output\RenderedContentWithFrontMatter;
 use League\CommonMark\Output\RenderedContentInterface;
-use function once;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Wikimedia\CSS\Objects\CSSObject;
 use Wikimedia\CSS\Parser\Parser as CSSParser;
 use Wikimedia\CSS\Sanitizer\StylesheetSanitizer;
+
+use function once;
 
 final class Loader
 {

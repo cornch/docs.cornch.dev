@@ -52,15 +52,15 @@ final class CommentsSeeder extends Seeder
 
             Comment
                 ::factory()
-                ->has(CommentReaction::factory()->count(random_int(0, 10)), 'reactions')
-                ->state([
-                    'locale' => $locale,
-                    'doc' => $doc,
-                    'version' => $version,
-                    'page' => $page,
-                ])
-                ->count(random_int(1, 10))
-                ->create();
+                    ->has(CommentReaction::factory()->count(random_int(0, 10)), 'reactions')
+                    ->state([
+                        'locale' => $locale,
+                        'doc' => $doc,
+                        'version' => $version,
+                        'page' => $page,
+                    ])
+                    ->count(random_int(1, 10))
+                    ->create();
 
             $progress->advance();
         }

@@ -14,6 +14,5 @@ final class Locale
         public readonly string $path,
         public readonly string $navigation,
         public readonly bool $translated,
-    ) {
-    }
+    ) {}
 }

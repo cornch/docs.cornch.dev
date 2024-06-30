@@ -14,8 +14,7 @@ final class Version
         public readonly ?DateTimeInterface $bugFixSupportEndsAt,
         public readonly ?DateTimeInterface $securitySupportEndsAt,
         public readonly bool $preRelease,
-    ) {
-    }
+    ) {}
 
     public function receivesBugFixes(): bool
     {

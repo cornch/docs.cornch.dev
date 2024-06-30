@@ -31,8 +31,6 @@ final class RouteServiceProvider extends ServiceProvider
 
     /**
      * Define your route model bindings, pattern filters, etc.
-     *
-     * @return void
      */
     public function boot(): void
     {
@@ -49,7 +47,7 @@ final class RouteServiceProvider extends ServiceProvider
                 ->group(base_path('routes/web.php'));
         });
 
-//        Route::bind('locale', fn ($value) => Locale::tryFrom($value));
+        //        Route::bind('locale', fn ($value) => Locale::tryFrom($value));
 
         Route::pattern('doc', 'laravel');
         Route::pattern('page', '[\w\-_]+?');
@@ -57,8 +55,6 @@ final class RouteServiceProvider extends ServiceProvider
 
     /**
      * Configure the rate limiters for the application.
-     *
-     * @return void
      */
     protected function configureRateLimiting(): void
     {

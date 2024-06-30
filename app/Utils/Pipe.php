@@ -10,8 +10,7 @@ final class Pipe
 {
     public function __construct(
         public readonly mixed $endpipe
-    ) {
-    }
+    ) {}
 
     #[Pure]
     public static function from(mixed $data): Pipe

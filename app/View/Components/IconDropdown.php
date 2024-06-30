@@ -30,8 +30,7 @@ final class IconDropdown extends Component
 
     public function __construct(
         public readonly string $size = 'md',
-    ) {
-    }
+    ) {}
 
     public function sizeStyle($component): string
     {
