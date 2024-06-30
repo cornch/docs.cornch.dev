@@ -44,9 +44,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: mix
-          path: |
-            public/dist
-            public/fonts
+          path: public/build
 
   tests:
     runs-on: ubuntu-latest
@@ -67,7 +65,7 @@ jobs:
 
       - name: Download Mix Resources
         uses: actions/download-artifact@v2
-        with: { name: mix, path: public }
+        with: { name: mix, path: public/build }
 
       - name: Run PEST
         run: php artisan test --coverage --coverage-clover coverage.xml
