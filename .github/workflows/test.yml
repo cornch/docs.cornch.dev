@@ -64,7 +64,7 @@ jobs:
         uses: ./.github/actions/prepare-laravel
 
       - name: Download Mix Resources
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4.1.7
         with: { name: mix, path: public/build }
 
       - name: Run PEST
