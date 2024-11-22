@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\CommonMark\Block\Renderer;
+namespace App\Markdown\Block\Renderer;
 
-use App\CommonMark\Block\Element\Callout;
+use App\Markdown\Block\Element\Callout;
 use League\CommonMark\Node\Block\Paragraph;
 use League\CommonMark\Node\Node;
 use League\CommonMark\Renderer\ChildNodeRendererInterface;

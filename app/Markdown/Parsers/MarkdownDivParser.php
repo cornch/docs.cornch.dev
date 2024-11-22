@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\CommonMark\Parsers;
+namespace App\Markdown\Parsers;
 
-use App\CommonMark\Block\Element\MarkdownDiv;
+use App\Markdown\Block\Element\MarkdownDiv;
 use JetBrains\PhpStorm\Pure;
 use League\CommonMark\Node\Block\AbstractBlock;
 use League\CommonMark\Parser\Block\AbstractBlockContinueParser;

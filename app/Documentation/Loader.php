@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Documentation;
 
-use App\CommonMark\DocumentationConverter;
-use App\CommonMark\NavigationConverter;
+use App\Markdown\DocumentationConverter;
+use App\Markdown\NavigationConverter;
 use App\Documentation\Models\Docset;
 use App\Documentation\Models\Page;
 use App\Documentation\Models\PathInfo;

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\CommonMark\Parsers;
+namespace App\Markdown\Parsers;
 
 use League\CommonMark\Extension\CommonMark\Node\Inline\HtmlInline;
 use League\CommonMark\Parser\Inline\InlineParserInterface;

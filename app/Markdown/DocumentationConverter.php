@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace App\CommonMark;
+namespace App\Markdown;
 
-use App\CommonMark\Block\Element\Callout;
-use App\CommonMark\Block\Element\MarkdownDiv;
-use App\CommonMark\Block\Renderer\CalloutRenderer;
-use App\CommonMark\Block\Renderer\MarkdownDivRenderer;
-use App\CommonMark\Block\Renderer\TableRenderer;
-use App\CommonMark\Listeners\LinkableHeader;
-use App\CommonMark\Listeners\LinkFixer;
-use App\CommonMark\Parsers\CalloutParser;
-use App\CommonMark\Parsers\MarkdownDivParser;
-use App\CommonMark\Parsers\RubyParser;
+use App\Markdown\Block\Element\Callout;
+use App\Markdown\Block\Element\MarkdownDiv;
+use App\Markdown\Block\Renderer\CalloutRenderer;
+use App\Markdown\Block\Renderer\MarkdownDivRenderer;
+use App\Markdown\Block\Renderer\TableRenderer;
+use App\Markdown\Listeners\LinkableHeader;
+use App\Markdown\Listeners\LinkFixer;
+use App\Markdown\Parsers\CalloutParser;
+use App\Markdown\Parsers\MarkdownDivParser;
+use App\Markdown\Parsers\RubyParser;
 use League\CommonMark\Environment\Environment;
 use League\CommonMark\Event\DocumentParsedEvent;
 use League\CommonMark\Extension\Attributes\AttributesExtension;

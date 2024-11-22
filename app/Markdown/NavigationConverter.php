@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\CommonMark;
+namespace App\Markdown;
 
-use App\CommonMark\Listeners\LinkFixer;
-use App\CommonMark\Listeners\NavigationLinkEvent;
+use App\Markdown\Listeners\LinkFixer;
+use App\Markdown\Listeners\NavigationLinkEvent;
 use League\CommonMark\Environment\Environment;
 use League\CommonMark\Event\DocumentParsedEvent;
 use League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension;

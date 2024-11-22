@@ -11,7 +11,7 @@
 |
 */
 
-use App\CommonMark\DocumentationConverter;
+use App\Markdown\DocumentationConverter;
 
 uses(Tests\TestCase::class)->in('Feature');
 

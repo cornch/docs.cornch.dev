@@ -1,6 +1,6 @@
 <?php
 
-namespace App\CommonMark\Block\Renderer;
+namespace App\Markdown\Block\Renderer;
 
 use League\CommonMark\Extension\Table\Table;
 use League\CommonMark\Node\Node;

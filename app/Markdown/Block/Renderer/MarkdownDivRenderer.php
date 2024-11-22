@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\CommonMark\Block\Renderer;
+namespace App\Markdown\Block\Renderer;
 
-use App\CommonMark\Block\Element\MarkdownDiv;
+use App\Markdown\Block\Element\MarkdownDiv;
 use League\CommonMark\Node\Node;
 use League\CommonMark\Renderer\ChildNodeRendererInterface;
 use League\CommonMark\Renderer\NodeRendererInterface;

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\CommonMark\Parsers;
+namespace App\Markdown\Parsers;
 
-use App\CommonMark\Block\Element\Callout;
+use App\Markdown\Block\Element\Callout;
 use JetBrains\PhpStorm\Pure;
 use League\CommonMark\Node\Block\AbstractBlock;
 use League\CommonMark\Parser\Block\AbstractBlockContinueParser;

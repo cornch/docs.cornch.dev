@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\CommonMark\Block\Element;
+namespace App\Markdown\Block\Element;
 
 use League\CommonMark\Node\Block\AbstractBlock;
 

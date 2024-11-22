@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\CommonMark\Listeners;
+namespace App\Markdown\Listeners;
 
 use League\CommonMark\Event\DocumentParsedEvent;
 use League\CommonMark\Extension\CommonMark\Node\Block\Heading;

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\CommonMark\Listeners;
+namespace App\Markdown\Listeners;
 
 use Illuminate\Support\Str;
 use League\CommonMark\Event\DocumentParsedEvent;
