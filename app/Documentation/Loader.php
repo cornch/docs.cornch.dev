@@ -108,7 +108,7 @@ final class Loader
                 self::CACHE_TTL,
                 function () {
                     $html = $this->parse()->getContent();
-                    $html = HTMLMin::html($html);
+                    // $html = HTMLMin::html($html);
                     $html = $this->replaceStubStrings($html);
 
                     return new HtmlString($html);
@@ -171,7 +171,7 @@ final class Loader
                 $markdown = $this->replaceStubStrings($markdown);
 
                 $html = (new NavigationConverter($this->docset->linkFixer))->convert($markdown)->getContent();
-                $html = HTMLMin::html($html);
+                // $html = HTMLMin::html($html);
 
                 return $this->replaceStubStrings($html);
             },

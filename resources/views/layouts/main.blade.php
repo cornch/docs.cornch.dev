@@ -54,7 +54,7 @@
                 x-cloak
             >
                 <x-slot:icon>
-                    <x-heroicon-o-globe class="w-4 h-4 mr-2 text-gray-900 dark:text-zinc-100" />
+                    <x-heroicon-o-globe-alt class="w-4 h-4 mr-2 text-gray-900 dark:text-zinc-100" />
                 </x-slot:icon>
 
                 <x-slot:select
@@ -106,7 +106,7 @@
         x-cloak
     >
         <span class="inline-flex items-center justify-center">
-            <x-heroicon-o-menu class="w-4 h-4 mr-2" />
+            <x-heroicon-o-bars-3 class="w-4 h-4 mr-2" />
             {{ __('Show Menu') }}
         </span>
 

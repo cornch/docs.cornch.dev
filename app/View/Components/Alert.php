@@ -54,7 +54,7 @@ class Alert extends Component
     public function icon(): string
     {
         return $this->icon ?? match ($this->theme) {
-            'warning' => 'heroicon-s-exclamation',
+            'warning' => 'heroicon-s-exclamation-triangle',
             'success' => 'heroicon-s-check-circle',
         };
     }

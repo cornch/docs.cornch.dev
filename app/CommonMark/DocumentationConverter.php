@@ -36,7 +36,7 @@ final class DocumentationConverter extends MarkdownConverter
 
         $environment->addExtension(new AttributesExtension());
 
-        $environment->addExtension(new TorchlightExtension());
+        // $environment->addExtension(new TorchlightExtension());
 
         $environment->addEventListener(DocumentParsedEvent::class, new LinkFixer($linkFixer));
         $environment->addEventListener(DocumentParsedEvent::class, new LinkableHeader());
