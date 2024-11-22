@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace App\Documentation;
 
-use App\Markdown\DocumentationConverter;
-use App\Markdown\NavigationConverter;
 use App\Documentation\Models\Docset;
 use App\Documentation\Models\Page;
 use App\Documentation\Models\PathInfo;
 use App\Exceptions\LocaleNotFoundException;
+use App\Markdown\DocumentationConverter;
+use App\Markdown\NavigationConverter;
 use App\Utils\Pipe;
 use Closure;
 use HTMLMin\HTMLMin\Facades\HTMLMin;
