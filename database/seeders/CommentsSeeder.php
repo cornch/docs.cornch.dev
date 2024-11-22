@@ -21,7 +21,7 @@ final class CommentsSeeder extends Seeder
                         ->dirname()
                         ->__toString();
 
-                    $files = (new Finder())
+                    $files = (new Finder)
                         ->in(resource_path('docs/' . $path))
                         ->files();
 

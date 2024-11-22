@@ -4,6 +4,8 @@
 /public/fonts
 /public/storage
 /public/mix-manifest.json
+/public/css/filament
+/public/js/filament
 /storage/*.key
 /vendor
 .env

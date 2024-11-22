@@ -58,7 +58,7 @@ final class MarkdownDivParser extends AbstractBlockContinueParser
 
     public static function createBlockStartParser(): BlockStartParserInterface
     {
-        return new class() implements BlockStartParserInterface
+        return new class implements BlockStartParserInterface
         {
             private const START_STRING = '<div';
 

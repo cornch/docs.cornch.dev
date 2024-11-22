@@ -53,7 +53,7 @@ final class CalloutParser extends AbstractBlockContinueParser
 
     public static function createBlockStartParser(): BlockStartParserInterface
     {
-        return new class() implements BlockStartParserInterface
+        return new class implements BlockStartParserInterface
         {
             private const CALLOUT_PAIRS = [['> {', '}'], ['> **', '**']];
 

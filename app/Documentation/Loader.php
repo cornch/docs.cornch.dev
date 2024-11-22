@@ -49,7 +49,7 @@ final class Loader
         $this->docset = Documentation::get($pathInfo->doc);
 
         if (! $this->docset->hasLocale($this->pathInfo->locale)) {
-            throw new LocaleNotFoundException();
+            throw new LocaleNotFoundException;
         }
     }
 

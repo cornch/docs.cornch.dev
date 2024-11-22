@@ -29,27 +29,27 @@ final class DocumentationConverter extends MarkdownConverter
     public function __construct(?\Closure $linkFixer = null)
     {
         $environment = new Environment(['allow_unsafe_links' => false]);
-        $environment->addExtension(new CommonMarkCoreExtension());
-        $environment->addExtension(new GithubFlavoredMarkdownExtension());
+        $environment->addExtension(new CommonMarkCoreExtension);
+        $environment->addExtension(new GithubFlavoredMarkdownExtension);
 
-        $environment->addExtension(new FrontMatterExtension());
+        $environment->addExtension(new FrontMatterExtension);
 
-        $environment->addExtension(new AttributesExtension());
+        $environment->addExtension(new AttributesExtension);
 
         // $environment->addExtension(new TorchlightExtension());
 
         $environment->addEventListener(DocumentParsedEvent::class, new LinkFixer($linkFixer));
-        $environment->addEventListener(DocumentParsedEvent::class, new LinkableHeader());
+        $environment->addEventListener(DocumentParsedEvent::class, new LinkableHeader);
 
         $environment->addBlockStartParser(CalloutParser::createBlockStartParser(), 80);
-        $environment->addRenderer(Callout::class, new CalloutRenderer());
+        $environment->addRenderer(Callout::class, new CalloutRenderer);
 
         $environment->addBlockStartParser(MarkdownDivParser::createBlockStartParser(), 50);
-        $environment->addRenderer(MarkdownDiv::class, new MarkdownDivRenderer());
+        $environment->addRenderer(MarkdownDiv::class, new MarkdownDivRenderer);
 
-        $environment->addRenderer(Table::class, new TableRenderer(), 10);
+        $environment->addRenderer(Table::class, new TableRenderer, 10);
 
-        $environment->addInlineParser(new RubyParser());
+        $environment->addInlineParser(new RubyParser);
 
         parent::__construct($environment);
     }

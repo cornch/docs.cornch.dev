@@ -18,11 +18,11 @@ final class NavigationConverter extends MarkdownConverter
     public function __construct(?\Closure $linkFixer = null)
     {
         $environment = new Environment(['allow_unsafe_links' => true]);
-        $environment->addExtension(new CommonMarkCoreExtension());
-        $environment->addExtension(new GithubFlavoredMarkdownExtension());
-        $environment->addExtension(new FrontMatterExtension());
+        $environment->addExtension(new CommonMarkCoreExtension);
+        $environment->addExtension(new GithubFlavoredMarkdownExtension);
+        $environment->addExtension(new FrontMatterExtension);
 
-        $environment->addEventListener(DocumentParsedEvent::class, new NavigationLinkEvent());
+        $environment->addEventListener(DocumentParsedEvent::class, new NavigationLinkEvent);
         $environment->addEventListener(DocumentParsedEvent::class, new LinkFixer($linkFixer));
 
         parent::__construct($environment);

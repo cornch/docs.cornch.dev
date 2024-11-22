@@ -43,7 +43,7 @@ final class CommentController
 
     public function store(CommentRequest $request): RedirectResponse
     {
-        $comment = new Comment();
+        $comment = new Comment;
         $comment->fromPathInfo($request->getDocPathInfo());
         $comment->commenter_fingerprint = Fingerprint::fromRequest($request);
         $comment->name = $request->input('name');
@@ -51,7 +51,7 @@ final class CommentController
             ? Hash::make($request->input('delete_password'))
             : '';
         $comment->content = $request->input('content');
-        $comment->reactions_counter = new CommentReactionsCounter();
+        $comment->reactions_counter = new CommentReactionsCounter;
 
         $comment->is_approved = false;
         $comment->save();

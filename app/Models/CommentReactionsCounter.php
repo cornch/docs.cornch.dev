@@ -64,12 +64,12 @@ final class CommentReactionsCounter implements Castable, Jsonable, JsonSerializa
 
     public static function castUsing(array $arguments): CastsAttributes
     {
-        return new class() implements CastsAttributes
+        return new class implements CastsAttributes
         {
             public function get($model, string $key, $value, array $attributes): CommentReactionsCounter
             {
                 if (empty($value)) {
-                    return new CommentReactionsCounter();
+                    return new CommentReactionsCounter;
                 }
 
                 return CommentReactionsCounter::fromJson($value);
