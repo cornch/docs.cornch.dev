@@ -12,13 +12,13 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with: { submodules: recursive }
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.1'
+          php-version: '8.4'
           tools: php-cs-fixer, cs2pr
 
       - name: Composer Install
@@ -32,7 +32,7 @@ jobs:
   mix:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with: { submodules: recursive }
 
       - uses: bahmutov/npm-install@v1
@@ -41,7 +41,7 @@ jobs:
         run: npm run build
 
       - name: Upload Compiled Resources
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: mix
           path: public/build
@@ -50,12 +50,12 @@ jobs:
     runs-on: ubuntu-latest
     needs: mix
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with: { submodules: recursive }
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
-        with: { php-version: 8.1 }
+        with: { php-version: 8.4 }
 
       - name: Composer Install
         uses: ./.github/actions/composer-install
@@ -64,7 +64,7 @@ jobs:
         uses: ./.github/actions/prepare-laravel
 
       - name: Download Mix Resources
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4
         with: { name: mix, path: public/build }
 
       - name: Run PEST
@@ -72,14 +72,14 @@ jobs:
 
       - name: Upload Coverage Report
         if: success()
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: coverage
           path: coverage.xml
 
       - name: Upload Logs
         if: failure()
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with: { name: logs, path: storage/logs }
 
   clean-up:
@@ -87,7 +87,7 @@ jobs:
     if: ${{ always() }}
     needs: [tests]
     steps:
-      - uses: geekyeggo/delete-artifact@v1
+      - uses: geekyeggo/delete-artifact@v5
         with:
           name: mix
           failOnError: false
