@@ -124,7 +124,7 @@
             md:h-full
             mb-16 md:mb-0
             md:pt-14
-            bg-gray-200 dark:bg-zinc-700
+            bg-gray-100 dark:bg-zinc-700
             shadow
         "
         x-show="show_menu"
