@@ -26,7 +26,8 @@
         "league/commonmark": "^2.5.3",
         "spatie/laravel-honeypot": "^4.5.3",
         "symfony/yaml": "^7.1.6",
-        "torchlight/torchlight-laravel": "^0.6.0",
+        "torchlight/torchlight-laravel": "0.6.0 as v0.5.15",
+        "torchlight/torchlight-commonmark": "0.5.5 as v0.5.6",
         "wikimedia/css-sanitizer": "^3.0.2"
     },
     "require-dev": {
