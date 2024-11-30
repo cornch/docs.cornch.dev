@@ -65,7 +65,7 @@ final class CalloutParser extends AbstractBlockContinueParser
             ];
 
             private const array VALID_CALLOUT_TYPES = [
-                'note', 'tip', 'video', 'warning', 'laracasts'
+                'note', 'tip', 'video', 'warning', 'laracasts',
             ];
 
             private function normalizeCalloutType(string $type): string

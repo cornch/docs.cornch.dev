@@ -182,20 +182,20 @@ final class Loader
     {
         $path = $this->resolveDocPath();
 
-//        return Cache
-//            ::remember(
-//                $this->getDocHash('markdown'),
-//                self::CACHE_TTL,
-//                function () use ($path) {
-                    $markdown = $this->getFile($path);
-                    $markdown = $this->replaceStubStrings($markdown);
+        //        return Cache
+        //            ::remember(
+        //                $this->getDocHash('markdown'),
+        //                self::CACHE_TTL,
+        //                function () use ($path) {
+        $markdown = $this->getFile($path);
+        $markdown = $this->replaceStubStrings($markdown);
 
-                    // remove style
-                    $markdown = preg_replace('#<style>[\w\W]+?</style>#', '', $markdown);
+        // remove style
+        $markdown = preg_replace('#<style>[\w\W]+?</style>#', '', $markdown);
 
-                    return (new DocumentationConverter($this->docset->linkFixer))->convert($markdown);
-//                },
-//            );
+        return (new DocumentationConverter($this->docset->linkFixer))->convert($markdown);
+        //                },
+        //            );
     }
 
     private function getFile(string $path): string
