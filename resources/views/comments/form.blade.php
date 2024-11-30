@@ -18,7 +18,7 @@
             @csrf
             <x-honeypot />
             <h2 class="flex items-center gap-x-1 text-2xl">
-                <x-heroicon-o-chat class="w-4 h-4" />
+                <x-heroicon-o-chat-bubble-left class="w-4 h-4" />
                 {{ __('Add Comment') }}
             </h2>
             <div class="flex flex-col">
