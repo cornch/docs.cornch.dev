@@ -3,7 +3,7 @@
         $attributes->class([
             'flex gap-y-2',
             'mb-8',
-            'rounded',
+            'rounded-sm',
             'border',
             ...$wrapperStyles(),
         ])

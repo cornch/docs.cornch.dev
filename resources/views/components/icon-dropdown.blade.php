@@ -25,7 +25,7 @@
                     {{ $current->attributes->merge(['class' => $sizeStyle('summary') . ' flex items-center no-marker']) }}
                 >
                     {{ $icon }}
-                    <span class="flex-grow">
+                    <span class="grow">
                         {{ $current }}
                     </span>
                     <x-heroicon-o-chevron-down class="{{ $sizeStyle('chevron') }} text-gray-900 dark:text-zinc-300 pointer-events-none" aria-hidden="true" />

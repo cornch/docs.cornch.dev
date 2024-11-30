@@ -44,7 +44,7 @@ final class CalloutRenderer implements NodeRendererInterface
         foreach ($node->children() as $child) {
             if ($child instanceof Paragraph) {
                 $child->data->set('attributes.class', $child->data->get('attributes.class', ''));
-                $child->data->set('attributes.class', trim($child->data->get('attributes.class') . ' !mb-0 lg:!ml-6'));
+                $child->data->set('attributes.class', trim($child->data->get('attributes.class') . ' mb-0! lg:ml-6!'));
             }
         }
 

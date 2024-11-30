@@ -1,12 +1,6 @@
 const plugin = require('tailwindcss/plugin')
 
 module.exports = {
-  content: [
-    'app/Markdown/Block/Renderer/**/*.php',
-    'app/View/**/*.php',
-    'resources/views/**/*.blade.php',
-    'resources/docs/laravel/build/**/*.md',
-  ],
   theme: {
     fontFamily: {
       sans: [
@@ -51,7 +45,6 @@ module.exports = {
     },
   },
   plugins: [
-      require('@tailwindcss/typography'),
       plugin(({ addUtilities }) => addUtilities({
           '.writing-tb': {
               'writing-mode': 'horizontal-tb',

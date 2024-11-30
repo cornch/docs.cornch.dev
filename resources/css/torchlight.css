@@ -6,7 +6,7 @@
 }
 
 pre {
-    @apply my-4 rounded overflow-x-auto;
+    @apply my-4 rounded-sm overflow-x-auto;
 }
 
 pre code.torchlight {

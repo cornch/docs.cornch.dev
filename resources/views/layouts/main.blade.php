@@ -26,12 +26,12 @@
 </head>
 
 <body>
-<header class="md:fixed w-full bg-white/90 dark:bg-zinc-800/90 backdrop-blur shadow z-40">
+<header class="md:fixed w-full bg-white/90 dark:bg-zinc-800/90 backdrop-blur-sm shadow-sm z-40">
     <div class="container max-w-5xl mx-auto md:px-6 antialiased">
         <nav class="flex flex-wrap items-center justify-between md:py-1">
             <x-logo class="w-12 mx-4" />
 
-            <h1 class="flex-grow w-full md:w-auto flex items-center order-3 md:order-none md:-mx-2 py-2 px-4 md:px-0 bg-gray-100 dark:bg-zinc-700 md:dark:bg-transparent md:bg-transparent">
+            <h1 class="grow w-full md:w-auto flex items-center order-3 md:order-none md:-mx-2 py-2 px-4 md:px-0 bg-gray-100 dark:bg-zinc-700 md:dark:bg-transparent md:bg-transparent">
                 @empty ($pathInfo?->doc)
                     <a href="/" class="block mx-2 md:text-xl lg:inline-block mr-12 font-black font-mono">\Cornch\Docs::class</a>
                 @else
@@ -79,7 +79,7 @@
                             @else
                                 <a
                                     href="{{ $url }}"
-                                    class="rounded underline hover:no-underline"
+                                    class="rounded-sm underline hover:no-underline"
                                 >
                                     {{ $name }}
                                 </a>
@@ -181,7 +181,7 @@
                             @else
                                 <a
                                     href="{{ $version['url'] }}"
-                                    class="rounded underline hover:no-underline"
+                                    class="rounded-sm underline hover:no-underline"
                                 >
                                     {{ $version['name'] }}
                                 </a>
@@ -192,13 +192,13 @@
             </x-icon-dropdown>
         </div>
 
-        <x-doc-sidebar class="sidebar flex-grow overflow-y-auto py-4 px-6" :page="$page" />
+        <x-doc-sidebar class="sidebar grow overflow-y-auto py-4 px-6" :page="$page" />
 
         <button
             class="
                 flex items-center justify-center
                 p-2 border-t border-gray-300 dark:border-zinc-800
-                bg-gray-200 hover:bg-gray-100 dark:bg-zinc-700 hover:dark:bg-zinc-600
+                bg-gray-200 hover:bg-gray-100 dark:bg-zinc-700 dark:hover:bg-zinc-600
                 transition-colors
             "
             x-on:click="show_menu = false"
@@ -211,7 +211,7 @@
 
     <div
         class="w-full md:ml-[20vw] overflow-x-scroll motion-safe:transition-[margin-left]"
-        x-bind:class="{ 'md:!ml-0': !show_menu }"
+        x-bind:class="{ 'md:ml-0!': !show_menu }"
         x-data="{ current: 0, display_zone: 1000 }"
         x-on:scroll.document.throttle.100ms="current = document.documentElement.scrollTop"
     >
@@ -240,7 +240,7 @@
             <template x-teleport="body">
                 <button
                     type="button"
-                    class="fixed right-12 bottom-12 p-4 rounded bg-white hover:bg-gray-200 dark:bg-neutral-500/60 hover:dark:bg-neutral-400/60 backdrop-blur shadow transition-colors"
+                    class="fixed right-12 bottom-12 p-4 rounded-sm bg-white hover:bg-gray-200 dark:bg-neutral-500/60 dark:hover:bg-neutral-400/60 backdrop-blur-sm shadow-sm transition-colors"
                     aria-hidden="true"
                     title="{{ __('Back to Top') }}"
                     x-show="current > display_zone"

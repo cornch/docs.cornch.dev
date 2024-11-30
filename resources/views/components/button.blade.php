@@ -7,7 +7,7 @@
             ->class([
                 'inline-block',
                 'px-4 py-2',
-                'rounded',
+                'rounded-sm',
                 'border',
                 'transition-colors',
                 ...$themeStyles(),

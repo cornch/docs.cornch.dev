@@ -51,11 +51,11 @@
         @apply md:pl-0;
 
         @apply before:content-["#"];
-        @apply before:md:absolute;
-        @apply before:md:ml-[-1em] before:mr-1 before:md:mr-0;
-        @apply before:md:align-middle;
+        @apply md:before:absolute;
+        @apply md:before:ml-[-1em] before:mr-1 md:before:mr-0;
+        @apply md:before:align-middle;
         @apply before:font-normal;
-        @apply before:text-red-600 before:dark:text-red-500;
+        @apply before:text-red-600 dark:before:text-red-500;
         @apply before:opacity-60;
     }
 
@@ -99,15 +99,15 @@
         @apply text-gray-900 dark:text-gray-200 font-mono;
     }
     pre {
-        @apply -mx-6 mb-12 py-4 sm:px-4 bg-gray-100 dark:bg-zinc-700 sm:rounded;
+        @apply -mx-6 mb-12 py-4 sm:px-4 bg-gray-100 dark:bg-zinc-700 sm:rounded-sm;
 
         & > code {
-            @apply sm:rounded shadow-sm;
+            @apply sm:rounded-sm shadow-xs;
         }
     }
 
     :not(pre) > code {
-        @apply -my-1 px-2 py-1 border-b border-r dark:border-zinc-800 rounded;
+        @apply -my-1 px-2 py-1 border-b border-r dark:border-zinc-800 rounded-sm;
 
         @apply text-[#24292f] bg-white;
         @apply dark:text-[#adbac7] dark:bg-[#2d333b];
@@ -178,7 +178,7 @@
 
                 @apply before:content-["#"];
                 @apply before:mr-1;
-                @apply before:text-red-600 before:dark:text-red-500;
+                @apply before:text-red-600 dark:before:text-red-500;
             }
         }
 
@@ -209,7 +209,7 @@
 }
 
 .callout {
-    @apply mb-10 max-w-2xl flex flex-col md:flex-row justify-start items-stretch mx-auto border rounded shadow;
+    @apply mb-10 max-w-2xl flex flex-col md:flex-row justify-start items-stretch mx-auto border rounded-sm shadow-sm;
 
     p {
         @apply pt-2 md:pt-4 pb-4 px-4 md:pl-0 pr-2 md:pr-4;
@@ -217,5 +217,5 @@
 }
 
 .callout__img {
-    @apply md:w-20 flex items-center justify-start md:justify-center flex-shrink-0 px-2 md:px-0 py-2 rounded-t md:rounded-l md:rounded-r-none;
+    @apply md:w-20 flex items-center justify-start md:justify-center shrink-0 px-2 md:px-0 py-2 rounded-t md:rounded-l md:rounded-r-none;
 }

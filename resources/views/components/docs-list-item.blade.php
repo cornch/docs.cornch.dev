@@ -33,7 +33,7 @@
                             <li class="m-2">
                                 <a
                                     href="{{ route('docs.show', ['locale' => $code, 'doc' => $doc, 'version' => $versionCode, 'page' => \App\Documentation\Documentation::get($doc)->index]) }}"
-                                    class="px-2 py-1 rounded bg-zinc-200 dark:bg-zinc-900 text-red-500 hover:text-red-400 hover:underline"
+                                    class="px-2 py-1 rounded-sm bg-zinc-200 dark:bg-zinc-900 text-red-500 hover:text-red-400 hover:underline"
                                     lang="{{ \App\Enums\Locale::from($code)->toBcp47() }}"
                                 >{{ $locale->name }}</a>
                             </li>

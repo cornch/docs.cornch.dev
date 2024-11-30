@@ -1,6 +1,6 @@
 @props(['comment'])
 
-<div class="rounded" id="comments-{{ $comment->id }}">
+<div class="rounded-sm" id="comments-{{ $comment->id }}">
     <header
         class="
             flex justify-between gap-2
@@ -12,7 +12,7 @@
             dark:bg-zinc-700 dark:text-zinc-200
         "
     >
-        <div class="flex-grow">
+        <div class="grow">
             <strong>
                 {{ $comment->name }}
                 @if($comment->email)
