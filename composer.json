@@ -28,7 +28,7 @@
         "symfony/yaml": "^7.2.0",
         "torchlight/torchlight-laravel": "0.6.0 as v0.5.15",
         "torchlight/torchlight-commonmark": "0.5.5 as v0.5.6",
-        "wikimedia/css-sanitizer": "^3.0.2"
+        "wikimedia/css-sanitizer": "^5.4.0"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^3.2.2",
