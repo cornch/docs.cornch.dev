@@ -31,7 +31,7 @@
         <nav class="flex flex-wrap items-center justify-between md:py-1">
             <x-logo class="w-12 mx-4" />
 
-            <h1 class="flex-grow w-full md:w-auto flex items-center order-3 md:order-none md:-mx-2 py-2 px-4 md:px-0 bg-gray-100 dark:bg-zinc-700 md:bg-transparent">
+            <h1 class="flex-grow w-full md:w-auto flex items-center order-3 md:order-none md:-mx-2 py-2 px-4 md:px-0 bg-gray-100 dark:bg-zinc-700 md:dark:bg-transparent md:bg-transparent">
                 @empty ($pathInfo?->doc)
                     <a href="/" class="block mx-2 md:text-xl lg:inline-block mr-12 font-black font-mono">\Cornch\Docs::class</a>
                 @else
