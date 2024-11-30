@@ -1,7 +1,7 @@
 <div
     {{ $attributes->merge(['class' => 'flex group']) }}
 >
-    <div class="{{ $sizeStyle('icon-wrapper') }} inline-flex justify-center items-center border border-r-0 border-zinc-400 group-hover:border-red-300 text-gray-900 rounded-l-full" aria-hidden="true">
+    <div class="{{ $sizeStyle('icon-wrapper') }} inline-flex justify-center items-center border border-r-0 border-zinc-400 group-hover:border-red-300  bg-white dark:bg-zinc-800 text-gray-900 rounded-l-full" aria-hidden="true">
         {{ $icon }}
     </div>
     <div class="relative">
