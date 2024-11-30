@@ -204,7 +204,7 @@
 
 [lang^="zh-"] ruby rt,
 [lang="ja-jp"] ruby rt {
-    /** ruby-align: start; **/
+    ruby-align: start;
     @apply w-1 whitespace-nowrap overflow-visible;
 }
 

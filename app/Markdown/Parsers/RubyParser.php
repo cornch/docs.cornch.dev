@@ -22,6 +22,8 @@ final class RubyParser implements InlineParserInterface
 
         $cursor->advanceBy($inlineContext->getFullMatchLength());
         [$ruby, $rt] = $inlineContext->getSubMatches();
+        // @TODO: temporary fix for URL encoding. This should be fixed on babelo-fisho's side.
+        $rt = urldecode($rt);
         $inlineContext->getContainer()->appendChild(new HtmlInline('<ruby>' . $ruby . '<rp>(</rp><rt>' . $rt . '</rt><rp>)</rp></ruby>'));
 
         return true;

@@ -40,14 +40,17 @@ final class CalloutParser extends AbstractBlockContinueParser
         return true;
     }
 
-    public function canHaveLazyContinuationLines(): bool
-    {
-        return false;
-    }
-
     #[Pure]
     public function tryContinue(Cursor $cursor, BlockContinueParserInterface $activeBlockParser): ?BlockContinue
     {
+        if (! $cursor->isIndented() && $cursor->getNextNonSpaceCharacter() === '>') {
+            $cursor->advanceToNextNonSpaceOrTab();
+            $cursor->advanceBy(1);
+            $cursor->advanceBySpaceOrTab();
+
+            return BlockContinue::at($cursor);
+        }
+
         return BlockContinue::none();
     }
 
@@ -55,9 +58,31 @@ final class CalloutParser extends AbstractBlockContinueParser
     {
         return new class implements BlockStartParserInterface
         {
-            private const CALLOUT_PAIRS = [['> {', '}'], ['> **', '**']];
+            private const array CALLOUT_PAIRS = [
+                ['> {', '}'],
+                ['> **', '**'],
+                ['> [!', ']'],
+            ];
 
-            private const VALID_CALLOUT_TYPES = ['note', 'tip', 'video', 'Warning', 'Note', 'laracasts'];
+            private const array VALID_CALLOUT_TYPES = [
+                'note', 'tip', 'video', 'warning', 'laracasts'
+            ];
+
+            private function normalizeCalloutType(string $type): string
+            {
+                return match ($type) {
+                    // legacy laravel
+                    'note' => 'WARNING',
+                    'tip' => 'NOTE',
+                    'laracasts', 'video' => 'VIDEO',
+
+                    // lgeacy github
+                    'Warning' => 'WARNING',
+                    'Note' => 'NOTE',
+
+                    default => 'NOTE',
+                };
+            }
 
             public function tryStart(Cursor $cursor, MarkdownParserStateInterface $parserState): ?BlockStart
             {
@@ -79,11 +104,12 @@ final class CalloutParser extends AbstractBlockContinueParser
                     $cursor->advanceBySpaceOrTab();
 
                     $type = mb_substr($sub, 0, $typeClosingPosition);
-                    if (! in_array($type, self::VALID_CALLOUT_TYPES, true)) {
+                    if (! in_array(strtolower($type), self::VALID_CALLOUT_TYPES, true)) {
                         return BlockStart::none();
                     }
 
-                    return BlockStart::of(new CalloutParser($type))->at($cursor);
+                    return BlockStart::of(new CalloutParser($this->normalizeCalloutType($type)))
+                        ->at($cursor);
                 }
 
                 return BlockStart::none();
