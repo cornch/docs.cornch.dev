@@ -16,6 +16,6 @@
     "dependencies": {
         "@tailwindcss/typography": "^0.5.15",
         "alpinejs": "^3.8.1",
-        "tailwindcss": "^4.0.0-beta.4"
+        "tailwindcss": "^4.0.0-beta.7"
     }
 }
